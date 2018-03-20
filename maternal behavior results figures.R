@@ -152,6 +152,23 @@ plot4 <- ggplot(mbt.dur.hist, aes(x = duration * 1000, fill = strain)) +
   theme(legend.position = "none")
 
 
+##summary statistics table
+mbt_freqs_sw <- data_freqs %>% filter(recording == "MBT") %>% 
+  select(strain, duration, m.freq, label)
+mbt.freq.table <- mbt_freqs_sw %>% select(-duration) %>% 
+  mutate(m.freq = m.freq/1000) %>%
+  group_by(strain,label) %>% 
+  summarise_all(funs(length, mean, sd, median, min, max))
+names(mbt.freq.table) <- c("Strain","USV Category","N","Mean","Standard Dev","Median","Min","Max")
+
+mbt_durs_sw <- data_durs %>% filter(recording == "MBT")
+mbt.dur.table <- mbt_durs_sw %>% select(label, duration, strain) %>%
+  mutate(duration = duration*1000) %>%
+  group_by(strain, label) %>%
+  summarise_all(funs(length, mean, sd, median, min, max))
+names(mbt.dur.table) <- c("Strain","USV Category","N","Mean","Standard Dev","Median","Min","Max")
+
+mbt.dur.freq.table <- merge(mbt.freq.table, mbt.dur.table, by = c("Strain","USV Category"))
 
 
 

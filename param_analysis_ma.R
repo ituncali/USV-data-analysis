@@ -25,6 +25,21 @@ library(dplyr)
 count_frame_2 <- left_join(count_frame,file.name.key)
 
 momanesth_counts <- count_frame_2 %>% filter(recording == "MA")
+momanesth_counts$strain <- as.factor(momanesth_counts$strain)
+
+#kruskal-wallis
+kruskal.test(total.counts ~ strain,
+             data = momanesth_counts)
+
+kruskal.test(total.counts ~ categories.allowed,
+             data = momanesth_counts)
+
+pairwise.wilcox.test(momanesth_counts$total.counts, momanesth_counts$categories.allowed,
+                     p.adjust.method = "BH")
+
+
+
+
 #momanesth counts lme
 lme_momanesth <- lme(total.counts ~ strain * categories.allowed, 
                      random = ~1| rat.id,

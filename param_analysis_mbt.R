@@ -43,6 +43,14 @@ mbt_freqs <- data_freqs %>% filter(recording == "MBT") %>%
             count = length(m.freq)) %>%
   filter(label == "flat" | label == "flat-z" | label == "flat-mz" | label == "short" | label == "short-c" | label == "complex" | label == "trill" | label == "trill-c")
 
+#shapiro wilks test of normality
+mbt_freqs_sw <- data_freqs %>% filter(recording == "MBT") %>% 
+  select(strain, duration, m.freq, label)
+stargazer(mbt_freqs_sw, type = "text")
+
+shapiro.test(log(pup_freqs_sh[mbt_freqs_sw$strain == "SD" & mbt_freqs_sw$label == "flat",]$m.freq))
+
+
 
 ##frequency analysis
 lme_mbt_freq <- lme(mean.freq ~ strain * label, 
@@ -52,6 +60,9 @@ anova.lme(lme_mbt_freq)
 mbt.lme.freq.sum <- summary(lsmeans(lme_mbt_freq, pairwise ~ strain * label, adjust = "Tukey"))[["contrasts"]]
 View(mbt.lme.freq.sum[mbt.lme.freq.sum$p.value < 0.05,])
 
+
+#duration data test normality
+mbt_durs_sw <- data_durs %>% filter(recording == "MBT")
 
 #duration data
 mbt_durs <- data_durs %>% filter(recording == "MBT") %>% group_by(strain, label,recording,file.name,rat.id) %>%
@@ -185,4 +196,3 @@ anova.lme(lme.group.type)
 
 lme.group.type.sum <- summary(lsmeans(lme.group.type, pairwise~grouping.time * label, adjust="Tukey"))[["contrasts"]]
 View(lme.group.type.sum[lme.group.type.sum$p.value < 0.05,])
-

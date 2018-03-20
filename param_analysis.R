@@ -39,7 +39,26 @@ wk95.f <- data.frame(categories.allowed = allowed.categories,
 pup_counts <- rbind.data.frame(pup_counts, wk95.f)
 
 pup_counts$rat.id.fix <- as.factor(ifelse(pup_counts$recording=="Fpupiso",paste(pup_counts$rat.id,"F"),paste(pup_counts$rat.id,"M")))
+pup_counts$strain <- as.factor(pup_counts$strain)
 
+pup_counts$t.counts <- mapply(function (x) ifelse(x > 0, log(x),NA), pup_counts$total.counts)
+
+shapiro.test(pup_counts[pup_counts$categories.allowed=="flat" & pup_counts$strain=="SD",]$t.counts)
+shapiro.test(pup_counts[pup_counts$categories.allowed=="flat" & pup_counts$strain=="WK",]$t.counts)
+shapiro.test(pup_counts[pup_counts$categories.allowed=="flat-z" & pup_counts$strain=="SD",]$t.counts)
+shapiro.test(pup_counts[pup_counts$categories.allowed=="flat-z" & pup_counts$strain=="WK",]$t.counts)
+
+
+
+#kruskal-wallis
+kruskal.test(total.counts ~ strain,
+             data = pup_counts)
+
+kruskal.test(total.counts ~ categories.allowed,
+             data = pup_counts)
+
+pairwise.wilcox.test(pup_counts$total.counts, pup_counts$categories.allowed,
+                     p.adjust.method = "BH")
 
 
 ##see which distribution best fits data
@@ -98,9 +117,13 @@ pup_freqs <- data_freqs %>% filter(recording == "Mpupiso" | recording == "Fpupis
   filter(label == "flat" | label == "flat-z" | label == "flat-mz" | label == "short")
 
 pup_freqs$rat.id.fix <- ifelse(pup_freqs$recording=="Fpupiso",paste(pup_freqs$rat.id,"F"),paste(pup_freqs$rat.id,"M"))
+pup_freqs$strain <- as.factor(pup_freqs$strain)
 
+##check normality
+pup_freqs_sh <- data_freqs %>% filter(recording == "Mpupiso" | recording == "Fpupiso")
+shapiro.test(pup_freqs_sh[pup_freqs_sh$strain == "WK",]$m.freq)
 
-
+#not normal....
 
 #lme
 
@@ -198,7 +221,7 @@ anova.lme(lme.pup.count.w)
 pup_freqs_w <- left_join(pup_freqs, pup.w)
 pup_freqs_w <- pup_freqs_w %>% filter(!is.na(BW))
 
-pup_freqs_w  %>% group_by(strain, rat.id.fix, label) %>%
+pup_freqs_w  %>% group_by(strain, rat.id.fix) %>%
   summarise(mean.freq.an = mean(mean.freq), sd.freq.an = sd(mean.freq)/sqrt(length(mean.freq)), BW = unique(BW)) %>%
   ggplot(aes(x = BW, y = mean.freq.an)) + 
   geom_point(aes(x = BW, y = mean.freq.an, colour = strain))
@@ -247,4 +270,15 @@ litter.w.lme <- lme(bw.pup ~ strain, random = ~1|rat.id, data = litter.w)
 anova.lme(litter.w.lme)
 
 
+##pup total calling times
+data_counts <- left_join(data_counts, file.name.key)
+pup_start_counts <- filter(data_counts, recording == "Fpupiso" | recording == "Mpupiso")
+pup_start_counts$rat.id.fix <- as.factor(ifelse(pup_start_counts$recording=="Fpupiso",paste(pup_start_counts$rat.id,"F"),paste(pup_start_counts$rat.id,"M")))
+pup_start_counts <- pup_start_counts %>% group_by(strain, rat.id.fix, recording) %>%
+  summarise(tot.call.time = max(start.time) - min(start.time), lat.to.start.call = min(start.time))
+
+lme.tot.call <- lme(tot.call.time ~ strain * recording,
+                    random = ~1|rat.id.fix,
+                    data = pup_start_counts)
+anova.lme(lme.tot.call)
 
