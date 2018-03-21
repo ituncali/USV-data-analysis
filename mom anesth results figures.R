@@ -132,7 +132,17 @@ xtra.rows.added <- cbind(label = xtra.rows,
                                                    q = rows.to.rep$unique.id, x = rows.to.rep$no.counts)),
                          recording = unlist(mapply(function(q,x) c(rep(q,x)),
                                                    q = rows.to.rep$recording, x = rows.to.rep$no.counts)))
-start.category.data <- rbind(start_data[,-8],xtra.rows.added)
+start.category.data <- rbind(start_data[start_data$no.counts < 2,-8],xtra.rows.added)
+
+#by category by 1 min bins
+ggplot(start.category.data[start.category.data$label == "flat",], aes(x = start.time, fill = strain)) + 
+  geom_histogram(aes(y=c(..count..[..group..==1]/sum(..count..[..group..==1]),
+                         ..count..[..group..==2]/sum(..count..[..group..==2]))*100),
+                 position = "dodge", colour = "black", alpha = 0.5) +
+  scale_fill_grey() +
+  xlab("Start Time of Flat USVs") +
+  ylab("Percent %") +
+  theme_classic()
 
 
 #by 1 min bins

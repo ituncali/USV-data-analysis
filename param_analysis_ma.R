@@ -6,7 +6,7 @@ library(dplyr)
 allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short-sd",
                         "short-ur", "short-dr", "short-c", "complex", "upward ramp",
                         "downward ramp", "step up", "step down", "multi-step", "multi-step-s",
-                        "trill", "trill-c", "trill-f", "inverted-U", "unclear") 
+                        "trill", "trill-c", "trill-f", "inverted-u", "unclear") 
 count_list <- by(data = data_counts, INDICES = data_counts$file.name, FUN = function(x) count_total(x, allowed.categories))
 count_frame <- do.call(rbind, count_list)
 count_frame$file.name <- row.names(count_frame)
