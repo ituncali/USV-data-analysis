@@ -106,44 +106,52 @@ plot6 <- momanesth_durs %>% group_by(strain, label) %>%
 #data
 start_data <- cbind(data_counts, 
                     no.counts = mapply(function(q) sum(str_count(q,categories.allowed.search)),data_counts$label))
-rows.to.rep <- start_data %>% filter(no.counts > 1)
-#total is sum(rows.to.rep$no.counts) = 3086 so this should be the same after replicating rows
-xtra.list <- mapply(function(q) str_extract_all(q, pattern = regex("[a-z]+(-[a-z]+)|[a-z]+")),
-                    rows.to.rep$label)
+#rows.to.rep <- start_data %>% filter(no.counts > 1)
+#needed to add extra regex at beginning to account for multi-step-s
+xtra.list <- mapply(function(q) str_extract_all(q, pattern = "[a-z]+(-[a-z]+)(-[a-z]+)|[a-z]+(-[a-z]+)|[a-z]+"),
+                    start_data$label)
 xtra.notlist <- unlist(xtra.list)
 xtra.notlist.fix <- str_replace_all(xtra.notlist, 
                                     pattern = c("downward" = "downward ramp",
                                                 "upward" = "upward ramp",
                                                 "up$" = "step up",
-                                                "down$" = "step down",
-                                                "inverted$" = "inverted-u"))                           
+                                                "down$" = "step down"#,
+                                                #"inverted$" = "inverted-u",
+                                                #"^s$" = "multi-step-s"
+                                                ))                           
 #first remove the rows that do not contain calls
 xtra.rows <- unlist(mapply(function(q) str_subset(q, categories.allowed.search), xtra.notlist.fix))
-xtra.rows.added <- cbind(label = xtra.rows,
+xtra.rows.added <- cbind.data.frame(label = xtra.rows,
                          rat.id = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                q = rows.to.rep$rat.id, x = rows.to.rep$no.counts)),
+                                                q = start_data$rat.id, x = start_data$no.counts)),
                          strain = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                q = rows.to.rep$strain, x = rows.to.rep$no.counts)),
+                                                q = start_data$strain, x = start_data$no.counts)),
                          start.time = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                    q = rows.to.rep$start.time, x = rows.to.rep$no.counts)),
+                                                    q = start_data$start.time, x = start_data$no.counts)),
                          file.name = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                   q = rows.to.rep$file.name, x = rows.to.rep$no.counts)),
+                                                   q = start_data$file.name, x = start_data$no.counts)),
                          unique.id = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                   q = rows.to.rep$unique.id, x = rows.to.rep$no.counts)),
+                                                   q = start_data$unique.id, x = start_data$no.counts)),
                          recording = unlist(mapply(function(q,x) c(rep(q,x)),
-                                                   q = rows.to.rep$recording, x = rows.to.rep$no.counts)))
-start.category.data <- rbind(start_data[start_data$no.counts < 2,-8],xtra.rows.added)
+                                                   q = start_data$recording, x = start_data$no.counts)))
+#start.category.data <- rbind(start_data[start_data$no.counts < 2,-8],xtra.rows.added)
 
-#by category by 1 min bins
-ggplot(start.category.data[start.category.data$label == "flat",], aes(x = start.time, fill = strain)) + 
-  geom_histogram(aes(y=c(..count..[..group..==1]/sum(..count..[..group..==1]),
-                         ..count..[..group..==2]/sum(..count..[..group..==2]))*100),
-                 position = "dodge", colour = "black", alpha = 0.5) +
+#by category by .5 min bins
+ma.xtra <- xtra.rows.added %>% filter(recording == "MA")
+bins <- cut(ma.xtra$start.time,30,include.lowest=T, labels = as.character(c(seq(from=0,to=14.5,by=.5))))
+hist.flat.data <- ma.xtra %>% mutate(bin = bins) %>%
+  group_by(bin, strain, file.name) %>%
+  summarise(no.counts = length(label)) %>%
+  group_by(bin,strain) %>% 
+  summarise(count = mean(no.counts), sem = sd(no.counts)/sqrt(length(no.counts)))
+
+ggplot(hist.flat.data, aes(x = bin, y = count, fill = strain)) + 
+  geom_bar(stat = "identity", position = "dodge", colour = "black", alpha = 0.5) +
+  geom_errorbar(aes(ymin = count - sem, ymax = count + sem), position = position_dodge(.8)) +
+  xlab("bin") +
+  ylab("count") +
   scale_fill_grey() +
-  xlab("Start Time of Flat USVs") +
-  ylab("Percent %") +
   theme_classic()
-
 
 #by 1 min bins
 bins <- cut(start_data[start_data$recording == "MA",]$start.time,15,include.lowest=T, labels = as.character(c(1:15)))
@@ -178,3 +186,34 @@ ggplot(hist.start.data, aes(x = bin, y = count, fill = strain)) +
   ylab("count") +
   scale_fill_grey() +
   theme_classic()
+
+#line plot of before and during grouping
+line.group.data <- all.levels %>% filter(label == "flat" | label == "short") %>%
+  group_by(strain, label, time.group) %>%
+  summarise(mcount = mean(time.count), sem = sd(time.count)/sqrt(length(time.count)))
+
+ggplot(line.group.data, aes(x = time.group, y = mcount, group = strain, colour = strain)) +
+  geom_point(size=3) +
+  geom_line(size=1) +
+  geom_errorbar(aes(ymin = mcount - sem, ymax = mcount + sem),width=.1,size=.5) +
+  facet_wrap(~label)
+
+
+#pie chart before and after grouping
+ggplot(grouping.pie.data, aes(x="", y=per, fill=label))+
+  geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
+  #scale_fill_manual(values=c("#BF383E", "#73BF5C", "#1F5694", "#13355C", "#3594FF", "#FFC19E", "#94705C", "#FF71B7", "#FF1FE0", "#E51CCA", "#BF5BA8", "#FFB3FA", "#5C0B51", "#BFBE3F", "#949339", "#5C5B1E", "#375C2C")) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 2) +
+  coord_polar("y", start=0) + 
+  facet_wrap(~strain * time.group) + 
+  theme_void() +
+  theme(legend.position = "none", aspect.ratio = 1)
+
+grouping.pie.data <- all.levels %>%
+  group_by(strain, label, time.group) %>%
+  summarise(tot.time.count = sum(time.count)) %>%
+  filter(tot.time.count > 1) %>%
+  mutate(per = tot.time.count/sum(tot.time.count) *100,
+         pie.lab = ifelse(per > 2.5, paste0(label, " ", round(per), "%"), NA))
+
+

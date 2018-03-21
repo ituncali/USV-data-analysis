@@ -33,7 +33,7 @@ write.csv(BIG_1,"C:/Users/ituncali/Documents/Master's Thesis/Data/Experiment 1/E
 allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short-sd",
                         "short-ur", "short-dr", "short-c", "complex", "upward ramp",
                         "downward ramp", "step up", "step down", "multi-step", "multi-step-s",
-                        "trill", "trill-c", "trill-f", "inverted-U", "unclear") 
+                        "trill", "trill-c", "trill-f", "inverted-u", "unclear") 
 
 BIG_non_overlap <- filter(BIG, label %in% allowed.categories)
 

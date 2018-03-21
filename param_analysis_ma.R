@@ -127,12 +127,35 @@ anova.lme(bin.ma.lme)
 
 
 ##momanesth before and after grouping
-grouping.data <- start_data %>% filter(recording == "MA") %>%
-  mutate(time.group = ifelse(start.time < 660, "b4","aft")) %>%
-  group_by(strain, time.group, rat.id, file.name) %>%
-  summarise(m.count = sum(no.counts))
+group.induced.data <- ma.xtra %>% 
+  mutate(time.group = ifelse(start.time < 600 & start.time > 570, "b4",
+                             ifelse(start.time >= 600 & start.time < 630, "during", NA))) %>%
+  filter(!is.na(time.group)) %>%
+  group_by(strain, time.group, rat.id, file.name, label) %>%
+  summarise(time.count = length(label))
+group.induced.data$file.name <- as.factor(as.character(group.induced.data$file.name))
 
-grouping.lme <- lme(m.count ~ strain * time.group, random = ~1|rat.id, data = grouping.data)
-anova.lme(grouping.lme)
+
+to.rbind <- momanesth_counts %>%
+  select(label = categories.allowed, strain, rat.id, file.name) %>%
+  mutate(time.group = c(rep("during",length(label))))
+all.levels <- momanesth_counts %>%
+  select(label = categories.allowed, strain, rat.id, file.name) %>%
+  mutate(time.group = c(rep("b4",length(label)))) %>%
+  rbind.data.frame(to.rbind) %>%
+  left_join(group.induced.data) %>%
+  mutate(time.count = ifelse(is.na(time.count), 0, time.count))
+
+all.levels$strain <- as.factor(all.levels$strain)
+all.levels$time.group <- as.factor(all.levels$time.group)
+all.levels$label <- as.factor(all.levels$label)
+
+
+group.induced.lme <- lme(time.count ~ strain * time.group * label, 
+                         random = ~1|rat.id, 
+                         data = all.levels)
+anova.lme(group.induced.lme)
+ma_summary <- (summary(lsmeans(group.induced.lme,pairwise ~ strain * label * time.group, adjust = "Tukey")[["contrasts"]]))
+View(ma_summary[ma_summary$p.value < 0.05,])
 
 
