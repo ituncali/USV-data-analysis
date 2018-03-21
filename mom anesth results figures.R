@@ -100,5 +100,71 @@ plot6 <- momanesth_durs %>% group_by(strain, label) %>%
   ylab("Duration (ms)")
 
 
+##extra plots
+
+#histogram of pup call start times
+#data
+start_data <- cbind(data_counts, 
+                    no.counts = mapply(function(q) sum(str_count(q,categories.allowed.search)),data_counts$label))
+rows.to.rep <- start_data %>% filter(no.counts > 1)
+#total is sum(rows.to.rep$no.counts) = 3086 so this should be the same after replicating rows
+xtra.list <- mapply(function(q) str_extract_all(q, pattern = regex("[a-z]+(-[a-z]+)|[a-z]+")),
+                    rows.to.rep$label)
+xtra.notlist <- unlist(xtra.list)
+xtra.notlist.fix <- str_replace_all(xtra.notlist, 
+                                    pattern = c("downward" = "downward ramp",
+                                                "upward" = "upward ramp",
+                                                "up$" = "step up",
+                                                "down$" = "step down",
+                                                "inverted$" = "inverted-u"))                           
+#first remove the rows that do not contain calls
+xtra.rows <- unlist(mapply(function(q) str_subset(q, categories.allowed.search), xtra.notlist.fix))
+xtra.rows.added <- cbind(label = xtra.rows,
+                         rat.id = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                q = rows.to.rep$rat.id, x = rows.to.rep$no.counts)),
+                         strain = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                q = rows.to.rep$strain, x = rows.to.rep$no.counts)),
+                         start.time = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                    q = rows.to.rep$start.time, x = rows.to.rep$no.counts)),
+                         file.name = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                   q = rows.to.rep$file.name, x = rows.to.rep$no.counts)),
+                         unique.id = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                   q = rows.to.rep$unique.id, x = rows.to.rep$no.counts)),
+                         recording = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                   q = rows.to.rep$recording, x = rows.to.rep$no.counts)))
+start.category.data <- rbind(start_data[,-8],xtra.rows.added)
 
 
+#by 1 min bins
+bins <- cut(start_data[start_data$recording == "MA",]$start.time,15,include.lowest=T, labels = as.character(c(1:15)))
+hist.start.data <- start_data %>% filter(recording == "MA") %>% 
+  mutate(bin = bins) %>% 
+  group_by(bin, strain, file.name) %>%
+  summarise(no.counts = sum(no.counts)) %>%
+  group_by(bin,strain) %>% 
+  summarise(count = mean(no.counts), sem = sd(no.counts)/sqrt(length(no.counts)))
+
+ggplot(hist.start.data, aes(x = bin, y = count, fill = strain)) + 
+  geom_bar(stat = "identity", position = "dodge", colour = "black", alpha = 0.5) +
+  geom_errorbar(aes(ymin = count - sem, ymax = count + sem), position = position_dodge(.8)) +
+  xlab("bin") +
+  ylab("count") +
+  scale_fill_grey() +
+  theme_classic()
+
+#by 5 min bins
+bins <- cut(start_data[start_data$recording == "MA",]$start.time,3,include.lowest=T, labels = c("1st 5", "2nd 5", "3rd 5"))
+hist.start.data <- start_data %>% filter(recording == "MA") %>% 
+  mutate(bin = bins) %>% 
+  group_by(bin, strain, file.name) %>%
+  summarise(no.counts = sum(no.counts)) %>%
+  group_by(bin,strain) %>% 
+  summarise(count = mean(no.counts), sem = sd(no.counts)/sqrt(length(no.counts)))
+
+ggplot(hist.start.data, aes(x = bin, y = count, fill = strain)) + 
+  geom_bar(stat = "identity", position = "dodge", colour = "black", alpha = 0.5) +
+  geom_errorbar(aes(ymin = count - sem, ymax = count + sem), position = position_dodge(.8)) +
+  xlab("bin") +
+  ylab("count") +
+  scale_fill_grey() +
+  theme_classic()

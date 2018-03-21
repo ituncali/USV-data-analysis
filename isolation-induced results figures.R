@@ -51,7 +51,7 @@ plot2 <- ggplot(plot2.data, aes(x="", y=per, fill=categories.allowed))+
 allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short-sd",
                         "short-ur", "short-dr", "short-c", "complex", "upward ramp",
                         "downward ramp", "step up", "step down", "multi-step", "multi-step-s",
-                        "trill", "trill-c", "trill-f", "inverted-U", "unclear")
+                        "trill", "trill-c", "trill-f", "inverted-u", "unclear")
 
 categories.allowed.search <- paste0(allowed.categories, "(?!-)")
 library(stringr)
