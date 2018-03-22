@@ -49,6 +49,9 @@ write.csv(BIG_2,"C:/Users/ituncali/Documents/Master's Thesis/Data/Experiment 1/E
 write.csv(BIG_non_overlap, "C:/Users/ituncali/Documents/Master's Thesis/USV-Interpolation-CleanUp/data/Exp1_Non_Overlap_all_vars.csv",
           row.names=F)
 
+QQ <- read.csv("data/QQ.csv",stringsAsFactors = F)
+filtered_50 <- read.csv("data/filtered_50.csv", stringsAsFactors = F)
+
 to.adapt <- data.frame(QQ, file.name = filtered_50$file.name, 
                            label = filtered_50$label, 
                            strain = filtered_50$strain, 
@@ -57,17 +60,17 @@ to.adapt <- data.frame(QQ, file.name = filtered_50$file.name,
                            duration=filtered_50$duration, 
                            start.time = filtered_50$start.time)
 
-write.csv(to.adapt, "C:/Users/ituncali/Documents/Master's Thesis/Data/Experiment 1/csv files/Exp1_Filtered_All_Vars.csv",
+write.csv(to.adapt, "C:/Users/ituncali/Documents/Master's Thesis/Data/Experiment 1/Exp1_Filtered_All_Vars.csv",
           row.names = F)
 
 ##to get a table with counts from all three files
-plot_frame_2 <- plot_frame_1 %>% group_by(strain,categories.allowed) %>% 
+plot_frame_2 <- count_frame_2 %>% group_by(strain,categories.allowed) %>% 
   summarise(sum(total.counts))
 names(plot_frame_2) <- c("strain","label","total_raw")
 
-call_per <- read.csv(file.choose(),stringsAsFactors = F)
-names(call_per) <- c("label","strain","total_filtered","total_nonoverlap","percent_filtered_from_nonoverlap")
-data.file.counts <- left_join(plot_frame_2,call_per)
+Strain_recovery <- read.csv("C:/Users/ituncali/Documents/Master's Thesis/USV-Interpolation-CleanUp/Strain_call_recovery.csv",stringsAsFactors = F)
+names(Strain_recovery) <- c("label","strain","total_filtered","total_nonoverlap","percent_filtered_from_nonoverlap")
+data.file.counts <- left_join(plot_frame_2,Strain_recovery)
 
 #right now, percent_filtered is the percent out of non-overlapping calls, we want 
 #it to be the percent out of the total raw calls

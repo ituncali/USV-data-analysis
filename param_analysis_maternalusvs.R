@@ -104,4 +104,27 @@ freqs_strain.M <- to.adapt%>%group_by(strain)%>%summarise(mean(mean.freqs))
 dur_strain.M <- to.adapt%>%group_by(strain)%>%summarise(mean(duration))
 
 
+##22kHz USVs in these recordings!!
+neg.data <- read.csv(file.choose(),stringsAsFactors = F)
+neg.data <- left_join(neg.data, file.name.key)
+
+neg.total.counts <- neg.data %>% 
+  mutate(neg.col = ifelse(peak.freq.mean. < 30000, 1, 0),
+         pos.col = ifelse(peak.freq.mean. >= 30000, 1, 0)) %>%
+  group_by(strain, rat.id, recording) %>%
+  summarise(neg.count = sum(neg.col), pos.count = sum(pos.col), tot.count = length(peak.freq.mean.))
+
+neg.percent <- neg.total.counts %>% group_by(strain,recording) %>%
+  summarise(count.neg = sum(neg.count),
+            count.tot = sum(tot.count),
+            percent.neg = sum(neg.count)/sum(tot.count)*100)
+maternal.negs <- neg.data %>% filter(recording == "MomAlone" | recording == "PupsSep") %>%
+  group_by(strain, rat.id, recording) %>%
+  filter(peak.freq.mean. < 28000) %>%
+  summarise(neg.count = length(peak.freq.mean.))
+
+
+
+
+
 
