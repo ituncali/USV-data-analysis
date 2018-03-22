@@ -105,6 +105,15 @@ momanesth.litter.w.lme.data <- momanesth_counts_w %>% group_by(strain, rat.id) %
 lme.ma.lme <- lme(total.count.an ~ strain * bw.pup, random = ~1|rat.id, data = momanesth.litter.w.lme.data)
 anova.lme(lme.ma.lme)
 
+library(ggpubr)
+ggscatter(momanesth.litter.w.lme.data, x = "bw.pup", y = "total.count.an", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "pup weight (g)", ylab = "mean frequency (Hz)")
+cor.test(lme.w.freq.data$BW, lme.w.freq.data$m.freq, method = "pearson")
+
+
+
 momanesth_freqs_w <- left_join(data_freqs[data_freqs$recording=="MA",], litter.w)
 lme.ma.freqs <- lme(m.freq ~ strain * bw.pup, random = ~1|rat.id, data = momanesth_freqs_w)
 anova.lme(lme.ma.freqs)

@@ -1,0 +1,22 @@
+label,colour
+complex,#e6194b
+downward ramp,#3cb44b
+flat,#aaffc3
+flat-mz,#0082c8
+flat-z,#f58231
+inverted-u,#911eb4
+multi-step,#46f0f0
+multi-step-s,#f032e6
+short,#d2f53c
+short-c,#fabebe
+short-dr,#ffe119
+short-sd,#e6beff
+short-su,#aa6e28
+short-ur,#fffac8
+step down,#800000
+step up,#008080
+trill,#808000
+trill-c,#ffd8b1
+trill-f,#000080
+unclear,#808080
+upward ramp,#FFFFFF

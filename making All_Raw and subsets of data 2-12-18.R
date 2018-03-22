@@ -83,6 +83,9 @@ write.csv(data.file.counts,"C:/Users/ituncali/Documents/Master's Thesis/Data/Exp
 #to get SD and WK columns
 dcast(Strain_recovery, label~strain)
 
+grid.arrange(tableGrob(dcast(Strain_recovery, label~strain), rows = NULL, cols = c("USV Category", "SD (%)","WKY (%)"), 
+                       theme = ttheme_default(base_size = 6)))
+
 #to get counts from different recordings
 
 count_frame_2 <- left_join(count_frame, file.name.key)

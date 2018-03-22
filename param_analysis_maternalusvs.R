@@ -123,6 +123,8 @@ maternal.negs <- neg.data %>% filter(recording == "MomAlone" | recording == "Pup
   filter(peak.freq.mean. < 28000) %>%
   summarise(neg.count = length(peak.freq.mean.))
 
+grid.arrange(tableGrob(neg.percent, rows = NULL))
+
 
 
 
