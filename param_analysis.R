@@ -144,7 +144,8 @@ summary(glht(lme_pup_freq,linfct=mcp(Material = "Tukey")))
 data_durs <- read.csv(file.choose(),stringsAsFactors = F)
 
 
-pup_durs <- data_durs %>% filter(recording == "Mpupiso" | recording == "Fpupiso") %>% group_by(strain, label,recording,file.name,rat.id) %>%
+pup_durs <- data_durs %>% filter(recording == "Mpupiso" | recording == "Fpupiso") %>% 
+  group_by(strain, label,recording,file.name,rat.id) %>%
 summarise(mean.dur = mean(duration), SEM = sd(duration)/sqrt(length(duration)),
 count = length(duration)) %>%
 filter(label == "flat" | label == "flat-z" | label == "flat-mz" | label == "short")
@@ -218,7 +219,7 @@ lme.w.count.data <- pup_counts_w %>% group_by(strain, rat.id.fix) %>%
 lme.pup.count.w <- lme(total.an ~ strain * BW, random = ~1|rat.id.fix, data = lme.w.count.data)
 anova.lme(lme.pup.count.w)
 
-pup_freqs_w <- left_join(pup_freqs, pup.w)
+pup_freqs_w <- left_join(pup_freqs, litter.w)
 pup_freqs_w <- pup_freqs_w %>% filter(!is.na(BW))
 
 pup_freqs_w  %>% group_by(strain, rat.id.fix) %>%
@@ -235,13 +236,13 @@ lme.pup.freq.w <- lme(m.freq ~ strain * BW, random = ~1|rat.id.fix, data = lme.w
 anova.lme(lme.pup.freq.w)
 
 library(ggpubr)
-ggscatter(lme.w.freq.data, x = "BW", y = "m.freq", 
+ggscatter(pup_freqs_w, x = "bw.pup", y = "mean.freq", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson",
           xlab = "pup weight (g)", ylab = "mean frequency (Hz)")
-cor.test(lme.w.freq.data$BW, lme.w.freq.data$m.freq, method = "pearson")
+cor.test(pup_freqs_w$bw.pup, pup_freqs_w$mean.freq, method = "pearson")
 
-pup_durs_w <- left_join(pup_durs, pup.w)
+pup_durs_w <- left_join(pup_durs, litter.w)
 pup_durs_w <- pup_durs_w %>% filter(!is.na(BW))
 
 pup_durs_w  %>% group_by(strain, rat.id.fix, label) %>%
@@ -258,7 +259,7 @@ lme.pup.dur.w <- lme(duration ~ strain * BW, random = ~1|rat.id.fix, data = lme.
 anova.lme(lme.pup.dur.w)
 
 library(ggpubr)
-ggscatter(lme.w.dur.data, x = "BW", y = "duration", 
+ggscatter(pup_durs_w, x = "bw.pup", y = "mean.dur", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson",
           xlab = "pup weight (g)", ylab = "duration (s)")

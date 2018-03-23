@@ -108,20 +108,41 @@ dur_strain.M <- to.adapt%>%group_by(strain)%>%summarise(mean(duration))
 neg.data <- read.csv(file.choose(),stringsAsFactors = F)
 neg.data <- left_join(neg.data, file.name.key)
 
-neg.total.counts <- neg.data %>% 
+neg.total.counts.incomplete <- neg.data %>% 
   mutate(neg.col = ifelse(peak.freq.mean. < 30000, 1, 0),
          pos.col = ifelse(peak.freq.mean. >= 30000, 1, 0)) %>%
-  group_by(strain, rat.id, recording) %>%
+  group_by(strain, rat.id, recording, file.name) %>%
   summarise(neg.count = sum(neg.col), pos.count = sum(pos.col), tot.count = length(peak.freq.mean.))
+
+missing.data <- data.frame(file.name = c("T0000094","T0000139","T0000122"),
+                           neg.count = c(0,0,0),
+                           pos.count = c(0,0,0),
+                           tot.count = c(0,0,0))
+missing.data <- left_join(missing.data, file.name.key)
+
+neg.total.counts <- rbind.data.frame(neg.total.counts.incomplete, missing.data)
+neg.total.all <- neg.total.counts %>%
+  filter(!(rat.id == "SD25E4" | rat.id == "SD31E5" | rat.id == "WK29E2")) %>%
+  mutate(per.neg = neg.count/tot.count)
+
+
+
+
+
+maternal.neg.counts <- neg.total.counts %>% filter(recording == "MomAlone" | recording == "PupsSep") %>%
+  mutate(per.neg = neg.count/tot.count)
 
 neg.percent <- neg.total.counts %>% group_by(strain,recording) %>%
   summarise(count.neg = sum(neg.count),
             count.tot = sum(tot.count),
             percent.neg = sum(neg.count)/sum(tot.count)*100)
+
 maternal.negs <- neg.data %>% filter(recording == "MomAlone" | recording == "PupsSep") %>%
   group_by(strain, rat.id, recording) %>%
   filter(peak.freq.mean. < 28000) %>%
   summarise(neg.count = length(peak.freq.mean.))
+
+
 
 grid.arrange(tableGrob(neg.percent, rows = NULL))
 

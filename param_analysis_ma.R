@@ -109,18 +109,46 @@ library(ggpubr)
 ggscatter(momanesth.litter.w.lme.data, x = "bw.pup", y = "total.count.an", 
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson",
-          xlab = "pup weight (g)", ylab = "mean frequency (Hz)")
-cor.test(lme.w.freq.data$BW, lme.w.freq.data$m.freq, method = "pearson")
+          xlab = "pup weight (g)", ylab = "USVs (n)")
+cor.test(momanesth.litter.w.lme.data$bw.pup, momanesth.litter.w.lme.data$total.count.an, method = "pearson")
 
 
-
-momanesth_freqs_w <- left_join(data_freqs[data_freqs$recording=="MA",], litter.w)
+#freqs corr w/ weight
+momanesth_freqs_w <- left_join(momanesth_freqs, litter.w)
 lme.ma.freqs <- lme(m.freq ~ strain * bw.pup, random = ~1|rat.id, data = momanesth_freqs_w)
 anova.lme(lme.ma.freqs)
 
-momanesth_durs_w <- left_join(data_durs[data_durs$recording=="MA",],litter.w)
-lme.ma.durs <- lme(duration ~ strain * bw.pup, random = ~1|rat.id, data = momanesth_durs_w)
+momanesth_avg_freqs <- data_freqs %>% filter(recording == "MA") %>% 
+  group_by(strain, file.name, rat.id) %>% 
+  summarise(mean.freq.an = mean(m.freq), sem = sd(m.freq)/sqrt(length(m.freq)),
+            count = length(m.freq))
+momanesth_avg_freqs_w <- left_join(momanesth_avg_freqs, litter.w)
+
+
+ggscatter(momanesth_freqs_w, x = "bw.pup", y = "mean.freq", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "pup weight (g)", ylab = "mean frequency (Hz)")
+cor.test(momanesth_freqs_w$bw.pup, momanesth_freqs_w$m.freq, method = "pearson")
+
+
+momanesth_durs_w <- left_join(momanesth_durs,litter.w)
+lme.ma.durs <- lme(mean.dur ~ strain * bw.pup, random = ~1|rat.id, data = momanesth_durs_w)
 anova.lme(lme.ma.durs)
+
+ggscatter(momanesth_durs_w, x = "bw.pup", y = "mean.dur", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "pup weight (g)", ylab = "duration (s)")
+cor.test(momanesth_durs_w$bw.pup, momanesth_durs_w$mean.dur, method = "pearson")
+
+momanesth_avg_durs <- data_durs %>% filter(recording == "MA") %>% 
+  group_by(strain, file.name, rat.id) %>% 
+  summarise(mean.dur.an = mean(duration), sem = sd(duration)/sqrt(length(duration)),
+            count = length(duration))
+momanesth_avg_durs_w <- left_join(momanesth_avg_durs,litter.w)
+
+
 
 ##momanesth time bins
 #by 3 min bins
@@ -134,8 +162,42 @@ bin.data <- start_data %>% filter(recording == "MA") %>%
 bin.ma.lme <- lme(count ~ strain * bin, random = ~1|file.name, data = bin.data)
 anova.lme(bin.ma.lme)
 
-
 ##momanesth before and after grouping
+#want to compare 1st 3 min, 3rd 3 min and 5th 3 min...
+ma.xtra <- xtra.rows.added %>% filter(recording == "MA")
+three.times.data <- ma.xtra %>% 
+  mutate(time.group = ifelse(start.time < 180, "1",
+                             ifelse(start.time >= 420 & start.time < 540, "2",
+                                    ifelse(start.time > 720, "3", NA)))) %>%
+  filter(!is.na(time.group)) %>%
+  group_by(strain, time.group, rat.id, file.name, label) %>%
+  summarise(time.count = length(label))
+
+to.join <- expand.grid(label=unique(momanesth_counts$categories.allowed), 
+                       time.group=c("1","2","3"), 
+                       file.name=unique(momanesth_counts$file.name))
+to.join <- left_join(to.join, file.name.key)
+
+pru <- to.join %>% left_join(three.times.data) %>%
+  mutate(time.count = ifelse(is.na(time.count), 0, time.count))
+
+three.times.lme <- lme(time.count ~ strain * time.group * label, 
+                         random = ~1|rat.id, 
+                         data = pru)
+anova.lme(three.times.lme)
+
+ma_summary <- (summary(lsmeans(three.times.lme,pairwise ~ (strain * time.group)|label, adjust = "Tukey")[["contrasts"]]))
+View(ma_summary[ma_summary$p.value < 0.05,])
+
+three.times.profile <- pru %>% group_by(strain, rat.id, time.group) %>% 
+  mutate(tot.count.in.time = sum(time.count)) %>% 
+  group_by(strain, rat.id, time.group, label) %>% 
+  mutate(rel.call.count = time.count/tot.count.in.time)
+three.times.profile.lme <- lme(rel.call.count ~ strain * time.group * label, 
+                               random = ~1|rat.id, 
+                               data = three.times.profile)
+
+##momanesth before and during grouping
 group.induced.data <- ma.xtra %>% 
   mutate(time.group = ifelse(start.time < 600 & start.time > 570, "b4",
                              ifelse(start.time >= 600 & start.time < 630, "during", NA))) %>%
@@ -144,15 +206,12 @@ group.induced.data <- ma.xtra %>%
   summarise(time.count = length(label))
 group.induced.data$file.name <- as.factor(as.character(group.induced.data$file.name))
 
+to.join <- expand.grid(label=unique(momanesth_counts$categories.allowed), 
+                       time.group=c("b4","during"), 
+                       file.name=unique(momanesth_counts$file.name))
+to.join <- left_join(to.join, file.name.key)
 
-to.rbind <- momanesth_counts %>%
-  select(label = categories.allowed, strain, rat.id, file.name) %>%
-  mutate(time.group = c(rep("during",length(label))))
-all.levels <- momanesth_counts %>%
-  select(label = categories.allowed, strain, rat.id, file.name) %>%
-  mutate(time.group = c(rep("b4",length(label)))) %>%
-  rbind.data.frame(to.rbind) %>%
-  left_join(group.induced.data) %>%
+all.levels <- to.join %>% left_join(group.induced.data) %>%
   mutate(time.count = ifelse(is.na(time.count), 0, time.count))
 
 all.levels$strain <- as.factor(all.levels$strain)
@@ -167,4 +226,15 @@ anova.lme(group.induced.lme)
 ma_summary <- (summary(lsmeans(group.induced.lme,pairwise ~ strain * label * time.group, adjust = "Tukey")[["contrasts"]]))
 View(ma_summary[ma_summary$p.value < 0.05,])
 
+all.levs.profile <- all.levels %>% group_by(strain, rat.id, time.group) %>% 
+  mutate(tot.count.in.time = sum(time.count)) %>% 
+  group_by(strain, rat.id, time.group, label) %>% 
+  mutate(rel.call.count = ifelse(tot.count.in.time >0, time.count/tot.count.in.time, 0))
+
+group.profile.lme <- lme(rel.call.count ~ strain * time.group * label, 
+                               random = ~1|rat.id, 
+                               data = all.levs.profile)
+anova.lme(group.profile.lme)
+ma_summary <- (summary(lsmeans(group.profile.lme,pairwise ~ (time.group * label) | strain, adjust = "Tukey")[["contrasts"]]))
+View(ma_summary[ma_summary$p.value < 0.05,])
 
