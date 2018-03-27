@@ -65,7 +65,7 @@ count_frame_3 <- count_frame_2 %>% group_by(categories.allowed) %>%
 count_frame_3$categories.allowed <- droplevels(count_frame_3$categories.allowed)
 
 #now see how many of the remaining calls are emitted per animal per recording
-counts.props <- count_frame_3 %>% group_by(categories.allowed, rat.id) %>% 
+counts.props <- count_frame_3 %>% group_by(categories.allowed, strain, rat.id) %>% 
   summarise(number = paste0(sum(ifelse(total.counts==0,0,1)),"/6"), 
             proportion = sum(ifelse(total.counts==0,0,1))/6) 
 
