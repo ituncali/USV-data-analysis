@@ -88,7 +88,64 @@ grid.arrange(tableGrob(dcast(Strain_recovery, label~strain), rows = NULL, cols =
 
 #to get counts from different recordings
 
-count_frame_2 <- left_join(count_frame, file.name.key)
+missing.data <- data.frame(categories.allowed = c(rep(allowed.categories,10)),
+total.counts = c(rep(0,210)),
+file.name = c(rep("T0000094",21),rep("T0000139",21),rep("T0000122",21),
+rep("T0000146",21),rep("T0000147",21),rep("T0000183",21),
+rep("T0000188",21),rep("T0000193",21),rep("T0000227",21),
+rep("T0000301",21)),
+total.filecounts = c(rep(0,210)),
+rel.filecount = c(rep(0,210)))
+
+count_frame <- rbind.data.frame(count_frame, missing.data)
+
+wk95.f <- data.frame(categories.allowed = allowed.categories,
+total.counts = c(rep(0,21)),
+file.name = c(rep("T0000305",21)),
+total.filecounts = c(rep(0,21)),
+rel.filecount = c(rep(0,21)))
+
+count_frame <- rbind.data.frame(count_frame, wk95.f)
+count_frame_2 <- left_join(count_frame,file.name.key)
+count_frame_2 <- count_frame_2 %>% select(label = categories.allowed, file.name, total.counts)
+
+freq_frame <- data_freqs %>% group_by(strain, label, recording, file.name, rat.id) %>% 
+  summarise(freq.count = length(m.freq)) %>%
+  ungroup() %>%
+  select(file.name, label, freq.count)
+
+dur_frame <- data_durs %>% group_by(strain, label, recording, file.name, rat.id) %>%
+  summarise(dur.count = length(duration)) %>%
+  ungroup() %>%
+  select(file.name, label, dur.count)
+
+join1 <- left_join(count_frame_2, dur_frame)
+join2 <- left_join(join1, freq_frame)
+counts_by_file <- left_join(join2, file.name.key)
+counts_by_file <- counts_by_file %>% mutate(dur.count = ifelse(is.na(dur.count), 0, dur.count),
+                                            freq.count = ifelse(is.na(freq.count),0, freq.count))
+
+per_by_file <- counts_by_file %>% mutate(percent = ifelse(dur.count > 0, freq.count/dur.count, 0)) %>%
+  select(label, file.name, strain, rat.id, recording, percent)
+
+per.lme <- lme(percent ~ label * strain * recording, random = ~1|rat.id, data = per_by_file)
+anova.lme(per.lme)
+per.sum <- summary(lsmeans(per.lme, pairwise ~ strain|label, adjust = "Tukey"))[["contrasts"]]
+View(per.sum[per.sum$p.value < 0.05,])
+
+per.lab.sum <- summary(lsmeans(per.lme, pairwise ~ strain*label|recording, adjust = "Tukey"))[["contrasts"]]
+View(per.lab.sum[per.lab.sum$p.value < 0.05,])
+
+#without recording in account
+per.strain.label <- counts_by_file %>% group_by(label, strain, rat.id) %>% 
+  summarise(sum.dur = sum(dur.count), sum.freq = sum(freq.count)) %>% 
+  mutate(percent = ifelse(sum.dur >0, sum.freq/sum.dur, 0))
+per.sl.lme <- lme(percent ~ strain * label, random = ~1|rat.id, data = pru)
+anova.lme(per.sl.lme)
+
+
+per.sl.sum <- summary(lsmeans(per.sl.lme, pairwise ~ strain|label, adjust = "Tukey"))[["contrasts"]]
+View(per.sl.sum[per.sl.sum$p.value < 0.05,])
 
 
 
