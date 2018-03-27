@@ -109,15 +109,15 @@ count_frame <- rbind.data.frame(count_frame, wk95.f)
 count_frame_2 <- left_join(count_frame,file.name.key)
 count_frame_2 <- count_frame_2 %>% select(label = categories.allowed, file.name, total.counts)
 
-freq_frame <- data_freqs %>% group_by(strain, label, recording, file.name, rat.id) %>% 
-  summarise(freq.count = length(m.freq)) %>%
-  ungroup() %>%
-  select(file.name, label, freq.count)
+freq_frame <- data_freqs %>% group_by(strain, label, rat.id) %>% 
+  summarise(freq.count = length(m.freq)) 
 
-dur_frame <- data_durs %>% group_by(strain, label, recording, file.name, rat.id) %>%
-  summarise(dur.count = length(duration)) %>%
-  ungroup() %>%
-  select(file.name, label, dur.count)
+dur_frame <- data_durs %>% group_by(strain, label, rat.id) %>%
+  summarise(dur.count = length(duration)) 
+
+blah <- left_join(dur_frame, freq_frame)
+per_by_animal <- blah %>% ungroup() %>% mutate(percent = ifelse(dur.count > 0, freq.count/dur.count, 0)) 
+
 
 join1 <- left_join(count_frame_2, dur_frame)
 join2 <- left_join(join1, freq_frame)
