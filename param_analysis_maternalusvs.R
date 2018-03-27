@@ -123,10 +123,14 @@ missing.data <- left_join(missing.data, file.name.key)
 neg.total.counts <- rbind.data.frame(neg.total.counts.incomplete, missing.data)
 neg.total.all <- neg.total.counts %>%
   filter(!(rat.id == "SD25E4" | rat.id == "SD31E5" | rat.id == "WK29E2")) %>%
-  mutate(per.neg = neg.count/tot.count)
+  mutate(per.neg = ifelse(tot.count > 0, neg.count/tot.count, 0))
 
-
-
+neg.lme <- lme(per.neg ~ recording,
+               random = ~1|rat.id,
+               data = neg.total.all)
+anova.lme(neg.lme)
+total.neg.sum <- (summary(lsmeans(neg.lme,pairwise~recording, adjust = "Tukey")[["contrasts"]]))
+View(total.neg.sum[total.neg.sum$p.value < 0.05,])
 
 
 maternal.neg.counts <- neg.total.counts %>% filter(recording == "MomAlone" | recording == "PupsSep") %>%
