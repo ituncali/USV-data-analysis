@@ -53,9 +53,8 @@ exp1.pers.sum <- summary(lsmeans(exp1.pers.lme, pairwise ~ categories.allowed, a
 exp1.counts <- count_frame_2 %>% group_by(categories.allowed) %>% summarise(tot.count =sum(total.counts))
 exp1.counts.pers <- exp1.counts %>% ungroup() %>% mutate(percent = tot.count/sum(tot.count) *100)
 
-sum(exp1.counts.pers[ord[c(14:21)],]$percent)
-calls.to.get.rid.of <- as.vector(exp1.counts.pers[ord[c(14:21)],]$categories.allowed)
-calls.to.get.rid.of <- paste0("categories.allowed==",calls.to.get.rid.of)
+sum(exp1.counts.pers[order[c(14:21)],]$percent)
+calls.to.get.rid.of <- as.vector(exp1.counts.pers[order(exp1.counts.pers$percent, decreasing = T)[14:21],]$categories.allowed)
 
 count_frame_3 <- count_frame_2 %>% group_by(categories.allowed) %>%
   filter(!(categories.allowed == calls.to.get.rid.of[1]|categories.allowed == calls.to.get.rid.of[2]|
@@ -99,5 +98,46 @@ data_freqs <- data_freqs %>% filter(!(label == calls.to.get.rid.of[1]|label == c
 file.name.key.unmelted <- read.csv("data/Exp1_file.name_key.csv", stringsAsFactors = F)
 file.name.key <- melt(data=file.name.key.unmelted,id = c("strain","rat.id"),
                       variable.name="recording",value.name = "file.name")
+
+
+##start time counts
+categories.allowed.search <- paste0(allowed.categories, "(?!-)")
+start_data <- cbind(data_counts, 
+                    no.counts = mapply(function(q) sum(str_count(q,categories.allowed.search)),data_counts$label))
+#rows.to.rep <- start_data %>% filter(no.counts > 1)
+#needed to add extra regex at beginning to account for multi-step-s
+xtra.list <- mapply(function(q) str_extract_all(q, pattern = "[a-z]+(-[a-z]+)(-[a-z]+)|[a-z]+(-[a-z]+)|[a-z]+"),
+                    start_data$label)
+xtra.notlist <- unlist(xtra.list)
+xtra.notlist.fix <- str_replace_all(xtra.notlist, 
+                                    pattern = c("downward" = "downward ramp",
+                                                "upward" = "upward ramp",
+                                                "up$" = "step up",
+                                                "down$" = "step down"#,
+                                                #"inverted$" = "inverted-u",
+                                                #"^s$" = "multi-step-s"
+                                    ))                           
+#first remove the rows that do not contain calls
+xtra.rows <- unlist(mapply(function(q) str_subset(q, categories.allowed.search), xtra.notlist.fix))
+xtra.rows.added <- cbind.data.frame(label = xtra.rows,
+                                    rat.id = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                           q = start_data$rat.id, x = start_data$no.counts)),
+                                    strain = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                           q = start_data$strain, x = start_data$no.counts)),
+                                    start.time = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                               q = start_data$start.time, x = start_data$no.counts)),
+                                    file.name = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                              q = start_data$file.name, x = start_data$no.counts)),
+                                    unique.id = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                              q = start_data$unique.id, x = start_data$no.counts)),
+                                    recording = unlist(mapply(function(q,x) c(rep(q,x)),
+                                                              q = start_data$recording, x = start_data$no.counts)))
+#now get rid of calls we said aren't important
+start.rows <- xtra.rows.added %>% filter(!(label == calls.to.get.rid.of[1]|label == calls.to.get.rid.of[2]|
+                                             label == calls.to.get.rid.of[3]|label == calls.to.get.rid.of[4]|
+                                             label == calls.to.get.rid.of[5]|label == calls.to.get.rid.of[6]|
+                                             label == calls.to.get.rid.of[7]|label == calls.to.get.rid.of[8]))
+
+
 
 
