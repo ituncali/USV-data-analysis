@@ -1,7 +1,7 @@
 library(cowplot)
 
 
-plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, labels = "AUTO", ncol = 2, align = 'w')
+plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO", ncol = 2, align = 'w')
 
 #bar graph of major 4 call type counts by strain
 plot1 <- momanesth_counts %>% 
@@ -18,11 +18,11 @@ plot1 <- momanesth_counts %>%
         axis.text.x = element_text(size = 14)) +
   scale_fill_grey(labels = c("SD","WKY")) +
   xlab("USV Category") +
-  ylab("USVs (n)")
+  ylab("# USVs / 15min")
 
 
 #pie chart
-label_colours <- read.csv(file.choose(), stringsAsFactors = F)
+label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
 names(label_colours) <- c("categories.allowed","colour")
 
 plot2 <- ggplot(ma.pie.data, aes(x="", y=per, fill=categories.allowed))+
@@ -32,7 +32,7 @@ plot2 <- ggplot(ma.pie.data, aes(x="", y=per, fill=categories.allowed))+
   coord_polar("y", start=0) + 
   facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
-  theme(legend.position = "right", aspect.ratio = 1, legend.title = element_blank(),
+  theme(legend.position = "bottom", aspect.ratio = 1, legend.title = element_blank(),
         legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
 
 ma.pie.data <- momanesth_counts %>% group_by(strain, categories.allowed) %>%
@@ -46,14 +46,6 @@ colour.key <- colour.key %>% group_by(categories.allowed) %>%
 
 
 #line data counts by time bins
-bins <- cut(start_data[start_data$recording == "MA",]$start.time,5,include.lowest=T, labels = c("1","2","3","4","5"))
-line.data <- start_data %>% filter(recording == "MA") %>% 
-  mutate(bin = bins) %>% 
-  group_by(bin,strain,file.name) %>% 
-  summarise(count = sum(no.counts))%>% 
-  group_by(bin,strain) %>% 
-  summarise(mean = mean(count), sem = sd(count)/sqrt(length(count)),count = length(count))
-
 line.data <- ma.xtra %>% 
   mutate(time.group = ifelse(start.time < 180, "1",
                              ifelse(start.time >= 360 & start.time < 540, "2",
@@ -62,24 +54,57 @@ line.data <- ma.xtra %>%
   group_by(strain, time.group, rat.id, file.name) %>%
   summarise(time.count = length(label)) %>%
   group_by(strain, time.group) %>%
-  summarise(m.time.group = mean(time.count), sem = sd(time.count)/sqrt(length(time.count))) %>%
-  mutate(time.group = ifelse(time.group == "1", "1-3",
-                             ifelse(time.group == "2", "7-9", "12-15")))
+  summarise(m.time.group = mean(time.count), sem = sd(time.count)/sqrt(length(time.count)))
+  
 line.data$time.group <- as.factor(line.data$time.group)
 
 plot3 <- ggplot(line.data, aes(x=time.group, y=m.time.group, group = strain, colour=strain)) + 
   geom_errorbar(aes(ymin=m.time.group-sem, ymax=m.time.group+sem), width=.1,size=.5) +
   geom_line(size=1) +
   geom_point(size=3) + 
-  ylab("USVs (n)") +
-  xlab("Time in test (3 min intervals)") +
+  ylab("# USVs / 3min") +
+  xlab("Social Context (3 min intervals)") +
   theme_classic() +
   theme(legend.position = "none") +
   scale_colour_grey(start = 0, end = .7) +
-  scale_x_discrete(labels = c("1"="start","2"="middle","3"="end"))
+  scale_x_discrete(labels = c("1"="Scattered","2"="Grouped with Littermates","3"="Grouped with Mother"))
 
 #scatter plot duration x frequency
-plot4 <- base.plot + annotation_custom(grob = inset.plot, xmin = 100, xmax = 400, ymin = 55, ymax = 95)
+library(gridExtra)
+plot4 <- grid.arrange(dur.hist, empty, main.plot, freq.hist, ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4))
+
+ma.freq.hist <- data_freqs %>% filter(recording == "MA")
+freq.hist <- ggplot(ma.freq.hist, aes(x = m.freq/1000, fill = strain)) + 
+  geom_histogram(aes(y = c(..count..[..group..==1]/sum(..count..[..group..==1]),
+                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), position = "identity", colour = "black", alpha=0.5) +
+  ylab("(%)")+
+  scale_fill_grey() +
+  theme_classic() +
+  theme(legend.position = "none", axis.title.y = element_blank(), 
+        axis.text.y = element_blank()) +
+  coord_flip()
+
+ma.dur.hist <- data_durs %>% filter(recording == "MA" & duration < 0.4)
+dur.hist <- ggplot(ma.dur.hist, aes(x = duration * 1000, fill = strain)) + 
+  geom_histogram(aes(y = c(..count..[..group..==1]/sum(..count..[..group..==1]),
+                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), 
+                 position = "identity", colour = "black", alpha=0.5) +
+  ylab("(%)")+
+  scale_fill_grey() +
+  theme_classic()+
+  theme(legend.position = "none", axis.title.x = element_blank(),
+        axis.text.x = element_blank())
+
+
+
+empty <- ggplot()+geom_point(aes(1,1), colour="white")+
+  theme(axis.ticks=element_blank(), 
+        panel.background=element_blank(), 
+        axis.text.x=element_blank(), axis.text.y=element_blank(),           
+        axis.title.x=element_blank(), axis.title.y=element_blank(),
+        axis.line = element_blank())
+
+main.plot <- base.plot + annotation_custom(grob = inset.plot, xmin = 100, xmax = 400, ymin = 55, ymax = 95)
 
 plot4.data <- data_freqs %>% filter((recording == "MA") & (label == "flat" | label == "flat-z" | label == "short" | label == "short-c" | label == "short-ur"))
 scatter.colour.key <- colour.key %>% filter(categories.allowed == "flat"|
@@ -89,7 +114,7 @@ scatter.colour.key <- colour.key %>% filter(categories.allowed == "flat"|
                                               categories.allowed == "short-ur")
 
 inset.plot <- ggplotGrob(ggplot(plot4.data, aes(x = duration * 1000, y = m.freq/1000)) +
-  geom_point(size = 2, aes(colour = label), alpha = 0.5) +
+  geom_point(size = 1, aes(colour = label), alpha = 0.5) +
   scale_colour_manual(values=as.vector(scatter.colour.key$label.colour)) +
   xlab("Duration (ms)") +
   ylab("Frequeny (kHz)") +
@@ -271,3 +296,34 @@ names(lc) <- c("label","colour")
 ck <- left_join(three.times.pie.data, lc)
 ck <- ck %>% group_by(label) %>%
   summarise(label.colour = unique(colour))
+
+
+
+###extra added 3-30
+extra.data <- all.levels %>% filter(label == "flat" | label =="short") %>% 
+  group_by(strain, label, time.group) %>% 
+  summarise(m.c = mean(time.count), 
+            sem = sd(time.count)/sqrt(length(time.count))) 
+  
+  
+  
+  
+ggplot(extra.data, aes(x = time.group, y = m.c, group = strain, fill = strain)) + 
+  geom_bar(stat="identity", position = "dodge") + 
+  geom_errorbar(aes(ymin=m.c - sem, ymax = m.c+sem),
+                position = position_dodge(.8),width=.1,size=.5) +
+  scale_fill_grey(labels = c("SD", "WKY")) +
+  theme_classic() +
+  scale_x_discrete(labels = c("b4"="Preceding","during"="During")) +
+  theme(strip.text = element_text(size=20),legend.justification = c(0,0),
+        legend.position = c(.6,.6), legend.title=element_blank(),
+        legend.text = element_text(size=20), axis.text = element_text(size=14),
+        axis.title = element_text(size=14)) +
+  xlab("Group Timing (30sec intervals)") +
+  ylab("# USVs / 30sec") +
+  facet_wrap(~label)
+
+
+
+
+

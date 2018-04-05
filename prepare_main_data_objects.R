@@ -31,6 +31,11 @@ ma.missing.data <- data.frame(categories.allowed = c(rep(allowed.categories,10))
                            total.filecounts = c(rep(0,210)),
                            rel.filecount = c(rep(0,210)))
 count_frame_added <- rbind.data.frame(count_frame, wk95.f, ma.missing.data)
+##file.name.key
+file.name.key.unmelted <- read.csv("data/Exp1_file.name_key.csv", stringsAsFactors = F)
+file.name.key <- melt(data=file.name.key.unmelted,id = c("strain","rat.id"),
+                      variable.name="recording",value.name = "file.name")
+
 count_frame_2 <- left_join(count_frame_added, file.name.key)
 
 exp1.counts.lme.data <- count_frame_2 %>% group_by(categories.allowed, rat.id) %>% 
@@ -53,7 +58,7 @@ exp1.pers.sum <- summary(lsmeans(exp1.pers.lme, pairwise ~ categories.allowed, a
 exp1.counts <- count_frame_2 %>% group_by(categories.allowed) %>% summarise(tot.count =sum(total.counts))
 exp1.counts.pers <- exp1.counts %>% ungroup() %>% mutate(percent = tot.count/sum(tot.count) *100)
 
-sum(exp1.counts.pers[order[c(14:21)],]$percent)
+sum(exp1.counts.pers[order(exp1.counts.pers$percent, decreasing=T)[14:21],]$percent)
 calls.to.get.rid.of <- as.vector(exp1.counts.pers[order(exp1.counts.pers$percent, decreasing = T)[14:21],]$categories.allowed)
 
 count_frame_3 <- count_frame_2 %>% group_by(categories.allowed) %>%
@@ -68,36 +73,25 @@ counts.props <- count_frame_3 %>% group_by(categories.allowed, strain, rat.id) %
   summarise(number = paste0(sum(ifelse(total.counts==0,0,1)),"/6"), 
             proportion = sum(ifelse(total.counts==0,0,1))/6) 
 
-#need to fix overlapping calls!!
-data_counts <- data_counts %>% filter(!(label == calls.to.get.rid.of[1]|label == calls.to.get.rid.of[2]|
-                           label == calls.to.get.rid.of[3]|label == calls.to.get.rid.of[4]|
-                           label == calls.to.get.rid.of[5]|label == calls.to.get.rid.of[6]|
-                           label == calls.to.get.rid.of[7]|label == calls.to.get.rid.of[8]))
 
 
 ##durations
-data_durs <- read.csv("data/Exp1_Non_Overlap_Durations.csv", stringsAsFactors = F)
-
-data_durs <- data_durs %>% filter(!(label == calls.to.get.rid.of[1]|label == calls.to.get.rid.of[2]|
-                                      label == calls.to.get.rid.of[3]|label == calls.to.get.rid.of[4]|
-                                      label == calls.to.get.rid.of[5]|label == calls.to.get.rid.of[6]|
-                                      label == calls.to.get.rid.of[7]|label == calls.to.get.rid.of[8]))
+data_dur_readin <- read.csv("data/Exp1_Non_Overlap_Durations.csv", stringsAsFactors = F)
+data_durs <- data_dur_readin %>% 
+  mutate(label = ifelse(duration < 0.012 & label !="short", "short",
+                        ifelse(duration > 0.012 & label == "short", "flat",label))) %>%
+  filter(duration < 0.8 & duration > 0.002)
 
 
 ##frequencies
 data_read_in <- read.csv("data/Exp1_Filtered_All_Vars.csv", stringsAsFactors = F)
 m.freq <- apply(data_read_in[,c(1:50)],1,function(y) mean(y))
-data_freqs <- mutate(data_read_in, m.freq = m.freq)
+data_freqs_readin <- mutate(data_read_in, m.freq = m.freq)
+data_freqs <- data_freqs_readin %>% 
+  mutate(label = ifelse(duration < 0.012 & label !="short", "short",
+                        ifelse(duration > 0.012 & label == "short", "flat",label))) %>%
+  filter(duration < 0.8 & duration > 0.002)
 
-data_freqs <- data_freqs %>% filter(!(label == calls.to.get.rid.of[1]|label == calls.to.get.rid.of[2]|
-                                        label == calls.to.get.rid.of[3]|label == calls.to.get.rid.of[4]|
-                                        label == calls.to.get.rid.of[5]|label == calls.to.get.rid.of[6]|
-                                        label == calls.to.get.rid.of[7]|label == calls.to.get.rid.of[8]))
-
-##file.name.key
-file.name.key.unmelted <- read.csv("data/Exp1_file.name_key.csv", stringsAsFactors = F)
-file.name.key <- melt(data=file.name.key.unmelted,id = c("strain","rat.id"),
-                      variable.name="recording",value.name = "file.name")
 
 
 ##start time counts
@@ -119,7 +113,7 @@ xtra.notlist.fix <- str_replace_all(xtra.notlist,
                                     ))                           
 #first remove the rows that do not contain calls
 xtra.rows <- unlist(mapply(function(q) str_subset(q, categories.allowed.search), xtra.notlist.fix))
-xtra.rows.added <- cbind.data.frame(label = xtra.rows,
+start.rows <- cbind.data.frame(label = xtra.rows,
                                     rat.id = unlist(mapply(function(q,x) c(rep(q,x)),
                                                            q = start_data$rat.id, x = start_data$no.counts)),
                                     strain = unlist(mapply(function(q,x) c(rep(q,x)),
@@ -133,11 +127,5 @@ xtra.rows.added <- cbind.data.frame(label = xtra.rows,
                                     recording = unlist(mapply(function(q,x) c(rep(q,x)),
                                                               q = start_data$recording, x = start_data$no.counts)))
 #now get rid of calls we said aren't important
-start.rows <- xtra.rows.added %>% filter(!(label == calls.to.get.rid.of[1]|label == calls.to.get.rid.of[2]|
-                                             label == calls.to.get.rid.of[3]|label == calls.to.get.rid.of[4]|
-                                             label == calls.to.get.rid.of[5]|label == calls.to.get.rid.of[6]|
-                                             label == calls.to.get.rid.of[7]|label == calls.to.get.rid.of[8]))
-
-
 
 

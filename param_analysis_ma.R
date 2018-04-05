@@ -3,26 +3,7 @@ data_counts <- read.csv(file.choose(),stringsAsFactors = F)
 source("C:/Users/ituncali/Documents/Master's Thesis/USV-Data-Management/src/count_total.R")
 library(stringr)
 library(dplyr)
-allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short-sd",
-                        "short-ur", "short-dr", "short-c", "complex", "upward ramp",
-                        "downward ramp", "step up", "step down", "multi-step", "multi-step-s",
-                        "trill", "trill-c", "trill-f", "inverted-u", "unclear") 
-count_list <- by(data = data_counts, INDICES = data_counts$file.name, FUN = function(x) count_total(x, allowed.categories))
-count_frame <- do.call(rbind, count_list)
-count_frame$file.name <- row.names(count_frame)
-row.names(count_frame) <- NULL
-count_frame$file.name <- str_replace(count_frame$file.name, pattern = ".[0-9]+$", replacement =  "" )
-count_frame <- count_frame %>% group_by(file.name) %>%
-  mutate(total.filecounts=sum(total.counts), rel.filecount=total.counts/total.filecounts)
 
-library(reshape2)
-file.name.key.unmelted <- read.csv(file.choose(),stringsAsFactors = F)
-
-file.name.key <- melt(data=file.name.key.unmelted,id = c("strain","rat.id"),
-                      variable.name="recording",value.name = "file.name")
-
-library(dplyr)
-count_frame_2 <- left_join(count_frame,file.name.key)
 
 momanesth_counts <- count_frame_2 %>% filter(recording == "MA")
 momanesth_counts$strain <- as.factor(momanesth_counts$strain)
@@ -45,10 +26,55 @@ lme_momanesth <- lme(total.counts ~ strain * categories.allowed,
                      random = ~1| rat.id,
                      data = momanesth_counts)
 anova.lme(lme_momanesth)
-lsmeans(lme_momanesth, pairwise ~ categories.allowed * strain, adjust = "Tukey")
-ma_pairwise_summary <- (summary(lsmeans(lme_momanesth,pairwise~categories.allowed * strain, adjust = "Tukey")[["contrasts"]]))
+lsmeans(lme_momanesth, pairwise ~ categories.allowed |strain, adjust = "Tukey")
+ma_pairwise_summary <- (summary(lsmeans(lme_momanesth,pairwise~categories.allowed |strain, adjust = "Tukey")[["contrasts"]]))
 View(ma_pairwise_summary[ma_pairwise_summary$p.value < 0.05,])
 
+
+#compare momanesth counts to isolated pup counts
+ma_5min <- start.rows %>% filter(recording=="MA" & start.time < 300)
+ma_5min_frame <- ma_5min %>% group_by(label, rat.id) %>%
+  summarise(total.counts = length(label))
+expanded.ma.grid <- expand.grid(rat.id = unique(momanesth_counts$rat.id),
+                                label = unique(momanesth_counts$categories.allowed))
+ma_5min_countframe <- left_join(expanded.ma.grid, ma_5min_frame)  
+ma_5min <- ma_5min_countframe %>% 
+  mutate(total.counts = ifelse(is.na(total.counts),0,total.counts/8)) %>%
+  left_join(file.name.key[file.name.key$recording=="MA",]) %>% 
+  select(-file.name)
+pup_to_join <- pup_counts %>% select(label = categories.allowed,
+                                     total.counts, file.name, strain,
+                                     rat.id, recording) %>%
+  group_by(label, rat.id,strain) %>%
+  summarise(total.counts = mean(total.counts)) %>%
+  mutate(recording=c(rep("Pup",length(total.counts))))
+
+ma_pup_counts <- rbind.data.frame(ma_5min, pup_to_join)
+
+lme_ma_pup <- lme(total.counts ~ strain * label * recording,
+                  random = ~1|rat.id/recording/label,
+                  data=ma_pup_counts)
+anova.lme(lme_ma_pup)
+ma.pup.sum <- summary(lsmeans(lme_ma_pup, pairwise~recording|strain*label,
+                              adjust="Tukey"))[["contrasts"]]
+View(ma.pup.sum[ma.pup.sum$p.value<0.05,])
+
+ma_pup_per <- ma_pup_counts %>% ungroup() %>%
+  filter(label=="flat"|label=="flat-z"|
+           label=="flat-mz"|label=="short"|
+           label=="short-c"|label=="short-ur") %>%
+  group_by(strain, rat.id, recording) %>% 
+  mutate(total.filecounts = sum(total.counts),
+           percent = ifelse(total.filecounts>0,total.counts/total.filecounts,0)) 
+  
+
+lme_mapup_per <- lme(percent ~ strain * label * recording,
+                     random = ~1|rat.id/recording/label,
+                     data=ma_pup_per)
+anova.lme(lme_mapup_per)
+ma.pup.per.sum <- summary(lsmeans(lme_mapup_per, pairwise~recording|strain*label,
+                              adjust="Tukey"))[["contrasts"]]
+View(ma.pup.per.sum[ma.pup.per.sum$p.value<0.05,])
 
 ##prepare freq data
 data_freqs <- read.csv(file.choose(), stringsAsFactors = F)
@@ -56,7 +82,7 @@ m.freq <- apply(data_freqs[,c(1:50)],1,function(y) mean(y))
 data_freqs <- mutate(data_freqs, m.freq = m.freq)
 
 momanesth_freqs <- data_freqs %>% filter(recording == "MA") %>% 
-  group_by(strain, label, file.name, rat.id) %>% 
+  group_by(strain, label, recording, file.name, rat.id) %>% 
   summarise(mean.freq = mean(m.freq), sem = sd(m.freq)/sqrt(length(m.freq)),
             count = length(m.freq)) %>%
   filter(label == "flat" | label == "flat-z" | label == "short" | label == "short-c" | label == "short-ur")
@@ -70,12 +96,27 @@ lsmeans(lme_ma_freq, pairwise ~ label, adjust = "Tukey")
 ma_pairwise_freq <- (summary(lsmeans(lme_ma_freq,pairwise~label * strain, adjust = "Tukey")[["contrasts"]]))
 View(ma_pairwise_freq[ma_pairwise_freq$p.value < 0.05,])
 
+#compare freqs between isolated pups and MA
+ma_freqs_comp <- momanesth_freqs %>% filter(label=="flat"|label=="flat-z"|
+                                              label=="short")
+
+pup_freqs_comp <- data_freqs %>% filter(recording == "Mpupiso" | recording == "Fpupiso") %>% 
+  group_by(strain, label, recording, file.name, rat.id) %>% 
+  summarise(mean.freq = mean(m.freq), sem = sd(m.freq)/sqrt(length(m.freq)),
+            count = length(m.freq)) %>%
+  filter(label == "flat" | label == "flat-z" |label == "short")
+
+ma.pup.freqs <- rbind.data.frame(ma_freqs_comp, pup_freqs_comp)
+
+lme.ma.pup.freqs <- lme(mean.freq ~ strain * recording * label,
+                        random = ~1|rat.id,
+                        data = ma.pup.freqs)
 
 ##prepare dur data
 data_durs <- read.csv(file.choose(),stringsAsFactors = F)
 
 momanesth_durs <- data_durs %>% filter(recording == "MA") %>% 
-  group_by(strain, label, file.name, rat.id) %>% 
+  group_by(strain, label, file.name,recording, rat.id) %>% 
   summarise(mean.dur = mean(duration), sem = sd(duration)/sqrt(length(duration)),
             count = length(duration)) %>%
   filter(label == "flat" | label == "flat-z" | label == "short" | label == "short-c" | label == "short-ur")
@@ -89,6 +130,20 @@ lsmeans(lme_ma_dur, pairwise ~ label * strain, adjust = "Tukey")
 ma_pairwise_dur <- (summary(lsmeans(lme_ma_dur,pairwise~label * strain, adjust = "Tukey")[["contrasts"]]))
 View(ma_pairwise_freq[ma_pairwise_dur$p.value < 0.05,])
 
+#compare pup iso and ma durs
+ma_durs_comp <- momanesth_durs %>% filter(label=="flat"|label=="flat-z"|
+                                            label=="short")
+pup_durs_comp <- data_durs %>% filter(recording == "Mpupiso" | recording == "Fpupiso") %>% 
+  group_by(strain, label, recording, file.name, rat.id) %>% 
+  summarise(mean.dur = mean(duration), sem = sd(duration)/sqrt(length(duration)),
+            count = length(duration)) %>%
+  filter(label == "flat" | label == "flat-z" |label == "short")
+
+ma.pups.durs <- rbind.data.frame(ma_durs_comp, pup_durs_comp)
+
+lme.ma.pup.durs <- lme(mean.dur ~ strain*recording*label,
+                       random=~1|rat.id,
+                       data=ma.pups.durs)
 
 ##pup litter weights
 litter.w <- read.csv(file.choose(),stringsAsFactors = F)
@@ -150,21 +205,10 @@ momanesth_avg_durs_w <- left_join(momanesth_avg_durs,litter.w)
 
 
 
-##momanesth time bins
-#by 3 min bins
-bins.ma <- cut(start_data[start_data$recording == "MA",]$start.time,5,include.lowest=T, labels = c("1","2","3","4","5"))
-
-bin.data <- start_data %>% filter(recording == "MA") %>% 
-  mutate(bin = bins.ma) %>% 
-  group_by(bin,strain,file.name) %>% 
-  summarise(count = sum(no.counts))
-
-bin.ma.lme <- lme(count ~ strain * bin, random = ~1|file.name, data = bin.data)
-anova.lme(bin.ma.lme)
-
 ##momanesth before and after grouping
 #want to compare 1st 3 min, 3rd 3 min and 5th 3 min...
-ma.xtra <- xtra.rows.added %>% filter(recording == "MA")
+ma.xtra <- start.rows %>% filter(recording == "MA")
+
 three.times.data <- ma.xtra %>% 
   mutate(time.group = ifelse(start.time < 180, "1",
                              ifelse(start.time >= 420 & start.time < 540, "2",
@@ -182,20 +226,27 @@ pru <- to.join %>% left_join(three.times.data) %>%
   mutate(time.count = ifelse(is.na(time.count), 0, time.count))
 
 three.times.lme <- lme(time.count ~ strain * time.group * label, 
-                         random = ~1|rat.id, 
+                         random = ~1|rat.id/time.group/label, 
                          data = pru)
 anova.lme(three.times.lme)
 
 ma_summary <- (summary(lsmeans(three.times.lme,pairwise ~ (strain * time.group)|label, adjust = "Tukey")[["contrasts"]]))
 View(ma_summary[ma_summary$p.value < 0.05,])
 
-three.times.profile <- pru %>% group_by(strain, rat.id, time.group) %>% 
+pru2 <- pru %>% filter(label=="flat"| label=="flat-z"|
+                       label=="short"|label=="short-ur"|
+                       label=="short-c")
+
+three.times.profile <- pru2 %>% group_by(strain, rat.id, time.group) %>% 
   mutate(tot.count.in.time = sum(time.count)) %>% 
   group_by(strain, rat.id, time.group, label) %>% 
   mutate(rel.call.count = time.count/tot.count.in.time)
 three.times.profile.lme <- lme(rel.call.count ~ strain * time.group * label, 
-                               random = ~1|rat.id, 
+                               random = ~1|rat.id/time.group/label, 
                                data = three.times.profile)
+anova.lme(three.times.profile.lme)
+fart.sum <- summary(lsmeans(three.times.profile.lme, pairwise~strain|label))[["contrasts"]]
+View(fart.sum[fart.sum$p.value<0.05,])
 
 ##momanesth before and during grouping
 group.induced.data <- ma.xtra %>% 
@@ -220,10 +271,10 @@ all.levels$label <- as.factor(all.levels$label)
 
 
 group.induced.lme <- lme(time.count ~ strain * time.group * label, 
-                         random = ~1|rat.id, 
+                         random = ~1|rat.id/time.group/label, 
                          data = all.levels)
 anova.lme(group.induced.lme)
-ma_summary <- (summary(lsmeans(group.induced.lme,pairwise ~ strain * label * time.group, adjust = "Tukey")[["contrasts"]]))
+ma_summary <- (summary(lsmeans(group.induced.lme,pairwise ~ time.group | strain*label, adjust = "Tukey")[["contrasts"]]))
 View(ma_summary[ma_summary$p.value < 0.05,])
 
 all.levs.profile <- all.levels %>% group_by(strain, rat.id, time.group) %>% 
@@ -232,7 +283,7 @@ all.levs.profile <- all.levels %>% group_by(strain, rat.id, time.group) %>%
   mutate(rel.call.count = ifelse(tot.count.in.time >0, time.count/tot.count.in.time, 0))
 
 group.profile.lme <- lme(rel.call.count ~ strain * time.group * label, 
-                               random = ~1|rat.id, 
+                               random = ~1|rat.id/time.group/label, 
                                data = all.levs.profile)
 anova.lme(group.profile.lme)
 ma_summary <- (summary(lsmeans(group.profile.lme,pairwise ~ (time.group * label) | strain, adjust = "Tukey")[["contrasts"]]))

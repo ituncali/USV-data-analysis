@@ -1,14 +1,16 @@
 library(cowplot)
 
 #usvs figure
-plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO", ncol = 2, align = 'w')
+plot_grid(plot1, plot2, plot3, labels = "AUTO", ncol = 2, align = 'w')
 
 #maternal behaviors figure
-plot_grid(plot5, plot6, labels = "AUTO")
+plot_grid(plot5, empty, labels = "AUTO", ncol=1)
 
 #bar graph
 plot1 <- mbt_counts %>% 
-  filter(categories.allowed == "flat" | categories.allowed == "flat-z" | categories.allowed == "short") %>% 
+  filter(categories.allowed == "flat" | categories.allowed == "flat-z" | 
+           categories.allowed=="flat-mz" |categories.allowed == "short"|
+           categories.allowed=="trill") %>% 
   group_by(strain, categories.allowed) %>% 
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
@@ -21,7 +23,7 @@ plot1 <- mbt_counts %>%
         axis.text.x = element_text(size = 14)) +
   scale_fill_grey(labels = c("SD","WKY")) +
   xlab("USV Category") +
-  ylab("Ultrasonic Vocalizations (n)")
+  ylab("USVs (n)")
 
 #pie chart
 plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
@@ -31,14 +33,18 @@ plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
   coord_polar("y", start=0) + 
   facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
-  theme(legend.position = "right", aspect.ratio = 1, legend.title = element_blank(),
-        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
+  theme(legend.position = "bottom", legend.direction = "horizontal", 
+        aspect.ratio = 1, 
+        legend.title = element_blank(),
+        legend.key.size = unit(.1,"cm"),
+        legend.background = element_rect(colour = "transparent", fill = "transparent"))
 
 mbt.pie.data <- mbt_counts %>% group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
-  filter(total.count > 1) %>%
+  filter(total.count > 1) %>% group_by(strain) %>%
   mutate(per = total.count/sum(total.count) *100,
          pie.lab = ifelse(per > 2.5, paste0(categories.allowed, " ", round(per), "%"), NA))
+label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
 names(label_colours) <- c("categories.allowed", "colour")
 colour.key <- left_join(mbt.pie.data, label_colours)
 colour.key <- colour.key %>% group_by(categories.allowed) %>%
@@ -79,7 +85,8 @@ freq.hist <- ggplot(mbt.freq.hist, aes(x = m.freq/1000, fill = strain)) +
 mbt.dur.hist <- data_durs %>% filter(recording == "MBT" & duration < 0.4)
 dur.hist <- ggplot(mbt.dur.hist, aes(x = duration * 1000, fill = strain)) + 
   geom_histogram(aes(y = c(..count..[..group..==1]/sum(..count..[..group..==1]),
-                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), position = "identity", colour = "black", alpha=0.5) +
+                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), 
+                 position = "identity", colour = "black", alpha=0.5) +
   ylab("(%)")+
   scale_fill_grey() +
   theme_classic()+
@@ -87,13 +94,16 @@ dur.hist <- ggplot(mbt.dur.hist, aes(x = duration * 1000, fill = strain)) +
         axis.text.x = element_blank())
 
 
-try.inset <- base.plot.mbt + annotation_custom(grob = inset.plot.mbt, xmin = 165, xmax = 410, ymin = 55, ymax = 95)
+try.inset <- base.plot.mbt + annotation_custom(grob = inset.plot.mbt, xmin = 165, xmax = 610, ymin = 52, ymax = 95)
 
 plot3.data.mbt <- data_freqs %>% filter((recording == "MBT") & 
-                                          (label == "flat" | label == "flat-z" | 
-                                             label == "short") &
-                                          duration < 0.4)
-
+                                          (label == "flat"|label=="flat-mz"|
+                                             label == "flat-z"|label=="trill"|
+                                             label == "short"))
+label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
+scatter.colour.key <- label_colours %>% filter(label == "flat"|label=="flat-mz"|
+                                                 label == "flat-z"|label=="trill"|
+                                                 label == "short")
 
 inset.plot.mbt <- ggplotGrob(ggplot(plot3.data.mbt, aes(x = duration * 1000, y = m.freq/1000)) +
                            geom_point(size = 2, aes(colour = label), alpha = 0.5) +
@@ -109,74 +119,44 @@ inset.plot.mbt <- ggplotGrob(ggplot(plot3.data.mbt, aes(x = duration * 1000, y =
                                    axis.title = element_text(size = 6),
                                    axis.text = element_text(size = 5)))
 
-label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
-scatter.colour.key <- label_colours %>% filter(label == "flat"|
-                                              label == "flat-z"|
-                                              label == "short")
 
 
-##call categories by time
-data.set <- start.rows %>% filter(recording == "MBT" & (label == "flat" | label == "flat-z"|
-                                                         label == "short"))
-bins <- cut(data.set$start.time,6,include.lowest=T, labels = c("1","2","3","4","5","6"))
 
-line.data <- data.set %>%  
-  mutate(bin = bins) %>% 
-  group_by(bin,strain,file.name, label) %>% 
-  summarise(count = length(label))%>% 
-  group_by(bin,strain, label) %>% 
-  summarise(m.count = mean(count),tot.count = length(count), sem = ifelse(tot.count > 1, sd(count)/sqrt(length(count)),0))
-line.data <- rbind.data.frame(line.data, data.frame(bin = c("1","6"),
-                                                    strain = c("WK","WK"),
-                                                    label = c("flat-z","flat-z"),
-                                                    m.count = c(0,0),
-                                                    tot.count = c(0,0),
-                                                    sem = c(0,0)))
+##duration bars
+plot4.data <- mbt_durs %>% group_by(strain, label) %>%
+  summarise(m.dur = mean(mean.dur)*1000, sem = sd(mean.dur)/sqrt(length(mean.dur))*1000)
 
-plot4 <- ggplot(line.data, aes(x=bin, y=m.count, group = label, colour=label)) + 
-  geom_errorbar(aes(ymin=m.count-sem, ymax=m.count+sem), width=.1,size=.5) +
-  geom_line(size=1) +
-  geom_point(size=3) + 
-  ylab("USVs (n)") +
-  xlab("Time in test (5 min intervals)") +
-  theme_classic() +
-  theme(legend.position = c(.75, .75)) +
-  scale_colour_manual(values=scatter.colour.key$colour) +
-  facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY")))
-
-
-#boxplot freqs
-mbt_freqs %>% group_by(strain, label) %>%
-  ggplot(aes(x = label, y = mean.freq/1000, colour = strain)) +
-  theme_bw() +
-  theme(legend.position = "none") +
-  geom_boxplot(fill = "white", position=position_dodge(0.8)) +
-  geom_point(aes(y = mean.freq/1000, group = strain),position=position_jitterdodge(0.2)) +
-  xlab("USV Category") +
-  ylab("Frequency (kHz)") +
-  scale_colour_grey()
-
-
-#boxplot durs
-mbt_durs %>% group_by(strain, label) %>%
-  ggplot(aes(x = label, y = mean.dur * 1000, colour = strain)) +
-  theme_bw() +
-  theme(legend.position = "none") +
-  geom_boxplot(fill = "white", position=position_dodge(0.8)) +
-  geom_point(aes(y = mean.dur * 1000, group = strain),position=position_jitterdodge(0.2)) +
+plot4 <- ggplot(plot4.data, aes(x=label, y=m.dur, fill=strain)) +
+  geom_bar(stat="identity", position=position_dodge(.8)) +
+  geom_errorbar(aes(ymin=m.dur-sem, ymax=m.dur+sem),size=.5, width=.1,
+                position=position_dodge(.8)) +
   xlab("USV Category") +
   ylab("Duration (ms)") +
-  scale_colour_grey()
-
+  theme_classic() +
+  theme(legend.position="none",axis.text.x = element_text(size = 14)) +
+  scale_fill_grey()
+  
 
 
 #behavioral counts
-plot5 <- ggplot(mbt.beh.counts.data, aes(x = behavior, y = score, colour = strain)) +
+library(gridExtra)
+plot5 <- grid.arrange(behavior.count, empty, ncol=2, widths=c(5, 3), heights=c(4))
+
+
+behavior.count <- ggplot(mbt.beh.counts.data, aes(x = behavior, y = score, colour = strain)) +
   geom_boxplot(fill = "white", position=position_dodge(0.8)) +
   geom_point(size = 2, aes(y = score, group = strain), position = position_jitterdodge(0.2)) +
-  scale_colour_grey() +
+  scale_colour_grey(start=0, end=.6, labels = c("SD","WKY")) +
   theme_classic() +
-  theme(legend.position = "none")
+  theme(legend.position = c(.2,.7), legend.text = element_text(size=14),
+        legend.title = element_blank()) +
+  scale_x_discrete(labels = c(retrieval = "Retrieval",
+                              mouthing = "Mouthing",
+                              corporal = "Corporal Licking",
+                              anogenital = "Anogenital Licking",
+                              nest.building = "Nest Build")) +
+  xlab("Behavior") +
+  ylab("# Behaviors / 30min")
 
 
 
@@ -193,46 +173,44 @@ ggplot(mbt.beh.durs.data, aes(x = behavior, y = score, colour = strain)) +
   geom_point(size = 2, aes(y = score, group = strain), position = position_jitterdodge(0.2))
 
 #usv emissions during behaviors
-ggplot(beh.total.usv.counts, aes(x = behavior, y = tot.usv, colour = strain)) +
-  geom_boxplot(fill = "white", position = position_dodge(0.8)) +
-  geom_point(size = 2, aes(y = tot.usv, group = strain), position = position_jitterdodge(0.2))
 
-plot6.data <- beh.usv.counts.data %>% filter(label == "flat" |
-                                               label == "flat-z" |
-                                               label == "short")
-plot6 <- ggplot(plot6.data, aes(x = label, y = usv.count, colour = strain)) +
-  geom_boxplot(fill = "white", position = position_dodge(0.8)) +
-  geom_point(size = 2, aes(y = usv.count, group = strain), position = position_jitterdodge(0.2)) +
-  scale_colour_grey() +
+plot6 <- ggplot(beh.total.usv.counts, aes(x = behavior, y = usv.count, fill = strain)) +
+  geom_bar(stat = "identity",position = position_dodge(0.8)) +
+  scale_colour_grey(start = 0, end = .6, labels = c("SD","WKY")) +
   theme_classic() +
-  theme(legend.position = "none", axis.text.x = element_text(size = 14)) +
-  facet_wrap(~behavior, labeller = as_labeller(c("Retrieval"="Grouping","Hover"="Active Caregiving",
-                                                 "LKP" = "Nursing"))) +
-  xlab("USV Category") +
-  ylab("Ultrasonic Vocalizations (n)")
-
-plot6.line.data <- beh.usv.counts.data %>% filter(label == "flat" |label == "flat-z" |
-                                                   label == "short") %>%
-  group_by(strain, label, behavior) %>%
-  summarise(m.count = mean(usv.count), sem = sd(usv.count)/sqrt(length(usv.count))) %>%
-  mutate(behavior.key = ifelse(behavior == "Retrieval", "1",
-                               ifelse(behavior == "Hover", "2", "3")))
-
-
-plot6 <- ggplot(plot6.line.data, aes(x = behavior.key, y = m.count, colour = label, group = label)) +
-  geom_errorbar(aes(ymin=m.count-sem, ymax=m.count+sem), width=.1,size=.5) +
-  geom_line(size=1) +
-  geom_point(size=3) + 
-  ylab("USVs (n)") +
+  theme(legend.position = "none") +
   xlab("Behavior") +
-  theme_classic() +
-  theme(legend.position = c(.75, .75)) +
-  scale_colour_manual(values=scatter.colour.key$colour) +
-  facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY"))) +
-  scale_x_discrete(labels = c("1"="Grouping","2"="Active Caregiving",
-                              "3" = "Nursing"))
+  ylab("Latency (s)") +
+  facet_wrap(~label)
 
-  
+
+
+##pie chart usv profiles during behaviors
+plot7.data <- beh.type.per %>% group_by(strain, behavior, label) %>%
+  summarise(tot.count = sum(usv.counts)) %>%
+  group_by(strain, behavior) %>%
+  mutate(per = tot.count/sum(tot.count)*100, 
+         pie.lab = ifelse(per > 2.5, paste0(label, " ", round(per),
+                                            "%"), NA),
+         behavior_f = factor(behavior, levels = c("Retrieval","Hover","LKP")),
+         strain_f = factor(strain, levels = c("SD","WK")))
+
+label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
+
+colour.key <- label_colours %>% filter(label == "flat"| label == "flat-z"|
+                                       label == "short")
+
+
+plot7 <- ggplot(plot7.data, aes(x="", y=per, fill=label))+
+  geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
+  scale_fill_manual(values= as.vector(colour.key$colour)) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 3) +
+  coord_polar("y", start=0) + 
+  facet_wrap(~strain_f*behavior_f) + 
+  theme_void() +
+  theme(legend.position = "right", aspect.ratio = 1, legend.title = element_blank(),
+        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
+
 
 
 
@@ -260,5 +238,67 @@ names(mbt.dur.table) <- c("Strain","USV Category","N","Mean","Standard Dev","Med
 
 mbt.dur.freq.table <- merge(mbt.freq.table, mbt.dur.table, by = c("Strain","USV Category"))
 
+##summary stats of pup parameters
+table.durs <- data_durs %>% filter((recording=="MA"|recording=="Mpupiso"|
+                                     recording=="Fpupiso") & (label=="flat"|
+                                      label=="flat-z"|
+                                      label=="short")) %>% 
+  group_by(strain, label, rat.id) %>% 
+  summarise(Min=round(min(duration)*1000,3), Mean=round(mean(duration)*1000,3),
+            SEM = round(sd(duration)/sqrt(length(duration))*1000,3),
+            fiveninetyfive=paste0(round(quantile(duration,0.05,type=3)*1000,3),", ",
+                                  round(quantile(duration,0.95,type=3)*1000,3)),
+            Max=round(max(duration)*1000,3))
+
+table.freqs <- data_freqs %>% filter((recording=="MA"|recording=="Mpupiso"|
+                                       recording=="Fpupiso") & (label=="flat"|
+                                        label=="flat-z"|
+                                          label=="short")) %>%
+  group_by(strain, label, rat.id) %>% 
+  summarise(Min=round(min(m.freq)/1000,3),Mean=round(mean(m.freq)/1000,3),
+            SEM = round(sd(m.freq)/sqrt(length(m.freq))/1000,3),
+            fiveninetyfive=paste0(round(quantile(m.freq,0.05,type=3)/1000,3),", ",
+                                  round(quantile(m.freq,0.95,type=3)/1000,3)),
+            Max=round(max(m.freq)/1000,3))
+
+#summary stats of behavioral latencies and durations
+mbt.lats.sum <- mbt_behavior %>% filter(behavior == "lat.retrieve" |
+                                               behavior == "lat.group" |
+                                               behavior == "lat.hover" |
+                                               behavior == "lat.nurse") %>% 
+  group_by(strain, behavior) %>% 
+  summarise(Min = round(min(score)/60,2), Median = round(median(score)/60,2), 
+            SIQrange = paste0(round((median(score) - 
+                                ((quantile(score,.75,type=3)-quantile(score,.25,type=3))/2))/60,2),
+                              ", ",
+            round((median(score) + ((quantile(score,.75,type=3)-quantile(score,.25,type=3))/2))/60,2)),
+            Max = round(max(score)/60,2))
+
+mbt.beh.durs.sum <- with.added %>%
+  group_by(strain, behavior) %>% 
+  summarise(Min = round(min(score)/60,2), Median = round(median(score)/60,2), 
+            SIQrange = paste0(round((median(score) - ((quantile(score,.75,type=3)-quantile(score,.25,type=3))/2))/60,2),
+                              ", ",
+                              round((median(score) + ((quantile(score,.75,type=3)-quantile(score,.25,type=3))/2))/60,2)),
+            Max = round(max(score)/60,2))
+to.add <- beh_times_data %>% group_by(strain, behavior, file.name,rat.id) %>% 
+  summarise(score = sum(beh.dur)) %>%
+  filter(behavior=="Retrieval")
+with.added <- rbind.data.frame(mbt_behavior[mbt_behavior$behavior == "dur.hover"|
+                                              mbt_behavior$behavior == "dur.nurse",],
+                               to.add)
 
 
+
+###mom usvs
+ggplot(mom_counts_1, aes(x = start.time, fill = label)) +
+  geom_histogram(colour="black", binwidth=60, position="identity") +
+  scale_fill_manual(values=c("#000000","#000000","#000000","#FF0000","#FF0000")) +
+  theme_classic() +
+  facet_wrap(~rat.id)+
+  theme(legend.justification = c(0,0), 
+        legend.position = c(0.85, 0),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = "transparent")) +
+  xlab("Start Time (s)") +
+  ylab("USVs (n)")

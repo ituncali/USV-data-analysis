@@ -7,7 +7,7 @@
 ##a .csv file containing all file names and their respective strain, rat.id and recording
 
 library(reshape2)
-file.name.key.unmelted <- read.csv(file.choose(),stringsAsFactors = F)
+file.name.key.unmelted <- read.csv("data/Exp1_file.name_key.csv", stringsAsFactors = F)
 
 file.name.key <- melt(data=file.name.key.unmelted,id = c("strain","rat.id"),
                       variable.name="recording",value.name = "file.name")
@@ -37,9 +37,9 @@ allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short
 
 BIG_non_overlap <- filter(BIG, label %in% allowed.categories)
 
-BIG_2 <- select(BIG_non_overlap, unique.id:duration,strain,rat.id,recording)
+BIG_2 <- select(BIG_non_overlap, unique.id:start.time,strain,rat.id,recording)
 
-write.csv(BIG_2,"C:/Users/ituncali/Documents/Master's Thesis/Data/Experiment 1/Exp1_Non_Overlap_Durations.csv",
+write.csv(BIG_2,"data/Exp1_Non_Overlap_Durations.csv",
           row.names = F)
 
 #3. filtered usvs w/ labels & freqs

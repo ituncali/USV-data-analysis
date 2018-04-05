@@ -5,7 +5,7 @@ library(cowplot)
 #create layout
 grid.arrange(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)
 
-plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, labels = "AUTO", ncol = 2, align = 'w')
+plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO", ncol = 2, align = 'w')
 
 #bar graph of major 4 call type counts by strain
 plot1 <- pup_counts %>% 
@@ -22,18 +22,18 @@ plot1 <- pup_counts %>%
         axis.text.x = element_text(size = 14)) +
   scale_fill_grey(labels = c("SD","WKY")) +
   xlab("USV Category") +
-  ylab("USVs (n)")
+  ylab("# USVs / 5min")
 
 
 #pie chart
-label_colours <- read.csv(file.choose(), stringsAsFactors = F)
+label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
 names(label_colours) <- c("categories.allowed","colour")
 plot2.data <- pup_counts %>% group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
   filter(total.count > 1) %>%
   mutate(per = round(total.count/sum(total.count) *100, digits = 0),
          pie.lab = ifelse(per > 2, paste0(categories.allowed, " ", per, "%"), NA))
-colour.key <- left_join(plot.2.data, label_colours)
+colour.key <- left_join(plot2.data, label_colours)
 colour.key <- colour.key %>% group_by(categories.allowed) %>%
   summarise(label.colour = unique(colour))
 
@@ -44,7 +44,7 @@ plot2 <- ggplot(plot2.data, aes(x="", y=per, fill=categories.allowed))+
   coord_polar("y", start=0) + 
   facet_wrap(~strain, labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
-  theme(legend.position = "right", aspect.ratio = 1, legend.title = element_blank(),
+  theme(legend.position = "bottom", aspect.ratio = 1, legend.title = element_blank(),
         legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
 
 #line plot of number of calls per 1 min time bin
@@ -70,7 +70,7 @@ plot3 <- ggplot(line.data, aes(x=bin, y=mean, group = strain, colour=strain)) +
   geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5) +
   geom_line(size=1) +
   geom_point(size=3) + 
-  ylab("USVs (n)") +
+  ylab("# USVs / 1min") +
   xlab("Test Duration (min)") +
   theme_classic() +
   theme(legend.position="none") +
@@ -79,7 +79,39 @@ plot3 <- ggplot(line.data, aes(x=bin, y=mean, group = strain, colour=strain)) +
 
 
 #scatter plot duration vs. frequency
-plot4 <- base.plot + annotation_custom(grob = inset.plot, xmin = 155, xmax = 340, ymin = 50, ymax = 95)
+plot4 <- grid.arrange(dur.hist, empty, main.plot, freq.hist, ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4))
+
+empty <- ggplot()+geom_point(aes(1,1), colour="white")+
+  theme(axis.ticks=element_blank(), 
+        panel.background=element_blank(), 
+        axis.text.x=element_blank(), axis.text.y=element_blank(),           
+        axis.title.x=element_blank(), axis.title.y=element_blank(),
+        axis.line = element_blank())
+
+pup.freq.hist <- data_freqs %>% filter(recording == "Mpupiso"|recording=="Fpupiso")
+freq.hist <- ggplot(pup.freq.hist, aes(x = m.freq/1000, fill = strain)) + 
+  geom_histogram(aes(y = c(..count..[..group..==1]/sum(..count..[..group..==1]),
+                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), position = "identity", colour = "black", alpha=0.5) +
+  ylab("(%)")+
+  scale_fill_grey() +
+  theme_classic() +
+  theme(legend.position = "none", axis.title.y = element_blank(), 
+        axis.text.y = element_blank()) +
+  coord_flip()
+
+pup.dur.hist <- data_durs %>% filter((recording == "Mpupiso"|recording=="Fpupiso") & duration < 0.4)
+dur.hist <- ggplot(pup.dur.hist, aes(x = duration * 1000, fill = strain)) + 
+  geom_histogram(aes(y = c(..count..[..group..==1]/sum(..count..[..group..==1]),
+                           ..count..[..group..==2]/sum(..count..[..group..==2]))*100), 
+                 position = "identity", colour = "black", alpha=0.5) +
+  ylab("(%)")+
+  scale_fill_grey() +
+  theme_classic()+
+  theme(legend.position = "none", axis.title.x = element_blank(),
+        axis.text.x = element_blank())
+
+
+main.plot <- base.plot + annotation_custom(grob = inset.plot, xmin = 155, xmax = 340, ymin = 50, ymax = 95)
   
 plot4.data <- data_freqs %>% filter((recording == "Mpupiso" | recording == "Fpupiso") & (label == "flat" | label == "flat-z" | label == "flat-mz" | label == "short"))
   #mutate(label2 = str_replace(label, pattern = "-.*", replacement = "")),

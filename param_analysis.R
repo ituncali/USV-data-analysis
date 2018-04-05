@@ -92,10 +92,11 @@ pup.aov <- aov(total.counts ~ (strain*recording*categories.allowed) + Error(rat.
 library(nlme)
 #use compound symmetric correlation structure
 lme_pups <- lme(total.counts ~ strain * recording * categories.allowed, 
-                random = ~1| rat.id.fix,
-                correlation = corAR1(form = ~1|rat.id.fix),
+                random = ~1| rat.id.fix/categories.allowed,
+                correlation = corCompSymm(form = ~1|rat.id.fix/categories.allowed),
                 data = pup_counts)
 library(lsmeans)
+anova.lme(lme_pups)
 lsmeans(lme_pups, pairwise ~ categories.allowed, adjust = "Tukey")
 
 

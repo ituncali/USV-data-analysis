@@ -37,11 +37,11 @@ maternal_counts <- count_frame_2 %>% filter(recording == "MomAlone" | recording 
 
 #maternal counts lme
 lme_maternal <- lme(total.counts ~ strain * categories.allowed * recording, 
-                     random = ~1| rat.id,
+                     random = ~1| rat.id/recording/categories.allowed,
                      data = maternal_counts)
 anova.lme(lme_maternal)
-lsmeans(lme_maternal, pairwise ~ categories.allowed * strain * recording, adjust = "Tukey")
-maternal_pairwise_summary <- (summary(lsmeans(lme_maternal,pairwise ~ strain * recording * categories.allowed, adjust = "Tukey")[["contrasts"]]))
+lsmeans(lme_maternal, pairwise ~ recording | strain * categories.allowed, adjust = "Tukey")
+maternal_pairwise_summary <- (summary(lsmeans(lme_maternal,pairwise ~  recording|strain *categories.allowed, adjust = "Tukey")[["contrasts"]]))
 View(maternal_pairwise_summary[maternal_pairwise_summary$p.value < 0.05,])
 
 
@@ -56,15 +56,16 @@ maternal_freqs <- data_freqs %>% filter(recording == "MomAlone" | recording == "
   group_by(strain, label, rat.id) %>% 
   summarise(mean.freq = mean(m.freq), sem = sd(m.freq)/sqrt(length(m.freq)),
             count = length(m.freq)) %>%
-  filter(label == "flat" | label == "short" | label == "trill-c")
+  filter(label == "flat" | label == "short")
+#don't include trill-c because only 1 SD emitted 1 trill-c.....
 
 #lme for maternal freqs
 lme_maternal_freq <- lme(mean.freq ~ strain * label, 
-                   random = ~1|rat.id, 
+                   random = ~1|rat.id/label, 
                    data = maternal_freqs)
 anova.lme(lme_maternal_freq)
 lsmeans(lme_maternal_freq, pairwise ~ label, adjust = "Tukey")
-maternal_pairwise_freq <- (summary(lsmeans(lme_maternal_freq,pairwise~label * strain, adjust = "Tukey")[["contrasts"]]))
+maternal_pairwise_freq <- (summary(lsmeans(lme_maternal_freq,pairwise~label, adjust = "Tukey")[["contrasts"]]))
 View(maternal_pairwise_freq[maternal_pairwise_freq$p.value < 0.05,])
 
 #maternal durs
@@ -72,11 +73,11 @@ maternal_durs <- data_durs %>% filter(recording == "MomAlone" | recording == "Pu
   group_by(strain, label, rat.id) %>% 
   summarise(mean.dur = mean(duration), sem = sd(duration)/sqrt(length(duration)),
             count = length(duration)) %>%
-  filter(label == "flat" | label == "short" | label == "trill-c")
+  filter(label == "flat" | label == "short")
 
 #lme for maternal freqs
 lme_maternal_dur <- lme(mean.dur ~ strain * label, 
-                         random = ~1|rat.id, 
+                         random = ~1|rat.id/label, 
                          data = maternal_durs)
 anova.lme(lme_maternal_dur)
 lsmeans(lme_maternal_dur, pairwise ~ label, adjust = "Tukey")
@@ -105,7 +106,7 @@ dur_strain.M <- to.adapt%>%group_by(strain)%>%summarise(mean(duration))
 
 
 ##22kHz USVs in these recordings!!
-neg.data <- read.csv(file.choose(),stringsAsFactors = F)
+neg.data <- read.csv("data/exp1_prelim_params.csv",stringsAsFactors = F)
 neg.data <- left_join(neg.data, file.name.key)
 
 neg.total.counts.incomplete <- neg.data %>% 
