@@ -174,7 +174,7 @@ View(dur.nurse.sum)
 ###USVs emitted during behaviors
 beh_times_data <- read.csv("data/Exp2_MBT_beh_times.csv",stringsAsFactors = F)
 beh_times_data$behavior <- gsub("HKP","LKP",beh_times_data$behavior)
-breaks <- c(rbind(beh_times_data$start,beh_times_data$end))
+
 
 merged.data <- merge(start.rows, beh_times_data, by = c("file.name","rat.id","strain"))
 
