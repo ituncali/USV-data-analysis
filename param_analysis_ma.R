@@ -55,6 +55,9 @@ lme_ma_pup <- lme(total.counts ~ strain * label * recording,
                   random = ~1|rat.id/recording/label,
                   data=ma_pup_counts)
 anova.lme(lme_ma_pup)
+
+
+
 ma.pup.sum <- summary(lsmeans(lme_ma_pup, pairwise~recording|strain*label,
                               adjust="Tukey"))[["contrasts"]]
 View(ma.pup.sum[ma.pup.sum$p.value<0.05,])
@@ -249,7 +252,7 @@ fart.sum <- summary(lsmeans(three.times.profile.lme, pairwise~strain|label))[["c
 View(fart.sum[fart.sum$p.value<0.05,])
 
 ##momanesth before and during grouping
-group.induced.data <- ma.xtra %>% 
+group.induced.data <- start.rows %>% filter(recording == "MA") %>% 
   mutate(time.group = ifelse(start.time < 600 & start.time > 570, "b4",
                              ifelse(start.time >= 600 & start.time < 630, "during", NA))) %>%
   filter(!is.na(time.group)) %>%

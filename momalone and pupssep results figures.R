@@ -11,8 +11,9 @@ plot1.data <- maternal_counts %>%
   
 
 plot1 <- ggplot(plot1.data, aes(x = recording, y = mean, group = strain, fill = strain)) + 
-  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.8)) + 
-  geom_bar(stat = "identity", position = position_dodge(.8)) +
+  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.6)) + 
+  geom_bar(stat = "identity", position = position_dodge(.6), width=.5,
+           colour="black") +
   theme_classic() +
   theme(legend.justification = c(0,0), legend.position = c(.80, .7), 
         legend.background = element_rect(colour = "transparent", fill = "transparent"),

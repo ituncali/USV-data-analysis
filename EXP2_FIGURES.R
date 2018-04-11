@@ -4,7 +4,7 @@
 
 ##bar plot of calls
 
-bp.data <- count_frame_3 %>% filter(categories.allowed=="flat"|
+bp.usv.data <- count_frame_3 %>% filter(categories.allowed=="flat"|
                                       categories.allowed=="short"|
                                       categories.allowed=="trill"|
                                       categories.allowed=="trill-c") %>%
@@ -14,20 +14,27 @@ bp.data <- count_frame_3 %>% filter(categories.allowed=="flat"|
                         ifelse(strain=="SD" & recording=="MSX3", "2",
                                ifelse(strain=="WK" & recording=="VEH","3","4"))))
 
-ggplot(bp.data, aes(x = categories.allowed, y = m.count, fill = group)) +
-  geom_bar(stat="identity", position=position_dodge(.8)) +
+ggplot(bp.usv.data, aes(x = categories.allowed, y = m.count, fill = group)) +
+  geom_bar(stat="identity", position=position_dodge(.9), colour="black",
+           width=.7) +
   geom_errorbar(aes(ymin = m.count-sem, ymax=m.count+sem),
-                position = position_dodge(.8)) +
+                position = position_dodge(.9), size=.5, width=.5) +
   scale_fill_grey(labels=c("SD VEH","SD MSX-3","WKY VEH","WKY MSX-3")) +
   theme_classic() +
-  theme(legend.justification = c(0,0), legend.position = c(.6,.6)) 
+  theme(legend.justification = c(0,0), legend.position = c(.6,.6),
+        axis.text = element_text(size=20), legend.title=element_blank(),
+        axis.title=element_text(size=15),
+        legend.text=element_text(size=20))+
+  xlab("USV Category")+
+  ylab("# USVs / 30min")
+
 
 
 #pie charts of calls
 plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
   geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
   scale_fill_manual(values=as.vector(colour.key$label.colour)) +
-  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 3) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 15) +
   coord_polar("y", start=0) + 
   facet_wrap(~strain * recording) + 
   theme_void() +
@@ -35,7 +42,8 @@ plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
         aspect.ratio = 1, 
         legend.title = element_blank(),
         legend.key.size = unit(.1,"cm"),
-        legend.background = element_rect(colour = "transparent", fill = "transparent"))
+        legend.background = element_rect(colour = "transparent", 
+                                         fill = "transparent"))
 
 mbt.pie.data <- count_frame_3 %>% group_by(strain, categories.allowed, recording) %>%
   summarise(total.count = sum(total.counts)) %>%
@@ -52,26 +60,35 @@ colour.key <- colour.key %>% group_by(categories.allowed) %>%
 
 #maternal behavior scores
 library(reshape2)
-bp.data <- melt(data=msx3_beh_scores,id = c("strain","rat.id", "file.name","recording"),
+bp.data <- melt(data=msx3_beh_scores_active,id = c("strain","rat.id", "file.name","recording","group"),
                      variable.name="behavior",value.name = "score")
 #active scores
 bp.active <- bp.data %>% filter(behavior=="retrieval"|behavior == "mouthing"|
                                   behavior=="corporal"|behavior=="anogenital"|
                                   behavior=="nest.building") %>%
-  group_by(strain, behavior, recording) %>%
-  summarise(med.score = median(score)) %>%
+  group_by(strain, behavior, recording, group) %>%
+  summarise(med.score = median(score), 
+            iqr = (quantile(score,.75)-quantile(score,.25))/2)
   mutate(group = ifelse(strain=="SD" & recording == "VEH", "1",
                         ifelse(strain=="SD" & recording == "MSX3","2",
                                ifelse(strain=="WK" & recording=="VEH","3","4"))))
 
 ggplot(bp.active, aes(x=behavior, y=med.score, fill = group))+
   theme_classic() +
-  geom_bar(stat = "identity", position=position_dodge(0.8)) +
- # geom_point(aes(y = score, group = recording),position=position_jitterdodge(0.2)) +
+  geom_bar(stat = "identity", position=position_dodge(0.8),colour="black",
+           width=.7) +
+  geom_errorbar(aes(ymin=med.score-iqr, ymax=med.score+iqr),
+                position=position_dodge(.8), size=.5, width=.5)+
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         axis.text.x = element_text(size = 14),
-        legend.title=element_blank()) +
+        legend.title=element_blank(), legend.justification = c(0,0),
+        legend.position = c(.8,.6))+
+  scale_x_discrete(labels=c(retrieval="Retrieval",
+                                          mouthing="Mouthing",
+                                          corporal="Corporal Licking",
+                                          anogenital="Anogenital Licking",
+                                          nest.building="Nest Building")) +
   xlab("Behavior") +
   ylab("# Behavior / 30min") +
   scale_fill_grey(labels = c("SD VEH","SD MSX-3","WKY VEH","WKY MSX-3"))
@@ -144,5 +161,20 @@ plot7 <- ggplot(plot7.data, aes(x="", y=per, fill=label))+
   theme(legend.position = "right", aspect.ratio = 1, legend.title = element_blank(),
         legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
 
+
+##bar plot of maternal USVs
+maternal.bar <- mom_counts %>% group_by(label, recording, strain) %>%
+  summarise(m.count = mean(usv.count), sem = sd(usv.count)/sqrt(length(usv.count))) %>%
+  mutate(group = ifelse(strain=="SD" & recording == "VEH", "1",
+                        ifelse(strain=="SD" & recording == "MSX3","2",
+                               ifelse(strain=="WK" & recording=="VEH","3","4"))))
+
+ggplot(maternal.bar, aes(x=label, y=m.count, fill=group))+
+  geom_bar(stat="identity", position=position_dodge(.8)) +
+  geom_errorbar(aes(ymin = m.count-sem, ymax=m.count+sem),
+                position = position_dodge(.8)) +
+  scale_fill_grey(labels=c("SD VEH","SD MSX-3","WKY VEH","WKY MSX-3")) +
+  theme_classic() +
+  theme(legend.justification = c(0,0), legend.position = c(.45,.45)) 
 
 

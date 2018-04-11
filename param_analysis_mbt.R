@@ -360,3 +360,40 @@ r.ret.lme <- lme(percent ~ strain,
                  random=~1|rat.id,
                  data=r.ret.per)
 anova(r.ret.lme)
+
+##see if maternal trills are correlated with behaviors
+all.trills <- mom_counts %>% filter(label=="trill"|label=="trill-c") %>% 
+  group_by(rat.id, strain) %>% summarise(trill.count = sum(usv.count))
+trill.group.corr <- left_join(all.trills, mbt_behavior_unmelted) %>%
+  mutate(dur.retrieve = lat.group - lat.retrieve)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$lat.group)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$retrieval)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$corporal)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$anogenital)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$nest.building)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$lat.retrieve)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$lat.hover)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$lat.nurse)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$dur.hover)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$dur.nurse)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$crossing)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$rearing)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$self.groom)
+
+cor.test(trill.group.corr$trill.count, trill.group.corr$dur.retrieve)
+
+
+

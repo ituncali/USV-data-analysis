@@ -14,13 +14,15 @@ plot1 <- pup_counts %>%
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
   geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.8)) + 
-  geom_bar(stat = "identity", position = position_dodge(.8)) +
+  geom_bar(stat = "identity", position = position_dodge(.8), colour="black",
+           width=.7) +
   theme_classic() +
-  theme(legend.justification = c(0,0), legend.position = c(.75, .70), 
+  theme(legend.justification = c(0,0), legend.position = c(.6, .60), 
         legend.background = element_rect(colour = "transparent", fill = "transparent"),
-        legend.text = element_text(size = 14), legend.title = element_blank(),
-        axis.text.x = element_text(size = 14)) +
-  scale_fill_grey(labels = c("SD","WKY")) +
+        legend.text = element_text(size = 17), legend.title = element_blank(),
+        axis.text = element_text(size = 17),
+        axis.title = element_text(size=14)) +
+  scale_fill_grey(labels = c("SD (n=8)","WKY (n=7)")) +
   xlab("USV Category") +
   ylab("# USVs / 5min")
 
@@ -40,12 +42,14 @@ colour.key <- colour.key %>% group_by(categories.allowed) %>%
 plot2 <- ggplot(plot2.data, aes(x="", y=per, fill=categories.allowed))+
   geom_bar(width = 1, stat = "identity", alpha = 0.5, colour = "black") +
   scale_fill_manual(values= as.vector(colour.key$label.colour)) +
-  geom_text(aes(label = pie.lab), position = position_stack(vjust = .5), size = 3) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = .5), size = 6) +
   coord_polar("y", start=0) + 
   facet_wrap(~strain, labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
   theme(legend.position = "bottom", aspect.ratio = 1, legend.title = element_blank(),
-        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
+        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", 
+                                                                          fill = "transparent"),
+        strip.text=element_text(size=24))
 
 #line plot of number of calls per 1 min time bin
 allowed.categories <- c("flat", "flat-z", "flat-mz", "short", "short-su", "short-sd",
@@ -141,7 +145,9 @@ base.plot <- data_freqs %>% filter((recording == "Mpupiso" | recording == "Fpupi
   ylab("Frequeny (kHz)") +
   theme_classic() +
   scale_colour_grey() +
-  theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  theme(legend.position = "none", panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.text=element_text(size=20),
+        axis.title=element_text(size=14))
 
 
 

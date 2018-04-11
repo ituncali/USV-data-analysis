@@ -1,27 +1,28 @@
 library(cowplot)
 
 #usvs figure
-plot_grid(plot1, plot2, plot3, labels = "AUTO", ncol = 2, align = 'w')
+plot_grid(plot1, plot2, plot3, labels = "AUTO", ncol = 1, align = 'v')
 
 #maternal behaviors figure
 plot_grid(plot5, empty, labels = "AUTO", ncol=1)
 
 #bar graph
 plot1 <- mbt_counts %>% 
-  filter(categories.allowed == "flat" | categories.allowed == "flat-z" | 
-           categories.allowed=="flat-mz" |categories.allowed == "short"|
-           categories.allowed=="trill") %>% 
+  #filter(categories.allowed == "flat" | categories.allowed == "flat-z" | 
+  #         categories.allowed=="flat-mz" |categories.allowed == "short"|
+  #         categories.allowed=="trill") %>% 
   group_by(strain, categories.allowed) %>% 
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
-  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.8)) + 
-  geom_bar(stat = "identity", position = position_dodge(.8)) +
+  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.6)) + 
+  geom_bar(stat = "identity", position = position_dodge(.6), colour="black",
+           width=.5) +
   theme_classic() +
   theme(legend.justification = c(0,0), legend.position = c(.5, .5), 
         legend.background = element_rect(colour = "transparent", fill = "transparent"),
-        legend.text = element_text(size = 14), legend.title = element_blank(),
-        axis.text.x = element_text(size = 14)) +
-  scale_fill_grey(labels = c("SD","WKY")) +
+        legend.text = element_text(size = 17), legend.title = element_blank(),
+        axis.text = element_text(size = 17), axis.title=element_text(size=14)) +
+  scale_fill_grey(labels = c("SD (n=8)","WKY (n=7)")) +
   xlab("USV Category") +
   ylab("USVs (n)")
 
@@ -29,7 +30,7 @@ plot1 <- mbt_counts %>%
 plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
   geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
   scale_fill_manual(values=as.vector(colour.key$label.colour)) +
-  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 3) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 6) +
   coord_polar("y", start=0) + 
   facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
@@ -37,7 +38,8 @@ plot2 <- ggplot(mbt.pie.data, aes(x="", y=per, fill=categories.allowed))+
         aspect.ratio = 1, 
         legend.title = element_blank(),
         legend.key.size = unit(.1,"cm"),
-        legend.background = element_rect(colour = "transparent", fill = "transparent"))
+        legend.background = element_rect(colour = "transparent", fill = "transparent"),
+        strip.text=element_text(size=20))
 
 mbt.pie.data <- mbt_counts %>% group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
@@ -148,12 +150,15 @@ behavior.count <- ggplot(mbt.beh.counts.data, aes(x = behavior, y = score, colou
   geom_point(size = 2, aes(y = score, group = strain), position = position_jitterdodge(0.2)) +
   scale_colour_grey(start=0, end=.6, labels = c("SD","WKY")) +
   theme_classic() +
-  theme(legend.position = c(.2,.7), legend.text = element_text(size=14),
-        legend.title = element_blank()) +
+  theme(legend.position = c(.2,.7), legend.text = element_text(size=17),
+        legend.title = element_blank(), axis.text=element_text(size=17),
+        axis.title=element_text(size=14)) +
   scale_x_discrete(labels = c(retrieval = "Retrieval",
                               mouthing = "Mouthing",
-                              corporal = "Corporal Licking",
-                              anogenital = "Anogenital Licking",
+                              corporal = "Corporal 
+Licking",
+                              anogenital = "Anogenital 
+Licking",
                               nest.building = "Nest Build")) +
   xlab("Behavior") +
   ylab("# Behaviors / 30min")
@@ -291,14 +296,51 @@ with.added <- rbind.data.frame(mbt_behavior[mbt_behavior$behavior == "dur.hover"
 
 
 ###mom usvs
-ggplot(mom_counts_1, aes(x = start.time, fill = label)) +
-  geom_histogram(colour="black", binwidth=60, position="identity") +
+ggplot(mom_counts_1, aes(x = start.time/60, fill = label)) +
+  geom_histogram(colour="black", binwidth=1, position="identity") +
   scale_fill_manual(values=c("#000000","#000000","#000000","#FF0000","#FF0000")) +
   theme_classic() +
   facet_wrap(~rat.id)+
   theme(legend.justification = c(0,0), 
         legend.position = c(0.85, 0),
         legend.title = element_blank(),
+        legend.background = element_rect(fill = "transparent"),
+        axis.text=element_text(size=17),
+        axis.title=element_text(size=17),
+        legend.text=element_text(size=17)) +
+  xlab("Start Time (min)") +
+  ylab("#USVs / 30min (n)")
+
+##hists totals
+ggplot(mom_counts_1, aes(x = start.time, fill = label)) +
+  geom_histogram(colour="black", binwidth=60, position="identity") +
+  scale_fill_manual(values=c("#000000","#000000","#000000","#FF0000","#FF0000")) +
+  theme_classic() +
+  facet_wrap(~strain)+
+  theme(legend.justification = c(0,0), 
+        legend.position = c(0.85, .45),
+        legend.title = element_blank(),
         legend.background = element_rect(fill = "transparent")) +
   xlab("Start Time (s)") +
   ylab("USVs (n)")
+
+##mom counts
+bar.moms <- mom_counts %>% group_by(strain, label) %>%
+  summarise(m.count = mean(usv.count),sem=sd(usv.count)/sqrt(length(usv.count)))
+
+ggplot(bar.moms, aes(x = label, y=m.count, fill = strain)) +
+  geom_bar(colour="black", stat="identity",position=position_dodge(.6),
+           width=.5) +
+    geom_errorbar(aes(ymin=m.count-sem,ymax=m.count+sem),
+                  position=position_dodge(.6),
+                  size=.1, width=.2) +
+  scale_fill_grey(labels=c("SD","WKY")) +
+  theme_classic() +
+  theme(legend.justification = c(0,0), 
+        legend.position = c(0.85, .45),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = "transparent"),
+        axis.text=element_text(size=17),
+        axis.title=element_text(size=14)) +
+  xlab("USV Category") +
+  ylab("#USVs / 30min (n)")

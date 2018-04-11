@@ -10,13 +10,15 @@ plot1 <- momanesth_counts %>%
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
   geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=.1,size=.5, position = position_dodge(.8)) + 
-  geom_bar(stat = "identity", position = position_dodge(.8)) +
+  geom_bar(stat = "identity", position = position_dodge(.8), colour="black",
+           width=.7) +
   theme_classic() +
-  theme(legend.justification = c(0,0), legend.position = c(.75, .70),
+  theme(legend.justification = c(0,0), legend.position = c(.6, .6),
         legend.background = element_rect(colour = "transparent", fill = "transparent"),
-        legend.text = element_text(size = 14), legend.title = element_blank(),
-        axis.text.x = element_text(size = 14)) +
-  scale_fill_grey(labels = c("SD","WKY")) +
+        legend.text = element_text(size = 17), legend.title = element_blank(),
+        axis.text = element_text(size = 17),
+        axis.title = element_text(size = 14)) +
+  scale_fill_grey(labels = c("SD (n=8)","WKY (n=7)")) +
   xlab("USV Category") +
   ylab("# USVs / 15min")
 
@@ -28,12 +30,14 @@ names(label_colours) <- c("categories.allowed","colour")
 plot2 <- ggplot(ma.pie.data, aes(x="", y=per, fill=categories.allowed))+
   geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
   scale_fill_manual(values= as.vector(colour.key$label.colour)) +
-  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 3) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 6) +
   coord_polar("y", start=0) + 
   facet_wrap(~strain,labeller = as_labeller(c("SD"="SD","WK"="WKY"))) + 
   theme_void() +
   theme(legend.position = "bottom", aspect.ratio = 1, legend.title = element_blank(),
-        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", fill = "transparent"))
+        legend.key.size = unit(.1,"cm"), legend.background = element_rect(colour = "transparent", 
+                                                                          fill = "transparent"),
+        strip.text=element_text(size=24))
 
 ma.pie.data <- momanesth_counts %>% group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
@@ -46,7 +50,7 @@ colour.key <- colour.key %>% group_by(categories.allowed) %>%
 
 
 #line data counts by time bins
-line.data <- ma.xtra %>% 
+line.data <- start.rows %>% filter(recording == "MA") %>% 
   mutate(time.group = ifelse(start.time < 180, "1",
                              ifelse(start.time >= 360 & start.time < 540, "2",
                                     ifelse(start.time > 720, "3", NA)))) %>%
@@ -65,9 +69,10 @@ plot3 <- ggplot(line.data, aes(x=time.group, y=m.time.group, group = strain, col
   ylab("# USVs / 3min") +
   xlab("Social Context (3 min intervals)") +
   theme_classic() +
-  theme(legend.position = "none") +
+  theme(legend.position = "none", axis.text=element_text(size=14),
+        axis.title=element_text(size=14)) +
   scale_colour_grey(start = 0, end = .7) +
-  scale_x_discrete(labels = c("1"="Scattered","2"="Grouped with Littermates","3"="Grouped with Mother"))
+  scale_x_discrete(labels = c("1"="Scattered","2"="Grouped w/ Littermates","3"="Grouped w/ Mother"))
 
 #scatter plot duration x frequency
 library(gridExtra)
@@ -309,9 +314,9 @@ extra.data <- all.levels %>% filter(label == "flat" | label =="short") %>%
   
   
 ggplot(extra.data, aes(x = time.group, y = m.c, group = strain, fill = strain)) + 
-  geom_bar(stat="identity", position = "dodge") + 
+  geom_bar(stat="identity", position = position_dodge(.6), colour="black",width=.5) + 
   geom_errorbar(aes(ymin=m.c - sem, ymax = m.c+sem),
-                position = position_dodge(.8),width=.1,size=.5) +
+                position = position_dodge(.6),width=.1,size=.5) +
   scale_fill_grey(labels = c("SD", "WKY")) +
   theme_classic() +
   scale_x_discrete(labels = c("b4"="Preceding","during"="During")) +
@@ -323,6 +328,65 @@ ggplot(extra.data, aes(x = time.group, y = m.c, group = strain, fill = strain)) 
   ylab("# USVs / 30sec") +
   facet_wrap(~label)
 
+##compare first 5 mins to isolation recs
+ma.pup.plot <- ma_pup_counts %>% group_by(strain, recording) %>%
+  summarise(m.count = mean(total.counts), 
+            sem = sd(total.counts)/sqrt(length(total.counts))) %>%
+  mutate(group = ifelse(strain == "SD" & recording == "Pup", "1",
+                ifelse(strain=="SD" & recording=="MA","2",
+                       ifelse(strain=="WK" & recording=="Pup","3","4"))))
+
+ma.pup.plot$recording <- factor(ma.pup.plot$recording, levels=c("Pup","MA"))
+
+
+ggplot(ma.pup.plot, aes(x = recording, y = m.count, fill=strain)) +
+  geom_bar(stat="identity", colour="black", width=.5,
+           position=position_dodge(.6)) +
+  geom_errorbar(aes(ymin=m.count-sem, ymax=m.count+sem), size=.5, width=.2,
+                position=position_dodge(.6))+
+  scale_fill_grey(labels=c("SD","WKY"))+
+  theme_classic() +
+  theme(legend.justification = c(0,0),
+        legend.position=c(.65,.75), legend.title=element_blank(),
+        axis.text=element_text(size=17),
+        axis.title=element_text(size=14),
+        legend.text=element_text(size=17))+
+  scale_x_discrete(labels = c("Pup"="Isolated","MA"="With Litter")) +
+  xlab(NULL) +
+  ylab("# USVs / 5min")
+
+
+#pie charts of isolated vs. 15 min
+ma.pup.pie.data <- ma_pup_counts %>%
+  group_by(strain, label, recording) %>%
+  summarise(rec.count = sum(total.counts)) %>%
+  group_by(strain, recording) %>%
+  mutate(tot.time = sum(rec.count)) %>%
+  group_by(strain, label, recording) %>%
+  mutate(per = rec.count/tot.time *100,
+         pie.lab = ifelse(per > 2.5, paste0(label, " ", round(per), "%"), NA))
+
+ma.pup.pie.data %>%
+  ggplot(aes(x="", y=per, fill=label))+
+  geom_bar(width = 1, stat = "identity", alpha = .5, colour = "black") +
+  scale_fill_manual(values= as.vector(ck$label.colour)) +
+  geom_text(aes(label = pie.lab), position = position_stack(vjust = 0.5), size = 10) +
+  coord_polar("y", start=0) + 
+  facet_wrap(~recording * strain, labeller=as_labeller(c("SD"="SD","WK"="WKY",
+                                                       "MA"="With Litter",
+                                                       "Pup"="Isolated"))) + 
+  theme_void() +
+  theme(legend.position = "none", aspect.ratio = 1, 
+        strip.text=element_text(size=24))
+
+
+lc <- label_colours
+names(lc) <- c("label","colour")
+ck <- left_join(ma.pup.pie.data, lc)
+ck <- ck %>% group_by(label) %>%
+  summarise(label.colour = unique(colour))
+
+  
 
 
 
