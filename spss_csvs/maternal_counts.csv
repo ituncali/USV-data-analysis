@@ -1,0 +1,241 @@
+"categories.allowed","total.counts","file.name","total.filecounts","rel.filecount","strain","rat.id","recording","usv.per"
+"flat",2,"T0000083",6,0.333333333333333,"SD","SD22","MomAlone",0.333333333333333
+"short",3,"T0000083",6,0.5,"SD","SD22","MomAlone",0.5
+"upward ramp",0,"T0000083",6,0,"SD","SD22","MomAlone",0
+"step up",0,"T0000083",6,0,"SD","SD22","MomAlone",0
+"trill",0,"T0000083",6,0,"SD","SD22","MomAlone",0
+"trill-c",0,"T0000083",6,0,"SD","SD22","MomAlone",0
+"trill-f",1,"T0000083",6,0.166666666666667,"SD","SD22","MomAlone",0.166666666666667
+"unclear",0,"T0000083",6,0,"SD","SD22","MomAlone",0
+"flat",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"short",14,"T0000084",19,0.736842105263158,"SD","SD22","PupsSep",0.823529411764706
+"upward ramp",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"step up",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"trill",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"trill-c",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"trill-f",0,"T0000084",19,0,"SD","SD22","PupsSep",0
+"unclear",3,"T0000084",19,0.157894736842105,"SD","SD22","PupsSep",0.176470588235294
+"flat",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"short",5,"T0000089",8,0.625,"WK","WK21","MomAlone",0.714285714285714
+"upward ramp",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"step up",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"trill",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"trill-c",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"trill-f",0,"T0000089",8,0,"WK","WK21","MomAlone",0
+"unclear",2,"T0000089",8,0.25,"WK","WK21","MomAlone",0.285714285714286
+"flat",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"short",4,"T0000090",4,1,"WK","WK21","PupsSep",1
+"upward ramp",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"step up",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"trill",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"trill-c",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"trill-f",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"unclear",0,"T0000090",4,0,"WK","WK21","PupsSep",0
+"flat",50,"T0000095",160,0.3125,"WK","WK2A3C1","PupsSep",0.347222222222222
+"short",60,"T0000095",160,0.375,"WK","WK2A3C1","PupsSep",0.416666666666667
+"upward ramp",21,"T0000095",160,0.13125,"WK","WK2A3C1","PupsSep",0.145833333333333
+"step up",4,"T0000095",160,0.025,"WK","WK2A3C1","PupsSep",0.0277777777777778
+"trill",1,"T0000095",160,0.00625,"WK","WK2A3C1","PupsSep",0.00694444444444444
+"trill-c",0,"T0000095",160,0,"WK","WK2A3C1","PupsSep",0
+"trill-f",2,"T0000095",160,0.0125,"WK","WK2A3C1","PupsSep",0.0138888888888889
+"unclear",6,"T0000095",160,0.0375,"WK","WK2A3C1","PupsSep",0.0416666666666667
+"flat",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"short",14,"T0000103",15,0.933333333333333,"SD","SD17","MomAlone",1
+"upward ramp",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"step up",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"trill",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"trill-c",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"trill-f",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"unclear",0,"T0000103",15,0,"SD","SD17","MomAlone",0
+"flat",5,"T0000104",23,0.217391304347826,"SD","SD17","PupsSep",0.25
+"short",14,"T0000104",23,0.608695652173913,"SD","SD17","PupsSep",0.7
+"upward ramp",0,"T0000104",23,0,"SD","SD17","PupsSep",0
+"step up",0,"T0000104",23,0,"SD","SD17","PupsSep",0
+"trill",0,"T0000104",23,0,"SD","SD17","PupsSep",0
+"trill-c",0,"T0000104",23,0,"SD","SD17","PupsSep",0
+"trill-f",0,"T0000104",23,0,"SD","SD17","PupsSep",0
+"unclear",1,"T0000104",23,0.0434782608695652,"SD","SD17","PupsSep",0.05
+"flat",50,"T0000123",158,0.316455696202532,"WK","WK26","PupsSep",0.335570469798658
+"short",22,"T0000123",158,0.139240506329114,"WK","WK26","PupsSep",0.147651006711409
+"upward ramp",3,"T0000123",158,0.0189873417721519,"WK","WK26","PupsSep",0.0201342281879195
+"step up",9,"T0000123",158,0.0569620253164557,"WK","WK26","PupsSep",0.0604026845637584
+"trill",6,"T0000123",158,0.0379746835443038,"WK","WK26","PupsSep",0.0402684563758389
+"trill-c",44,"T0000123",158,0.278481012658228,"WK","WK26","PupsSep",0.295302013422819
+"trill-f",4,"T0000123",158,0.0253164556962025,"WK","WK26","PupsSep",0.0268456375838926
+"unclear",11,"T0000123",158,0.069620253164557,"WK","WK26","PupsSep",0.0738255033557047
+"flat",1,"T0000140",5,0.2,"SD","SD24","PupsSep",0.2
+"short",4,"T0000140",5,0.8,"SD","SD24","PupsSep",0.8
+"upward ramp",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"step up",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"trill",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"trill-c",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"trill-f",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"unclear",0,"T0000140",5,0,"SD","SD24","PupsSep",0
+"flat",1,"T0000153",2,0.5,"SD","SD17E3","MomAlone",0.5
+"short",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"upward ramp",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"step up",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"trill",1,"T0000153",2,0.5,"SD","SD17E3","MomAlone",0.5
+"trill-c",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"trill-f",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"unclear",0,"T0000153",2,0,"SD","SD17E3","MomAlone",0
+"flat",2,"T0000154",8,0.25,"SD","SD17E3","PupsSep",0.666666666666667
+"short",1,"T0000154",8,0.125,"SD","SD17E3","PupsSep",0.333333333333333
+"upward ramp",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"step up",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"trill",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"trill-c",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"trill-f",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"unclear",0,"T0000154",8,0,"SD","SD17E3","PupsSep",0
+"flat",1,"T0000184",2,0.5,"WK","WK29E2","PupsSep",0.5
+"short",1,"T0000184",2,0.5,"WK","WK29E2","PupsSep",0.5
+"upward ramp",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"step up",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"trill",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"trill-c",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"trill-f",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"unclear",0,"T0000184",2,0,"WK","WK29E2","PupsSep",0
+"flat",2,"T0000189",7,0.285714285714286,"WK","WK34G1","PupsSep",0.285714285714286
+"short",0,"T0000189",7,0,"WK","WK34G1","PupsSep",0
+"upward ramp",0,"T0000189",7,0,"WK","WK34G1","PupsSep",0
+"step up",2,"T0000189",7,0.285714285714286,"WK","WK34G1","PupsSep",0.285714285714286
+"trill",3,"T0000189",7,0.428571428571429,"WK","WK34G1","PupsSep",0.428571428571429
+"trill-c",0,"T0000189",7,0,"WK","WK34G1","PupsSep",0
+"trill-f",0,"T0000189",7,0,"WK","WK34G1","PupsSep",0
+"unclear",0,"T0000189",7,0,"WK","WK34G1","PupsSep",0
+"flat",74,"T0000194",82,0.902439024390244,"SD","SD31E5","PupsSep",0.948717948717949
+"short",4,"T0000194",82,0.0487804878048781,"SD","SD31E5","PupsSep",0.0512820512820513
+"upward ramp",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"step up",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"trill",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"trill-c",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"trill-f",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"unclear",0,"T0000194",82,0,"SD","SD31E5","PupsSep",0
+"flat",2,"T0000226",3,0.666666666666667,"WK","WK77","MomAlone",1
+"short",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"upward ramp",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"step up",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"trill",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"trill-c",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"trill-f",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"unclear",0,"T0000226",3,0,"WK","WK77","MomAlone",0
+"flat",2,"T0000240",4,0.5,"SD","SD76","MomAlone",0.666666666666667
+"short",1,"T0000240",4,0.25,"SD","SD76","MomAlone",0.333333333333333
+"upward ramp",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"step up",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"trill",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"trill-c",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"trill-f",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"unclear",0,"T0000240",4,0,"SD","SD76","MomAlone",0
+"flat",7,"T0000241",16,0.4375,"SD","SD76","PupsSep",0.5
+"short",7,"T0000241",16,0.4375,"SD","SD76","PupsSep",0.5
+"upward ramp",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"step up",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"trill",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"trill-c",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"trill-f",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"unclear",0,"T0000241",16,0,"SD","SD76","PupsSep",0
+"flat",21,"T0000252",37,0.567567567567568,"SD","SD78","MomAlone",0.67741935483871
+"short",10,"T0000252",37,0.27027027027027,"SD","SD78","MomAlone",0.32258064516129
+"upward ramp",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"step up",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"trill",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"trill-c",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"trill-f",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"unclear",0,"T0000252",37,0,"SD","SD78","MomAlone",0
+"flat",12,"T0000253",62,0.193548387096774,"SD","SD78","PupsSep",0.260869565217391
+"short",9,"T0000253",62,0.145161290322581,"SD","SD78","PupsSep",0.195652173913043
+"upward ramp",4,"T0000253",62,0.0645161290322581,"SD","SD78","PupsSep",0.0869565217391304
+"step up",2,"T0000253",62,0.032258064516129,"SD","SD78","PupsSep",0.0434782608695652
+"trill",10,"T0000253",62,0.161290322580645,"SD","SD78","PupsSep",0.217391304347826
+"trill-c",4,"T0000253",62,0.0645161290322581,"SD","SD78","PupsSep",0.0869565217391304
+"trill-f",3,"T0000253",62,0.0483870967741935,"SD","SD78","PupsSep",0.0652173913043478
+"unclear",2,"T0000253",62,0.032258064516129,"SD","SD78","PupsSep",0.0434782608695652
+"flat",9,"T0000302",41,0.219512195121951,"WK","WK95","PupsSep",0.243243243243243
+"short",17,"T0000302",41,0.414634146341463,"WK","WK95","PupsSep",0.459459459459459
+"upward ramp",0,"T0000302",41,0,"WK","WK95","PupsSep",0
+"step up",0,"T0000302",41,0,"WK","WK95","PupsSep",0
+"trill",1,"T0000302",41,0.024390243902439,"WK","WK95","PupsSep",0.027027027027027
+"trill-c",5,"T0000302",41,0.121951219512195,"WK","WK95","PupsSep",0.135135135135135
+"trill-f",2,"T0000302",41,0.0487804878048781,"WK","WK95","PupsSep",0.0540540540540541
+"unclear",3,"T0000302",41,0.0731707317073171,"WK","WK95","PupsSep",0.0810810810810811
+"flat",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"short",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"upward ramp",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"step up",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"trill",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"trill-c",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"trill-f",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"unclear",0,"T0000094",0,0,"WK","WK2A3C1","MomAlone",NA
+"flat",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"short",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"upward ramp",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"step up",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"trill",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"trill-c",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"trill-f",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"unclear",0,"T0000139",0,0,"SD","SD24","MomAlone",NA
+"flat",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"short",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"upward ramp",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"step up",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"trill",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"trill-c",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"trill-f",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"unclear",0,"T0000122",0,0,"WK","WK26","MomAlone",NA
+"flat",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"short",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"upward ramp",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"step up",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"trill",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"trill-c",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"trill-f",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"unclear",0,"T0000146",0,0,"SD","SD25E4","MomAlone",NA
+"flat",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"short",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"upward ramp",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"step up",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"trill",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"trill-c",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"trill-f",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"unclear",0,"T0000147",0,0,"SD","SD25E4","PupsSep",NA
+"flat",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"short",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"upward ramp",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"step up",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"trill",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"trill-c",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"trill-f",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"unclear",0,"T0000183",0,0,"WK","WK29E2","MomAlone",NA
+"flat",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"short",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"upward ramp",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"step up",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"trill",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"trill-c",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"trill-f",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"unclear",0,"T0000188",0,0,"WK","WK34G1","MomAlone",NA
+"flat",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"short",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"upward ramp",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"step up",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"trill",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"trill-c",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"trill-f",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"unclear",0,"T0000193",0,0,"SD","SD31E5","MomAlone",NA
+"flat",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"short",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"upward ramp",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"step up",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"trill",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"trill-c",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"trill-f",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"unclear",0,"T0000227",0,0,"WK","WK77","PupsSep",NA
+"flat",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"short",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"upward ramp",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"step up",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"trill",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"trill-c",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"trill-f",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
+"unclear",0,"T0000301",0,0,"WK","WK95","MomAlone",NA
