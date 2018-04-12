@@ -6,9 +6,9 @@ pup.per <- pup_counts_all %>%
   group_by(strain) %>% mutate(percent=usv.count/sum(usv.count)*100) %>%
   filter(percent>2)
 
-label.to.keep <- as.vector(unique(pup.per$categories.allowed))
+label.to.keep.pup <- as.vector(unique(pup.per$categories.allowed))
 
-pup_counts <- pup_counts_all %>% filter(categories.allowed %in% label.to.keep)
+pup_counts <- pup_counts_all %>% filter(categories.allowed %in% label.to.keep.pup)
 pup_counts$rat.id.fix <- as.factor(ifelse(pup_counts$recording=="Fpupiso",paste(pup_counts$rat.id,"F"),paste(pup_counts$rat.id,"M")))
 
 
@@ -32,7 +32,7 @@ pup_freqs <- data_freqs %>% filter(recording == "Mpupiso" | recording == "Fpupis
   group_by(strain, label, recording, file.name, rat.id) %>% 
   summarise(mean.freq = mean(m.freq), sem = sd(m.freq)/sqrt(length(m.freq)),
             count = length(m.freq)) %>%
-  filter(label %in% label.to.keep)
+  filter(label %in% label.to.keep.pup)
 pup_freqs$rat.id.fix <- ifelse(pup_freqs$recording=="Fpupiso",paste(pup_freqs$rat.id,"F"),paste(pup_freqs$rat.id,"M"))
 lme_pup_freq <- lme(mean.freq ~ strain * recording * label, 
                     random = ~1|rat.id.fix,
@@ -44,7 +44,7 @@ pup_durs <- data_durs %>% filter(recording == "Mpupiso" | recording == "Fpupiso"
   group_by(strain, label,recording,file.name,rat.id) %>%
   summarise(mean.dur = mean(duration), SEM = sd(duration)/sqrt(length(duration)),
             count = length(duration)) %>%
-  filter(label %in% label.to.keep)
+  filter(label %in% label.to.keep.pup)
 pup_durs$rat.id.fix <- ifelse(pup_durs$recording=="Fpupiso",paste(pup_durs$rat.id,"F"),paste(pup_durs$rat.id,"M"))
 
 
