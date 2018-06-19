@@ -1,0 +1,631 @@
+"file.name","behavior","label","strain","rat.id","recording","usv.count","total","percent"
+"T0000085","Retrieval","complex","SD","SD22","MBT",11,1874,0.00586979722518677
+"T0000091","Retrieval","complex","WK","WK21","MBT",4,284,0.0140845070422535
+"T0000096","Retrieval","complex","WK","WK2A3C1","MBT",6,156,0.0384615384615385
+"T0000105","Retrieval","complex","SD","SD17","MBT",42,614,0.0684039087947883
+"T0000124","Retrieval","complex","WK","WK26","MBT",32,117,0.273504273504274
+"T0000141","Retrieval","complex","SD","SD24","MBT",5,414,0.0120772946859903
+"T0000152","Retrieval","complex","SD","SD25E4","MBT",19,1035,0.0183574879227053
+"T0000155","Retrieval","complex","SD","SD17E3","MBT",17,946,0.0179704016913319
+"T0000185","Retrieval","complex","WK","WK29E2","MBT",7,269,0.0260223048327138
+"T0000190","Retrieval","complex","WK","WK34G1","MBT",17,373,0.0455764075067024
+"T0000195","Retrieval","complex","SD","SD31E5","MBT",6,217,0.0276497695852535
+"T0000228","Retrieval","complex","WK","WK77","MBT",32,237,0.135021097046413
+"T0000242","Retrieval","complex","SD","SD76","MBT",3,420,0.00714285714285714
+"T0000254","Retrieval","complex","SD","SD78","MBT",1,360,0.00277777777777778
+"T0000303","Retrieval","complex","WK","WK95","MBT",8,147,0.054421768707483
+"T0000085","Hover","complex","SD","SD22","MBT",30,1319,0.0227445034116755
+"T0000091","Hover","complex","WK","WK21","MBT",7,118,0.0593220338983051
+"T0000096","Hover","complex","WK","WK2A3C1","MBT",3,18,0.166666666666667
+"T0000105","Hover","complex","SD","SD17","MBT",10,317,0.0315457413249211
+"T0000124","Hover","complex","WK","WK26","MBT",35,357,0.0980392156862745
+"T0000141","Hover","complex","SD","SD24","MBT",7,140,0.05
+"T0000152","Hover","complex","SD","SD25E4","MBT",3,381,0.0078740157480315
+"T0000155","Hover","complex","SD","SD17E3","MBT",9,624,0.0144230769230769
+"T0000185","Hover","complex","WK","WK29E2","MBT",1,40,0.025
+"T0000190","Hover","complex","WK","WK34G1","MBT",9,84,0.107142857142857
+"T0000195","Hover","complex","SD","SD31E5","MBT",10,158,0.0632911392405063
+"T0000228","Hover","complex","WK","WK77","MBT",4,64,0.0625
+"T0000242","Hover","complex","SD","SD76","MBT",2,284,0.00704225352112676
+"T0000254","Hover","complex","SD","SD78","MBT",2,169,0.0118343195266272
+"T0000303","Hover","complex","WK","WK95","MBT",2,62,0.032258064516129
+"T0000085","LKP","complex","SD","SD22","MBT",0,80,0
+"T0000091","LKP","complex","WK","WK21","MBT",6,102,0.0588235294117647
+"T0000096","LKP","complex","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","complex","SD","SD17","MBT",11,230,0.0478260869565217
+"T0000124","LKP","complex","WK","WK26","MBT",4,29,0.137931034482759
+"T0000141","LKP","complex","SD","SD24","MBT",1,5,0.2
+"T0000152","LKP","complex","SD","SD25E4","MBT",1,57,0.0175438596491228
+"T0000155","LKP","complex","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","complex","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","complex","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","complex","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","complex","WK","WK77","MBT",0,10,0
+"T0000242","LKP","complex","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","complex","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","complex","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","flat","SD","SD22","MBT",1430,1874,0.76307363927428
+"T0000091","Retrieval","flat","WK","WK21","MBT",107,284,0.376760563380282
+"T0000096","Retrieval","flat","WK","WK2A3C1","MBT",28,156,0.179487179487179
+"T0000105","Retrieval","flat","SD","SD17","MBT",378,614,0.615635179153095
+"T0000124","Retrieval","flat","WK","WK26","MBT",19,117,0.162393162393162
+"T0000141","Retrieval","flat","SD","SD24","MBT",264,414,0.63768115942029
+"T0000152","Retrieval","flat","SD","SD25E4","MBT",656,1035,0.633816425120773
+"T0000155","Retrieval","flat","SD","SD17E3","MBT",670,946,0.708245243128964
+"T0000185","Retrieval","flat","WK","WK29E2","MBT",98,269,0.364312267657993
+"T0000190","Retrieval","flat","WK","WK34G1","MBT",95,373,0.254691689008043
+"T0000195","Retrieval","flat","SD","SD31E5","MBT",148,217,0.682027649769585
+"T0000228","Retrieval","flat","WK","WK77","MBT",86,237,0.362869198312236
+"T0000242","Retrieval","flat","SD","SD76","MBT",295,420,0.702380952380952
+"T0000254","Retrieval","flat","SD","SD78","MBT",183,360,0.508333333333333
+"T0000303","Retrieval","flat","WK","WK95","MBT",11,147,0.0748299319727891
+"T0000085","Hover","flat","SD","SD22","MBT",929,1319,0.704321455648218
+"T0000091","Hover","flat","WK","WK21","MBT",52,118,0.440677966101695
+"T0000096","Hover","flat","WK","WK2A3C1","MBT",7,18,0.388888888888889
+"T0000105","Hover","flat","SD","SD17","MBT",233,317,0.735015772870662
+"T0000124","Hover","flat","WK","WK26","MBT",161,357,0.450980392156863
+"T0000141","Hover","flat","SD","SD24","MBT",65,140,0.464285714285714
+"T0000152","Hover","flat","SD","SD25E4","MBT",249,381,0.653543307086614
+"T0000155","Hover","flat","SD","SD17E3","MBT",475,624,0.761217948717949
+"T0000185","Hover","flat","WK","WK29E2","MBT",27,40,0.675
+"T0000190","Hover","flat","WK","WK34G1","MBT",29,84,0.345238095238095
+"T0000195","Hover","flat","SD","SD31E5","MBT",95,158,0.60126582278481
+"T0000228","Hover","flat","WK","WK77","MBT",24,64,0.375
+"T0000242","Hover","flat","SD","SD76","MBT",182,284,0.640845070422535
+"T0000254","Hover","flat","SD","SD78","MBT",108,169,0.63905325443787
+"T0000303","Hover","flat","WK","WK95","MBT",8,62,0.129032258064516
+"T0000085","LKP","flat","SD","SD22","MBT",57,80,0.7125
+"T0000091","LKP","flat","WK","WK21","MBT",49,102,0.480392156862745
+"T0000096","LKP","flat","WK","WK2A3C1","MBT",2,16,0.125
+"T0000105","LKP","flat","SD","SD17","MBT",112,230,0.48695652173913
+"T0000124","LKP","flat","WK","WK26","MBT",8,29,0.275862068965517
+"T0000141","LKP","flat","SD","SD24","MBT",2,5,0.4
+"T0000152","LKP","flat","SD","SD25E4","MBT",37,57,0.649122807017544
+"T0000155","LKP","flat","SD","SD17E3","MBT",6,6,1
+"T0000185","LKP","flat","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","flat","WK","WK34G1","MBT",1,1,1
+"T0000195","LKP","flat","SD","SD31E5","MBT",10,12,0.833333333333333
+"T0000228","LKP","flat","WK","WK77","MBT",5,10,0.5
+"T0000242","LKP","flat","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","flat","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","flat","WK","WK95","MBT",8,13,0.615384615384615
+"T0000085","Retrieval","flat-mz","SD","SD22","MBT",73,1874,0.0389541088580576
+"T0000091","Retrieval","flat-mz","WK","WK21","MBT",9,284,0.0316901408450704
+"T0000096","Retrieval","flat-mz","WK","WK2A3C1","MBT",0,156,0
+"T0000105","Retrieval","flat-mz","SD","SD17","MBT",69,614,0.112377850162866
+"T0000124","Retrieval","flat-mz","WK","WK26","MBT",1,117,0.00854700854700855
+"T0000141","Retrieval","flat-mz","SD","SD24","MBT",69,414,0.166666666666667
+"T0000152","Retrieval","flat-mz","SD","SD25E4","MBT",27,1035,0.0260869565217391
+"T0000155","Retrieval","flat-mz","SD","SD17E3","MBT",61,946,0.0644820295983087
+"T0000185","Retrieval","flat-mz","WK","WK29E2","MBT",5,269,0.0185873605947955
+"T0000190","Retrieval","flat-mz","WK","WK34G1","MBT",12,373,0.032171581769437
+"T0000195","Retrieval","flat-mz","SD","SD31E5","MBT",15,217,0.0691244239631336
+"T0000228","Retrieval","flat-mz","WK","WK77","MBT",7,237,0.029535864978903
+"T0000242","Retrieval","flat-mz","SD","SD76","MBT",24,420,0.0571428571428571
+"T0000254","Retrieval","flat-mz","SD","SD78","MBT",29,360,0.0805555555555556
+"T0000303","Retrieval","flat-mz","WK","WK95","MBT",1,147,0.00680272108843537
+"T0000085","Hover","flat-mz","SD","SD22","MBT",40,1319,0.0303260045489007
+"T0000091","Hover","flat-mz","WK","WK21","MBT",2,118,0.0169491525423729
+"T0000096","Hover","flat-mz","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","flat-mz","SD","SD17","MBT",1,317,0.00315457413249211
+"T0000124","Hover","flat-mz","WK","WK26","MBT",3,357,0.00840336134453781
+"T0000141","Hover","flat-mz","SD","SD24","MBT",13,140,0.0928571428571429
+"T0000152","Hover","flat-mz","SD","SD25E4","MBT",8,381,0.020997375328084
+"T0000155","Hover","flat-mz","SD","SD17E3","MBT",21,624,0.0336538461538462
+"T0000185","Hover","flat-mz","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","flat-mz","WK","WK34G1","MBT",5,84,0.0595238095238095
+"T0000195","Hover","flat-mz","SD","SD31E5","MBT",4,158,0.0253164556962025
+"T0000228","Hover","flat-mz","WK","WK77","MBT",2,64,0.03125
+"T0000242","Hover","flat-mz","SD","SD76","MBT",8,284,0.028169014084507
+"T0000254","Hover","flat-mz","SD","SD78","MBT",0,169,0
+"T0000303","Hover","flat-mz","WK","WK95","MBT",0,62,0
+"T0000085","LKP","flat-mz","SD","SD22","MBT",5,80,0.0625
+"T0000091","LKP","flat-mz","WK","WK21","MBT",1,102,0.00980392156862745
+"T0000096","LKP","flat-mz","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","flat-mz","SD","SD17","MBT",3,230,0.0130434782608696
+"T0000124","LKP","flat-mz","WK","WK26","MBT",0,29,0
+"T0000141","LKP","flat-mz","SD","SD24","MBT",1,5,0.2
+"T0000152","LKP","flat-mz","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","flat-mz","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","flat-mz","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","flat-mz","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","flat-mz","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","flat-mz","WK","WK77","MBT",0,10,0
+"T0000242","LKP","flat-mz","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","flat-mz","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","flat-mz","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","flat-z","SD","SD22","MBT",239,1874,0.127534685165422
+"T0000091","Retrieval","flat-z","WK","WK21","MBT",5,284,0.0176056338028169
+"T0000096","Retrieval","flat-z","WK","WK2A3C1","MBT",27,156,0.173076923076923
+"T0000105","Retrieval","flat-z","SD","SD17","MBT",53,614,0.0863192182410423
+"T0000124","Retrieval","flat-z","WK","WK26","MBT",7,117,0.0598290598290598
+"T0000141","Retrieval","flat-z","SD","SD24","MBT",51,414,0.123188405797101
+"T0000152","Retrieval","flat-z","SD","SD25E4","MBT",90,1035,0.0869565217391304
+"T0000155","Retrieval","flat-z","SD","SD17E3","MBT",79,946,0.0835095137420719
+"T0000185","Retrieval","flat-z","WK","WK29E2","MBT",26,269,0.0966542750929368
+"T0000190","Retrieval","flat-z","WK","WK34G1","MBT",18,373,0.0482573726541555
+"T0000195","Retrieval","flat-z","SD","SD31E5","MBT",28,217,0.129032258064516
+"T0000228","Retrieval","flat-z","WK","WK77","MBT",11,237,0.0464135021097046
+"T0000242","Retrieval","flat-z","SD","SD76","MBT",31,420,0.0738095238095238
+"T0000254","Retrieval","flat-z","SD","SD78","MBT",23,360,0.0638888888888889
+"T0000303","Retrieval","flat-z","WK","WK95","MBT",1,147,0.00680272108843537
+"T0000085","Hover","flat-z","SD","SD22","MBT",136,1319,0.103108415466262
+"T0000091","Hover","flat-z","WK","WK21","MBT",7,118,0.0593220338983051
+"T0000096","Hover","flat-z","WK","WK2A3C1","MBT",1,18,0.0555555555555556
+"T0000105","Hover","flat-z","SD","SD17","MBT",7,317,0.0220820189274448
+"T0000124","Hover","flat-z","WK","WK26","MBT",25,357,0.0700280112044818
+"T0000141","Hover","flat-z","SD","SD24","MBT",16,140,0.114285714285714
+"T0000152","Hover","flat-z","SD","SD25E4","MBT",14,381,0.036745406824147
+"T0000155","Hover","flat-z","SD","SD17E3","MBT",43,624,0.0689102564102564
+"T0000185","Hover","flat-z","WK","WK29E2","MBT",3,40,0.075
+"T0000190","Hover","flat-z","WK","WK34G1","MBT",6,84,0.0714285714285714
+"T0000195","Hover","flat-z","SD","SD31E5","MBT",6,158,0.0379746835443038
+"T0000228","Hover","flat-z","WK","WK77","MBT",2,64,0.03125
+"T0000242","Hover","flat-z","SD","SD76","MBT",19,284,0.0669014084507042
+"T0000254","Hover","flat-z","SD","SD78","MBT",2,169,0.0118343195266272
+"T0000303","Hover","flat-z","WK","WK95","MBT",0,62,0
+"T0000085","LKP","flat-z","SD","SD22","MBT",13,80,0.1625
+"T0000091","LKP","flat-z","WK","WK21","MBT",8,102,0.0784313725490196
+"T0000096","LKP","flat-z","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","flat-z","SD","SD17","MBT",4,230,0.0173913043478261
+"T0000124","LKP","flat-z","WK","WK26","MBT",0,29,0
+"T0000141","LKP","flat-z","SD","SD24","MBT",0,5,0
+"T0000152","LKP","flat-z","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","flat-z","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","flat-z","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","flat-z","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","flat-z","SD","SD31E5","MBT",1,12,0.0833333333333333
+"T0000228","LKP","flat-z","WK","WK77","MBT",0,10,0
+"T0000242","LKP","flat-z","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","flat-z","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","flat-z","WK","WK95","MBT",1,13,0.0769230769230769
+"T0000085","Retrieval","short","SD","SD22","MBT",96,1874,0.0512273212379936
+"T0000091","Retrieval","short","WK","WK21","MBT",62,284,0.21830985915493
+"T0000096","Retrieval","short","WK","WK2A3C1","MBT",23,156,0.147435897435897
+"T0000105","Retrieval","short","SD","SD17","MBT",46,614,0.0749185667752443
+"T0000124","Retrieval","short","WK","WK26","MBT",16,117,0.136752136752137
+"T0000141","Retrieval","short","SD","SD24","MBT",9,414,0.0217391304347826
+"T0000152","Retrieval","short","SD","SD25E4","MBT",136,1035,0.131400966183575
+"T0000155","Retrieval","short","SD","SD17E3","MBT",72,946,0.0761099365750529
+"T0000185","Retrieval","short","WK","WK29E2","MBT",29,269,0.107806691449814
+"T0000190","Retrieval","short","WK","WK34G1","MBT",25,373,0.0670241286863271
+"T0000195","Retrieval","short","SD","SD31E5","MBT",11,217,0.0506912442396313
+"T0000228","Retrieval","short","WK","WK77","MBT",28,237,0.118143459915612
+"T0000242","Retrieval","short","SD","SD76","MBT",40,420,0.0952380952380952
+"T0000254","Retrieval","short","SD","SD78","MBT",14,360,0.0388888888888889
+"T0000303","Retrieval","short","WK","WK95","MBT",22,147,0.149659863945578
+"T0000085","Hover","short","SD","SD22","MBT",145,1319,0.109931766489765
+"T0000091","Hover","short","WK","WK21","MBT",31,118,0.26271186440678
+"T0000096","Hover","short","WK","WK2A3C1","MBT",4,18,0.222222222222222
+"T0000105","Hover","short","SD","SD17","MBT",48,317,0.151419558359621
+"T0000124","Hover","short","WK","WK26","MBT",75,357,0.210084033613445
+"T0000141","Hover","short","SD","SD24","MBT",21,140,0.15
+"T0000152","Hover","short","SD","SD25E4","MBT",61,381,0.16010498687664
+"T0000155","Hover","short","SD","SD17E3","MBT",46,624,0.0737179487179487
+"T0000185","Hover","short","WK","WK29E2","MBT",6,40,0.15
+"T0000190","Hover","short","WK","WK34G1","MBT",11,84,0.130952380952381
+"T0000195","Hover","short","SD","SD31E5","MBT",15,158,0.0949367088607595
+"T0000228","Hover","short","WK","WK77","MBT",8,64,0.125
+"T0000242","Hover","short","SD","SD76","MBT",49,284,0.172535211267606
+"T0000254","Hover","short","SD","SD78","MBT",43,169,0.254437869822485
+"T0000303","Hover","short","WK","WK95","MBT",24,62,0.387096774193548
+"T0000085","LKP","short","SD","SD22","MBT",3,80,0.0375
+"T0000091","LKP","short","WK","WK21","MBT",22,102,0.215686274509804
+"T0000096","LKP","short","WK","WK2A3C1","MBT",13,16,0.8125
+"T0000105","LKP","short","SD","SD17","MBT",51,230,0.221739130434783
+"T0000124","LKP","short","WK","WK26","MBT",12,29,0.413793103448276
+"T0000141","LKP","short","SD","SD24","MBT",0,5,0
+"T0000152","LKP","short","SD","SD25E4","MBT",8,57,0.140350877192982
+"T0000155","LKP","short","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","short","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","short","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","short","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","short","WK","WK77","MBT",4,10,0.4
+"T0000242","LKP","short","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","short","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","short","WK","WK95","MBT",4,13,0.307692307692308
+"T0000085","Retrieval","downward ramp","SD","SD22","MBT",0,1874,0
+"T0000091","Retrieval","downward ramp","WK","WK21","MBT",0,284,0
+"T0000096","Retrieval","downward ramp","WK","WK2A3C1","MBT",8,156,0.0512820512820513
+"T0000105","Retrieval","downward ramp","SD","SD17","MBT",3,614,0.00488599348534202
+"T0000124","Retrieval","downward ramp","WK","WK26","MBT",1,117,0.00854700854700855
+"T0000141","Retrieval","downward ramp","SD","SD24","MBT",2,414,0.00483091787439614
+"T0000152","Retrieval","downward ramp","SD","SD25E4","MBT",6,1035,0.00579710144927536
+"T0000155","Retrieval","downward ramp","SD","SD17E3","MBT",1,946,0.00105708245243129
+"T0000185","Retrieval","downward ramp","WK","WK29E2","MBT",0,269,0
+"T0000190","Retrieval","downward ramp","WK","WK34G1","MBT",4,373,0.0107238605898123
+"T0000195","Retrieval","downward ramp","SD","SD31E5","MBT",0,217,0
+"T0000228","Retrieval","downward ramp","WK","WK77","MBT",2,237,0.00843881856540084
+"T0000242","Retrieval","downward ramp","SD","SD76","MBT",1,420,0.00238095238095238
+"T0000254","Retrieval","downward ramp","SD","SD78","MBT",1,360,0.00277777777777778
+"T0000303","Retrieval","downward ramp","WK","WK95","MBT",0,147,0
+"T0000085","Hover","downward ramp","SD","SD22","MBT",2,1319,0.00151630022744503
+"T0000091","Hover","downward ramp","WK","WK21","MBT",0,118,0
+"T0000096","Hover","downward ramp","WK","WK2A3C1","MBT",1,18,0.0555555555555556
+"T0000105","Hover","downward ramp","SD","SD17","MBT",1,317,0.00315457413249211
+"T0000124","Hover","downward ramp","WK","WK26","MBT",7,357,0.0196078431372549
+"T0000141","Hover","downward ramp","SD","SD24","MBT",4,140,0.0285714285714286
+"T0000152","Hover","downward ramp","SD","SD25E4","MBT",3,381,0.0078740157480315
+"T0000155","Hover","downward ramp","SD","SD17E3","MBT",1,624,0.0016025641025641
+"T0000185","Hover","downward ramp","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","downward ramp","WK","WK34G1","MBT",5,84,0.0595238095238095
+"T0000195","Hover","downward ramp","SD","SD31E5","MBT",1,158,0.00632911392405063
+"T0000228","Hover","downward ramp","WK","WK77","MBT",0,64,0
+"T0000242","Hover","downward ramp","SD","SD76","MBT",0,284,0
+"T0000254","Hover","downward ramp","SD","SD78","MBT",1,169,0.00591715976331361
+"T0000303","Hover","downward ramp","WK","WK95","MBT",0,62,0
+"T0000085","LKP","downward ramp","SD","SD22","MBT",0,80,0
+"T0000091","LKP","downward ramp","WK","WK21","MBT",0,102,0
+"T0000096","LKP","downward ramp","WK","WK2A3C1","MBT",1,16,0.0625
+"T0000105","LKP","downward ramp","SD","SD17","MBT",7,230,0.0304347826086957
+"T0000124","LKP","downward ramp","WK","WK26","MBT",0,29,0
+"T0000141","LKP","downward ramp","SD","SD24","MBT",0,5,0
+"T0000152","LKP","downward ramp","SD","SD25E4","MBT",7,57,0.12280701754386
+"T0000155","LKP","downward ramp","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","downward ramp","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","downward ramp","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","downward ramp","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","downward ramp","WK","WK77","MBT",0,10,0
+"T0000242","LKP","downward ramp","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","downward ramp","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","downward ramp","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","inverted-u","SD","SD22","MBT",3,1874,0.0016008537886873
+"T0000091","Retrieval","inverted-u","WK","WK21","MBT",4,284,0.0140845070422535
+"T0000096","Retrieval","inverted-u","WK","WK2A3C1","MBT",0,156,0
+"T0000105","Retrieval","inverted-u","SD","SD17","MBT",3,614,0.00488599348534202
+"T0000124","Retrieval","inverted-u","WK","WK26","MBT",3,117,0.0256410256410256
+"T0000141","Retrieval","inverted-u","SD","SD24","MBT",0,414,0
+"T0000152","Retrieval","inverted-u","SD","SD25E4","MBT",16,1035,0.0154589371980676
+"T0000155","Retrieval","inverted-u","SD","SD17E3","MBT",4,946,0.00422832980972516
+"T0000185","Retrieval","inverted-u","WK","WK29E2","MBT",3,269,0.0111524163568773
+"T0000190","Retrieval","inverted-u","WK","WK34G1","MBT",11,373,0.0294906166219839
+"T0000195","Retrieval","inverted-u","SD","SD31E5","MBT",1,217,0.00460829493087558
+"T0000228","Retrieval","inverted-u","WK","WK77","MBT",20,237,0.0843881856540084
+"T0000242","Retrieval","inverted-u","SD","SD76","MBT",2,420,0.00476190476190476
+"T0000254","Retrieval","inverted-u","SD","SD78","MBT",2,360,0.00555555555555556
+"T0000303","Retrieval","inverted-u","WK","WK95","MBT",4,147,0.0272108843537415
+"T0000085","Hover","inverted-u","SD","SD22","MBT",3,1319,0.00227445034116755
+"T0000091","Hover","inverted-u","WK","WK21","MBT",4,118,0.0338983050847458
+"T0000096","Hover","inverted-u","WK","WK2A3C1","MBT",1,18,0.0555555555555556
+"T0000105","Hover","inverted-u","SD","SD17","MBT",1,317,0.00315457413249211
+"T0000124","Hover","inverted-u","WK","WK26","MBT",9,357,0.0252100840336134
+"T0000141","Hover","inverted-u","SD","SD24","MBT",6,140,0.0428571428571429
+"T0000152","Hover","inverted-u","SD","SD25E4","MBT",13,381,0.0341207349081365
+"T0000155","Hover","inverted-u","SD","SD17E3","MBT",3,624,0.00480769230769231
+"T0000185","Hover","inverted-u","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","inverted-u","WK","WK34G1","MBT",3,84,0.0357142857142857
+"T0000195","Hover","inverted-u","SD","SD31E5","MBT",7,158,0.0443037974683544
+"T0000228","Hover","inverted-u","WK","WK77","MBT",8,64,0.125
+"T0000242","Hover","inverted-u","SD","SD76","MBT",3,284,0.0105633802816901
+"T0000254","Hover","inverted-u","SD","SD78","MBT",3,169,0.0177514792899408
+"T0000303","Hover","inverted-u","WK","WK95","MBT",2,62,0.032258064516129
+"T0000085","LKP","inverted-u","SD","SD22","MBT",0,80,0
+"T0000091","LKP","inverted-u","WK","WK21","MBT",1,102,0.00980392156862745
+"T0000096","LKP","inverted-u","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","inverted-u","SD","SD17","MBT",10,230,0.0434782608695652
+"T0000124","LKP","inverted-u","WK","WK26","MBT",0,29,0
+"T0000141","LKP","inverted-u","SD","SD24","MBT",0,5,0
+"T0000152","LKP","inverted-u","SD","SD25E4","MBT",2,57,0.0350877192982456
+"T0000155","LKP","inverted-u","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","inverted-u","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","inverted-u","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","inverted-u","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","inverted-u","WK","WK77","MBT",1,10,0.1
+"T0000242","LKP","inverted-u","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","inverted-u","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","inverted-u","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","short-c","SD","SD22","MBT",2,1874,0.00106723585912487
+"T0000091","Retrieval","short-c","WK","WK21","MBT",8,284,0.028169014084507
+"T0000096","Retrieval","short-c","WK","WK2A3C1","MBT",2,156,0.0128205128205128
+"T0000105","Retrieval","short-c","SD","SD17","MBT",1,614,0.00162866449511401
+"T0000124","Retrieval","short-c","WK","WK26","MBT",8,117,0.0683760683760684
+"T0000141","Retrieval","short-c","SD","SD24","MBT",0,414,0
+"T0000152","Retrieval","short-c","SD","SD25E4","MBT",12,1035,0.0115942028985507
+"T0000155","Retrieval","short-c","SD","SD17E3","MBT",5,946,0.00528541226215645
+"T0000185","Retrieval","short-c","WK","WK29E2","MBT",10,269,0.0371747211895911
+"T0000190","Retrieval","short-c","WK","WK34G1","MBT",14,373,0.0375335120643432
+"T0000195","Retrieval","short-c","SD","SD31E5","MBT",2,217,0.00921658986175115
+"T0000228","Retrieval","short-c","WK","WK77","MBT",17,237,0.0717299578059072
+"T0000242","Retrieval","short-c","SD","SD76","MBT",5,420,0.0119047619047619
+"T0000254","Retrieval","short-c","SD","SD78","MBT",8,360,0.0222222222222222
+"T0000303","Retrieval","short-c","WK","WK95","MBT",14,147,0.0952380952380952
+"T0000085","Hover","short-c","SD","SD22","MBT",2,1319,0.00151630022744503
+"T0000091","Hover","short-c","WK","WK21","MBT",4,118,0.0338983050847458
+"T0000096","Hover","short-c","WK","WK2A3C1","MBT",1,18,0.0555555555555556
+"T0000105","Hover","short-c","SD","SD17","MBT",1,317,0.00315457413249211
+"T0000124","Hover","short-c","WK","WK26","MBT",14,357,0.0392156862745098
+"T0000141","Hover","short-c","SD","SD24","MBT",2,140,0.0142857142857143
+"T0000152","Hover","short-c","SD","SD25E4","MBT",4,381,0.010498687664042
+"T0000155","Hover","short-c","SD","SD17E3","MBT",3,624,0.00480769230769231
+"T0000185","Hover","short-c","WK","WK29E2","MBT",1,40,0.025
+"T0000190","Hover","short-c","WK","WK34G1","MBT",7,84,0.0833333333333333
+"T0000195","Hover","short-c","SD","SD31E5","MBT",6,158,0.0379746835443038
+"T0000228","Hover","short-c","WK","WK77","MBT",4,64,0.0625
+"T0000242","Hover","short-c","SD","SD76","MBT",6,284,0.0211267605633803
+"T0000254","Hover","short-c","SD","SD78","MBT",1,169,0.00591715976331361
+"T0000303","Hover","short-c","WK","WK95","MBT",10,62,0.161290322580645
+"T0000085","LKP","short-c","SD","SD22","MBT",0,80,0
+"T0000091","LKP","short-c","WK","WK21","MBT",1,102,0.00980392156862745
+"T0000096","LKP","short-c","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","short-c","SD","SD17","MBT",9,230,0.0391304347826087
+"T0000124","LKP","short-c","WK","WK26","MBT",3,29,0.103448275862069
+"T0000141","LKP","short-c","SD","SD24","MBT",0,5,0
+"T0000152","LKP","short-c","SD","SD25E4","MBT",1,57,0.0175438596491228
+"T0000155","LKP","short-c","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","short-c","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","short-c","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","short-c","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","short-c","WK","WK77","MBT",0,10,0
+"T0000242","LKP","short-c","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","short-c","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","short-c","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","step down","SD","SD22","MBT",6,1874,0.0032017075773746
+"T0000091","Retrieval","step down","WK","WK21","MBT",1,284,0.00352112676056338
+"T0000096","Retrieval","step down","WK","WK2A3C1","MBT",0,156,0
+"T0000105","Retrieval","step down","SD","SD17","MBT",9,614,0.0146579804560261
+"T0000124","Retrieval","step down","WK","WK26","MBT",0,117,0
+"T0000141","Retrieval","step down","SD","SD24","MBT",2,414,0.00483091787439614
+"T0000152","Retrieval","step down","SD","SD25E4","MBT",34,1035,0.0328502415458937
+"T0000155","Retrieval","step down","SD","SD17E3","MBT",14,946,0.0147991543340381
+"T0000185","Retrieval","step down","WK","WK29E2","MBT",1,269,0.00371747211895911
+"T0000190","Retrieval","step down","WK","WK34G1","MBT",1,373,0.00268096514745308
+"T0000195","Retrieval","step down","SD","SD31E5","MBT",1,217,0.00460829493087558
+"T0000228","Retrieval","step down","WK","WK77","MBT",4,237,0.0168776371308017
+"T0000242","Retrieval","step down","SD","SD76","MBT",2,420,0.00476190476190476
+"T0000254","Retrieval","step down","SD","SD78","MBT",4,360,0.0111111111111111
+"T0000303","Retrieval","step down","WK","WK95","MBT",3,147,0.0204081632653061
+"T0000085","Hover","step down","SD","SD22","MBT",13,1319,0.00985595147839272
+"T0000091","Hover","step down","WK","WK21","MBT",0,118,0
+"T0000096","Hover","step down","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","step down","SD","SD17","MBT",6,317,0.0189274447949527
+"T0000124","Hover","step down","WK","WK26","MBT",13,357,0.0364145658263305
+"T0000141","Hover","step down","SD","SD24","MBT",0,140,0
+"T0000152","Hover","step down","SD","SD25E4","MBT",8,381,0.020997375328084
+"T0000155","Hover","step down","SD","SD17E3","MBT",9,624,0.0144230769230769
+"T0000185","Hover","step down","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","step down","WK","WK34G1","MBT",1,84,0.0119047619047619
+"T0000195","Hover","step down","SD","SD31E5","MBT",3,158,0.0189873417721519
+"T0000228","Hover","step down","WK","WK77","MBT",2,64,0.03125
+"T0000242","Hover","step down","SD","SD76","MBT",3,284,0.0105633802816901
+"T0000254","Hover","step down","SD","SD78","MBT",3,169,0.0177514792899408
+"T0000303","Hover","step down","WK","WK95","MBT",0,62,0
+"T0000085","LKP","step down","SD","SD22","MBT",0,80,0
+"T0000091","LKP","step down","WK","WK21","MBT",2,102,0.0196078431372549
+"T0000096","LKP","step down","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","step down","SD","SD17","MBT",9,230,0.0391304347826087
+"T0000124","LKP","step down","WK","WK26","MBT",0,29,0
+"T0000141","LKP","step down","SD","SD24","MBT",1,5,0.2
+"T0000152","LKP","step down","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","step down","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","step down","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","step down","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","step down","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","step down","WK","WK77","MBT",0,10,0
+"T0000242","LKP","step down","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","step down","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","step down","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","upward ramp","SD","SD22","MBT",2,1874,0.00106723585912487
+"T0000091","Retrieval","upward ramp","WK","WK21","MBT",2,284,0.00704225352112676
+"T0000096","Retrieval","upward ramp","WK","WK2A3C1","MBT",1,156,0.00641025641025641
+"T0000105","Retrieval","upward ramp","SD","SD17","MBT",1,614,0.00162866449511401
+"T0000124","Retrieval","upward ramp","WK","WK26","MBT",0,117,0
+"T0000141","Retrieval","upward ramp","SD","SD24","MBT",10,414,0.0241545893719807
+"T0000152","Retrieval","upward ramp","SD","SD25E4","MBT",13,1035,0.01256038647343
+"T0000155","Retrieval","upward ramp","SD","SD17E3","MBT",4,946,0.00422832980972516
+"T0000185","Retrieval","upward ramp","WK","WK29E2","MBT",2,269,0.00743494423791822
+"T0000190","Retrieval","upward ramp","WK","WK34G1","MBT",1,373,0.00268096514745308
+"T0000195","Retrieval","upward ramp","SD","SD31E5","MBT",2,217,0.00921658986175115
+"T0000228","Retrieval","upward ramp","WK","WK77","MBT",6,237,0.0253164556962025
+"T0000242","Retrieval","upward ramp","SD","SD76","MBT",6,420,0.0142857142857143
+"T0000254","Retrieval","upward ramp","SD","SD78","MBT",3,360,0.00833333333333333
+"T0000303","Retrieval","upward ramp","WK","WK95","MBT",0,147,0
+"T0000085","Hover","upward ramp","SD","SD22","MBT",8,1319,0.00606520090978014
+"T0000091","Hover","upward ramp","WK","WK21","MBT",0,118,0
+"T0000096","Hover","upward ramp","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","upward ramp","SD","SD17","MBT",7,317,0.0220820189274448
+"T0000124","Hover","upward ramp","WK","WK26","MBT",1,357,0.00280112044817927
+"T0000141","Hover","upward ramp","SD","SD24","MBT",2,140,0.0142857142857143
+"T0000152","Hover","upward ramp","SD","SD25E4","MBT",9,381,0.0236220472440945
+"T0000155","Hover","upward ramp","SD","SD17E3","MBT",3,624,0.00480769230769231
+"T0000185","Hover","upward ramp","WK","WK29E2","MBT",1,40,0.025
+"T0000190","Hover","upward ramp","WK","WK34G1","MBT",0,84,0
+"T0000195","Hover","upward ramp","SD","SD31E5","MBT",6,158,0.0379746835443038
+"T0000228","Hover","upward ramp","WK","WK77","MBT",4,64,0.0625
+"T0000242","Hover","upward ramp","SD","SD76","MBT",2,284,0.00704225352112676
+"T0000254","Hover","upward ramp","SD","SD78","MBT",3,169,0.0177514792899408
+"T0000303","Hover","upward ramp","WK","WK95","MBT",1,62,0.0161290322580645
+"T0000085","LKP","upward ramp","SD","SD22","MBT",1,80,0.0125
+"T0000091","LKP","upward ramp","WK","WK21","MBT",0,102,0
+"T0000096","LKP","upward ramp","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","upward ramp","SD","SD17","MBT",7,230,0.0304347826086957
+"T0000124","LKP","upward ramp","WK","WK26","MBT",0,29,0
+"T0000141","LKP","upward ramp","SD","SD24","MBT",0,5,0
+"T0000152","LKP","upward ramp","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","upward ramp","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","upward ramp","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","upward ramp","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","upward ramp","SD","SD31E5","MBT",1,12,0.0833333333333333
+"T0000228","LKP","upward ramp","WK","WK77","MBT",0,10,0
+"T0000242","LKP","upward ramp","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","upward ramp","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","upward ramp","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","short-ur","SD","SD22","MBT",1,1874,0.000533617929562433
+"T0000091","Retrieval","short-ur","WK","WK21","MBT",1,284,0.00352112676056338
+"T0000096","Retrieval","short-ur","WK","WK2A3C1","MBT",0,156,0
+"T0000105","Retrieval","short-ur","SD","SD17","MBT",0,614,0
+"T0000124","Retrieval","short-ur","WK","WK26","MBT",0,117,0
+"T0000141","Retrieval","short-ur","SD","SD24","MBT",1,414,0.00241545893719807
+"T0000152","Retrieval","short-ur","SD","SD25E4","MBT",11,1035,0.0106280193236715
+"T0000155","Retrieval","short-ur","SD","SD17E3","MBT",12,946,0.0126849894291755
+"T0000185","Retrieval","short-ur","WK","WK29E2","MBT",3,269,0.0111524163568773
+"T0000190","Retrieval","short-ur","WK","WK34G1","MBT",9,373,0.0241286863270777
+"T0000195","Retrieval","short-ur","SD","SD31E5","MBT",1,217,0.00460829493087558
+"T0000228","Retrieval","short-ur","WK","WK77","MBT",13,237,0.0548523206751055
+"T0000242","Retrieval","short-ur","SD","SD76","MBT",6,420,0.0142857142857143
+"T0000254","Retrieval","short-ur","SD","SD78","MBT",2,360,0.00555555555555556
+"T0000303","Retrieval","short-ur","WK","WK95","MBT",12,147,0.0816326530612245
+"T0000085","Hover","short-ur","SD","SD22","MBT",5,1319,0.00379075056861259
+"T0000091","Hover","short-ur","WK","WK21","MBT",4,118,0.0338983050847458
+"T0000096","Hover","short-ur","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","short-ur","SD","SD17","MBT",0,317,0
+"T0000124","Hover","short-ur","WK","WK26","MBT",1,357,0.00280112044817927
+"T0000141","Hover","short-ur","SD","SD24","MBT",3,140,0.0214285714285714
+"T0000152","Hover","short-ur","SD","SD25E4","MBT",3,381,0.0078740157480315
+"T0000155","Hover","short-ur","SD","SD17E3","MBT",7,624,0.0112179487179487
+"T0000185","Hover","short-ur","WK","WK29E2","MBT",1,40,0.025
+"T0000190","Hover","short-ur","WK","WK34G1","MBT",0,84,0
+"T0000195","Hover","short-ur","SD","SD31E5","MBT",3,158,0.0189873417721519
+"T0000228","Hover","short-ur","WK","WK77","MBT",2,64,0.03125
+"T0000242","Hover","short-ur","SD","SD76","MBT",8,284,0.028169014084507
+"T0000254","Hover","short-ur","SD","SD78","MBT",3,169,0.0177514792899408
+"T0000303","Hover","short-ur","WK","WK95","MBT",8,62,0.129032258064516
+"T0000085","LKP","short-ur","SD","SD22","MBT",1,80,0.0125
+"T0000091","LKP","short-ur","WK","WK21","MBT",2,102,0.0196078431372549
+"T0000096","LKP","short-ur","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","short-ur","SD","SD17","MBT",4,230,0.0173913043478261
+"T0000124","LKP","short-ur","WK","WK26","MBT",1,29,0.0344827586206897
+"T0000141","LKP","short-ur","SD","SD24","MBT",0,5,0
+"T0000152","LKP","short-ur","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","short-ur","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","short-ur","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","short-ur","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","short-ur","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","short-ur","WK","WK77","MBT",0,10,0
+"T0000242","LKP","short-ur","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","short-ur","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","short-ur","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","step up","SD","SD22","MBT",11,1874,0.00586979722518677
+"T0000091","Retrieval","step up","WK","WK21","MBT",3,284,0.0105633802816901
+"T0000096","Retrieval","step up","WK","WK2A3C1","MBT",1,156,0.00641025641025641
+"T0000105","Retrieval","step up","SD","SD17","MBT",3,614,0.00488599348534202
+"T0000124","Retrieval","step up","WK","WK26","MBT",5,117,0.0427350427350427
+"T0000141","Retrieval","step up","SD","SD24","MBT",1,414,0.00241545893719807
+"T0000152","Retrieval","step up","SD","SD25E4","MBT",15,1035,0.0144927536231884
+"T0000155","Retrieval","step up","SD","SD17E3","MBT",7,946,0.00739957716701903
+"T0000185","Retrieval","step up","WK","WK29E2","MBT",1,269,0.00371747211895911
+"T0000190","Retrieval","step up","WK","WK34G1","MBT",8,373,0.0214477211796247
+"T0000195","Retrieval","step up","SD","SD31E5","MBT",2,217,0.00921658986175115
+"T0000228","Retrieval","step up","WK","WK77","MBT",10,237,0.0421940928270042
+"T0000242","Retrieval","step up","SD","SD76","MBT",4,420,0.00952380952380952
+"T0000254","Retrieval","step up","SD","SD78","MBT",0,360,0
+"T0000303","Retrieval","step up","WK","WK95","MBT",3,147,0.0204081632653061
+"T0000085","Hover","step up","SD","SD22","MBT",5,1319,0.00379075056861259
+"T0000091","Hover","step up","WK","WK21","MBT",4,118,0.0338983050847458
+"T0000096","Hover","step up","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","step up","SD","SD17","MBT",2,317,0.00630914826498423
+"T0000124","Hover","step up","WK","WK26","MBT",8,357,0.0224089635854342
+"T0000141","Hover","step up","SD","SD24","MBT",1,140,0.00714285714285714
+"T0000152","Hover","step up","SD","SD25E4","MBT",6,381,0.015748031496063
+"T0000155","Hover","step up","SD","SD17E3","MBT",4,624,0.00641025641025641
+"T0000185","Hover","step up","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","step up","WK","WK34G1","MBT",3,84,0.0357142857142857
+"T0000195","Hover","step up","SD","SD31E5","MBT",2,158,0.0126582278481013
+"T0000228","Hover","step up","WK","WK77","MBT",4,64,0.0625
+"T0000242","Hover","step up","SD","SD76","MBT",2,284,0.00704225352112676
+"T0000254","Hover","step up","SD","SD78","MBT",0,169,0
+"T0000303","Hover","step up","WK","WK95","MBT",5,62,0.0806451612903226
+"T0000085","LKP","step up","SD","SD22","MBT",0,80,0
+"T0000091","LKP","step up","WK","WK21","MBT",6,102,0.0588235294117647
+"T0000096","LKP","step up","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","step up","SD","SD17","MBT",3,230,0.0130434782608696
+"T0000124","LKP","step up","WK","WK26","MBT",1,29,0.0344827586206897
+"T0000141","LKP","step up","SD","SD24","MBT",0,5,0
+"T0000152","LKP","step up","SD","SD25E4","MBT",1,57,0.0175438596491228
+"T0000155","LKP","step up","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","step up","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","step up","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","step up","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","step up","WK","WK77","MBT",0,10,0
+"T0000242","LKP","step up","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","step up","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","step up","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","trill","SD","SD22","MBT",0,1874,0
+"T0000091","Retrieval","trill","WK","WK21","MBT",59,284,0.207746478873239
+"T0000096","Retrieval","trill","WK","WK2A3C1","MBT",54,156,0.346153846153846
+"T0000105","Retrieval","trill","SD","SD17","MBT",5,614,0.00814332247557003
+"T0000124","Retrieval","trill","WK","WK26","MBT",20,117,0.170940170940171
+"T0000141","Retrieval","trill","SD","SD24","MBT",0,414,0
+"T0000152","Retrieval","trill","SD","SD25E4","MBT",0,1035,0
+"T0000155","Retrieval","trill","SD","SD17E3","MBT",0,946,0
+"T0000185","Retrieval","trill","WK","WK29E2","MBT",67,269,0.24907063197026
+"T0000190","Retrieval","trill","WK","WK34G1","MBT",141,373,0.378016085790885
+"T0000195","Retrieval","trill","SD","SD31E5","MBT",0,217,0
+"T0000228","Retrieval","trill","WK","WK77","MBT",1,237,0.00421940928270042
+"T0000242","Retrieval","trill","SD","SD76","MBT",0,420,0
+"T0000254","Retrieval","trill","SD","SD78","MBT",69,360,0.191666666666667
+"T0000303","Retrieval","trill","WK","WK95","MBT",42,147,0.285714285714286
+"T0000085","Hover","trill","SD","SD22","MBT",1,1319,0.000758150113722517
+"T0000091","Hover","trill","WK","WK21","MBT",1,118,0.00847457627118644
+"T0000096","Hover","trill","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","trill","SD","SD17","MBT",0,317,0
+"T0000124","Hover","trill","WK","WK26","MBT",4,357,0.0112044817927171
+"T0000141","Hover","trill","SD","SD24","MBT",0,140,0
+"T0000152","Hover","trill","SD","SD25E4","MBT",0,381,0
+"T0000155","Hover","trill","SD","SD17E3","MBT",0,624,0
+"T0000185","Hover","trill","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","trill","WK","WK34G1","MBT",1,84,0.0119047619047619
+"T0000195","Hover","trill","SD","SD31E5","MBT",0,158,0
+"T0000228","Hover","trill","WK","WK77","MBT",0,64,0
+"T0000242","Hover","trill","SD","SD76","MBT",0,284,0
+"T0000254","Hover","trill","SD","SD78","MBT",0,169,0
+"T0000303","Hover","trill","WK","WK95","MBT",2,62,0.032258064516129
+"T0000085","LKP","trill","SD","SD22","MBT",0,80,0
+"T0000091","LKP","trill","WK","WK21","MBT",3,102,0.0294117647058824
+"T0000096","LKP","trill","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","trill","SD","SD17","MBT",0,230,0
+"T0000124","LKP","trill","WK","WK26","MBT",0,29,0
+"T0000141","LKP","trill","SD","SD24","MBT",0,5,0
+"T0000152","LKP","trill","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","trill","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","trill","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","trill","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","trill","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","trill","WK","WK77","MBT",0,10,0
+"T0000242","LKP","trill","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","trill","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","trill","WK","WK95","MBT",0,13,0
+"T0000085","Retrieval","trill-c","SD","SD22","MBT",0,1874,0
+"T0000091","Retrieval","trill-c","WK","WK21","MBT",19,284,0.0669014084507042
+"T0000096","Retrieval","trill-c","WK","WK2A3C1","MBT",6,156,0.0384615384615385
+"T0000105","Retrieval","trill-c","SD","SD17","MBT",1,614,0.00162866449511401
+"T0000124","Retrieval","trill-c","WK","WK26","MBT",5,117,0.0427350427350427
+"T0000141","Retrieval","trill-c","SD","SD24","MBT",0,414,0
+"T0000152","Retrieval","trill-c","SD","SD25E4","MBT",0,1035,0
+"T0000155","Retrieval","trill-c","SD","SD17E3","MBT",0,946,0
+"T0000185","Retrieval","trill-c","WK","WK29E2","MBT",17,269,0.0631970260223048
+"T0000190","Retrieval","trill-c","WK","WK34G1","MBT",17,373,0.0455764075067024
+"T0000195","Retrieval","trill-c","SD","SD31E5","MBT",0,217,0
+"T0000228","Retrieval","trill-c","WK","WK77","MBT",0,237,0
+"T0000242","Retrieval","trill-c","SD","SD76","MBT",1,420,0.00238095238095238
+"T0000254","Retrieval","trill-c","SD","SD78","MBT",21,360,0.0583333333333333
+"T0000303","Retrieval","trill-c","WK","WK95","MBT",26,147,0.17687074829932
+"T0000085","Hover","trill-c","SD","SD22","MBT",0,1319,0
+"T0000091","Hover","trill-c","WK","WK21","MBT",2,118,0.0169491525423729
+"T0000096","Hover","trill-c","WK","WK2A3C1","MBT",0,18,0
+"T0000105","Hover","trill-c","SD","SD17","MBT",0,317,0
+"T0000124","Hover","trill-c","WK","WK26","MBT",1,357,0.00280112044817927
+"T0000141","Hover","trill-c","SD","SD24","MBT",0,140,0
+"T0000152","Hover","trill-c","SD","SD25E4","MBT",0,381,0
+"T0000155","Hover","trill-c","SD","SD17E3","MBT",0,624,0
+"T0000185","Hover","trill-c","WK","WK29E2","MBT",0,40,0
+"T0000190","Hover","trill-c","WK","WK34G1","MBT",4,84,0.0476190476190476
+"T0000195","Hover","trill-c","SD","SD31E5","MBT",0,158,0
+"T0000228","Hover","trill-c","WK","WK77","MBT",0,64,0
+"T0000242","Hover","trill-c","SD","SD76","MBT",0,284,0
+"T0000254","Hover","trill-c","SD","SD78","MBT",0,169,0
+"T0000303","Hover","trill-c","WK","WK95","MBT",0,62,0
+"T0000085","LKP","trill-c","SD","SD22","MBT",0,80,0
+"T0000091","LKP","trill-c","WK","WK21","MBT",1,102,0.00980392156862745
+"T0000096","LKP","trill-c","WK","WK2A3C1","MBT",0,16,0
+"T0000105","LKP","trill-c","SD","SD17","MBT",0,230,0
+"T0000124","LKP","trill-c","WK","WK26","MBT",0,29,0
+"T0000141","LKP","trill-c","SD","SD24","MBT",0,5,0
+"T0000152","LKP","trill-c","SD","SD25E4","MBT",0,57,0
+"T0000155","LKP","trill-c","SD","SD17E3","MBT",0,6,0
+"T0000185","LKP","trill-c","WK","WK29E2","MBT",0,0,NA
+"T0000190","LKP","trill-c","WK","WK34G1","MBT",0,1,0
+"T0000195","LKP","trill-c","SD","SD31E5","MBT",0,12,0
+"T0000228","LKP","trill-c","WK","WK77","MBT",0,10,0
+"T0000242","LKP","trill-c","SD","SD76","MBT",0,0,NA
+"T0000254","LKP","trill-c","SD","SD78","MBT",0,0,NA
+"T0000303","LKP","trill-c","WK","WK95","MBT",0,13,0

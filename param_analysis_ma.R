@@ -63,9 +63,9 @@ ma.pup.sum <- summary(lsmeans(lme_ma_pup, pairwise~recording|strain*label,
 View(ma.pup.sum[ma.pup.sum$p.value<0.05,])
 
 ma_pup_per <- ma_pup_counts %>% ungroup() %>%
-  filter(label=="flat"|label=="flat-z"|
-           label=="flat-mz"|label=="short"|
-           label=="short-c"|label=="short-ur") %>%
+  #filter(label=="flat"|label=="flat-z"|
+  #         label=="flat-mz"|label=="short"|
+  #         label=="short-c"|label=="short-ur") %>%
   group_by(strain, rat.id, recording) %>% 
   mutate(total.filecounts = sum(total.counts),
            percent = ifelse(total.filecounts>0,total.counts/total.filecounts,0)) 

@@ -1,0 +1,331 @@
+"label","time.group","file.name","strain","rat.id","recording","time.count","tot.count.in.time","rel.call.count"
+"complex","b4","T0000100","SD","SD22","MA",0,7,0
+"flat","b4","T0000100","SD","SD22","MA",7,7,1
+"flat-mz","b4","T0000100","SD","SD22","MA",0,7,0
+"flat-z","b4","T0000100","SD","SD22","MA",0,7,0
+"short","b4","T0000100","SD","SD22","MA",0,7,0
+"upward ramp","b4","T0000100","SD","SD22","MA",0,7,0
+"inverted-u","b4","T0000100","SD","SD22","MA",0,7,0
+"short-c","b4","T0000100","SD","SD22","MA",0,7,0
+"step up","b4","T0000100","SD","SD22","MA",0,7,0
+"multi-step","b4","T0000100","SD","SD22","MA",0,7,0
+"short-ur","b4","T0000100","SD","SD22","MA",0,7,0
+"complex","during","T0000100","SD","SD22","MA",0,40,0
+"flat","during","T0000100","SD","SD22","MA",31,40,0.775
+"flat-mz","during","T0000100","SD","SD22","MA",3,40,0.075
+"flat-z","during","T0000100","SD","SD22","MA",3,40,0.075
+"short","during","T0000100","SD","SD22","MA",2,40,0.05
+"upward ramp","during","T0000100","SD","SD22","MA",1,40,0.025
+"inverted-u","during","T0000100","SD","SD22","MA",0,40,0
+"short-c","during","T0000100","SD","SD22","MA",0,40,0
+"step up","during","T0000100","SD","SD22","MA",0,40,0
+"multi-step","during","T0000100","SD","SD22","MA",0,40,0
+"short-ur","during","T0000100","SD","SD22","MA",0,40,0
+"complex","b4","T0000102","WK","WK21","MA",1,11,0.0909090909090909
+"flat","b4","T0000102","WK","WK21","MA",8,11,0.727272727272727
+"flat-mz","b4","T0000102","WK","WK21","MA",0,11,0
+"flat-z","b4","T0000102","WK","WK21","MA",0,11,0
+"short","b4","T0000102","WK","WK21","MA",1,11,0.0909090909090909
+"upward ramp","b4","T0000102","WK","WK21","MA",0,11,0
+"inverted-u","b4","T0000102","WK","WK21","MA",1,11,0.0909090909090909
+"short-c","b4","T0000102","WK","WK21","MA",0,11,0
+"step up","b4","T0000102","WK","WK21","MA",0,11,0
+"multi-step","b4","T0000102","WK","WK21","MA",0,11,0
+"short-ur","b4","T0000102","WK","WK21","MA",0,11,0
+"complex","during","T0000102","WK","WK21","MA",0,9,0
+"flat","during","T0000102","WK","WK21","MA",5,9,0.555555555555556
+"flat-mz","during","T0000102","WK","WK21","MA",0,9,0
+"flat-z","during","T0000102","WK","WK21","MA",0,9,0
+"short","during","T0000102","WK","WK21","MA",2,9,0.222222222222222
+"upward ramp","during","T0000102","WK","WK21","MA",0,9,0
+"inverted-u","during","T0000102","WK","WK21","MA",0,9,0
+"short-c","during","T0000102","WK","WK21","MA",2,9,0.222222222222222
+"step up","during","T0000102","WK","WK21","MA",0,9,0
+"multi-step","during","T0000102","WK","WK21","MA",0,9,0
+"short-ur","during","T0000102","WK","WK21","MA",0,9,0
+"complex","b4","T0000109","WK","WK2A3C1","MA",3,32,0.09375
+"flat","b4","T0000109","WK","WK2A3C1","MA",14,32,0.4375
+"flat-mz","b4","T0000109","WK","WK2A3C1","MA",0,32,0
+"flat-z","b4","T0000109","WK","WK2A3C1","MA",2,32,0.0625
+"short","b4","T0000109","WK","WK2A3C1","MA",8,32,0.25
+"upward ramp","b4","T0000109","WK","WK2A3C1","MA",1,32,0.03125
+"inverted-u","b4","T0000109","WK","WK2A3C1","MA",0,32,0
+"short-c","b4","T0000109","WK","WK2A3C1","MA",1,32,0.03125
+"step up","b4","T0000109","WK","WK2A3C1","MA",3,32,0.09375
+"multi-step","b4","T0000109","WK","WK2A3C1","MA",0,32,0
+"short-ur","b4","T0000109","WK","WK2A3C1","MA",0,32,0
+"complex","during","T0000109","WK","WK2A3C1","MA",7,54,0.12962962962963
+"flat","during","T0000109","WK","WK2A3C1","MA",16,54,0.296296296296296
+"flat-mz","during","T0000109","WK","WK2A3C1","MA",0,54,0
+"flat-z","during","T0000109","WK","WK2A3C1","MA",0,54,0
+"short","during","T0000109","WK","WK2A3C1","MA",25,54,0.462962962962963
+"upward ramp","during","T0000109","WK","WK2A3C1","MA",1,54,0.0185185185185185
+"inverted-u","during","T0000109","WK","WK2A3C1","MA",0,54,0
+"short-c","during","T0000109","WK","WK2A3C1","MA",0,54,0
+"step up","during","T0000109","WK","WK2A3C1","MA",1,54,0.0185185185185185
+"multi-step","during","T0000109","WK","WK2A3C1","MA",1,54,0.0185185185185185
+"short-ur","during","T0000109","WK","WK2A3C1","MA",3,54,0.0555555555555556
+"complex","b4","T0000111","SD","SD17","MA",0,6,0
+"flat","b4","T0000111","SD","SD17","MA",4,6,0.666666666666667
+"flat-mz","b4","T0000111","SD","SD17","MA",0,6,0
+"flat-z","b4","T0000111","SD","SD17","MA",0,6,0
+"short","b4","T0000111","SD","SD17","MA",2,6,0.333333333333333
+"upward ramp","b4","T0000111","SD","SD17","MA",0,6,0
+"inverted-u","b4","T0000111","SD","SD17","MA",0,6,0
+"short-c","b4","T0000111","SD","SD17","MA",0,6,0
+"step up","b4","T0000111","SD","SD17","MA",0,6,0
+"multi-step","b4","T0000111","SD","SD17","MA",0,6,0
+"short-ur","b4","T0000111","SD","SD17","MA",0,6,0
+"complex","during","T0000111","SD","SD17","MA",0,39,0
+"flat","during","T0000111","SD","SD17","MA",28,39,0.717948717948718
+"flat-mz","during","T0000111","SD","SD17","MA",0,39,0
+"flat-z","during","T0000111","SD","SD17","MA",0,39,0
+"short","during","T0000111","SD","SD17","MA",8,39,0.205128205128205
+"upward ramp","during","T0000111","SD","SD17","MA",0,39,0
+"inverted-u","during","T0000111","SD","SD17","MA",0,39,0
+"short-c","during","T0000111","SD","SD17","MA",0,39,0
+"step up","during","T0000111","SD","SD17","MA",1,39,0.0256410256410256
+"multi-step","during","T0000111","SD","SD17","MA",2,39,0.0512820512820513
+"short-ur","during","T0000111","SD","SD17","MA",0,39,0
+"complex","b4","T0000138","WK","WK26","MA",1,7,0.142857142857143
+"flat","b4","T0000138","WK","WK26","MA",1,7,0.142857142857143
+"flat-mz","b4","T0000138","WK","WK26","MA",0,7,0
+"flat-z","b4","T0000138","WK","WK26","MA",0,7,0
+"short","b4","T0000138","WK","WK26","MA",2,7,0.285714285714286
+"upward ramp","b4","T0000138","WK","WK26","MA",0,7,0
+"inverted-u","b4","T0000138","WK","WK26","MA",0,7,0
+"short-c","b4","T0000138","WK","WK26","MA",3,7,0.428571428571429
+"step up","b4","T0000138","WK","WK26","MA",0,7,0
+"multi-step","b4","T0000138","WK","WK26","MA",0,7,0
+"short-ur","b4","T0000138","WK","WK26","MA",0,7,0
+"complex","during","T0000138","WK","WK26","MA",2,23,0.0869565217391304
+"flat","during","T0000138","WK","WK26","MA",2,23,0.0869565217391304
+"flat-mz","during","T0000138","WK","WK26","MA",0,23,0
+"flat-z","during","T0000138","WK","WK26","MA",0,23,0
+"short","during","T0000138","WK","WK26","MA",5,23,0.217391304347826
+"upward ramp","during","T0000138","WK","WK26","MA",0,23,0
+"inverted-u","during","T0000138","WK","WK26","MA",3,23,0.130434782608696
+"short-c","during","T0000138","WK","WK26","MA",5,23,0.217391304347826
+"step up","during","T0000138","WK","WK26","MA",3,23,0.130434782608696
+"multi-step","during","T0000138","WK","WK26","MA",3,23,0.130434782608696
+"short-ur","during","T0000138","WK","WK26","MA",0,23,0
+"complex","b4","T0000145","SD","SD24","MA",1,9,0.111111111111111
+"flat","b4","T0000145","SD","SD24","MA",5,9,0.555555555555556
+"flat-mz","b4","T0000145","SD","SD24","MA",0,9,0
+"flat-z","b4","T0000145","SD","SD24","MA",0,9,0
+"short","b4","T0000145","SD","SD24","MA",3,9,0.333333333333333
+"upward ramp","b4","T0000145","SD","SD24","MA",0,9,0
+"inverted-u","b4","T0000145","SD","SD24","MA",0,9,0
+"short-c","b4","T0000145","SD","SD24","MA",0,9,0
+"step up","b4","T0000145","SD","SD24","MA",0,9,0
+"multi-step","b4","T0000145","SD","SD24","MA",0,9,0
+"short-ur","b4","T0000145","SD","SD24","MA",0,9,0
+"complex","during","T0000145","SD","SD24","MA",1,11,0.0909090909090909
+"flat","during","T0000145","SD","SD24","MA",5,11,0.454545454545455
+"flat-mz","during","T0000145","SD","SD24","MA",0,11,0
+"flat-z","during","T0000145","SD","SD24","MA",0,11,0
+"short","during","T0000145","SD","SD24","MA",2,11,0.181818181818182
+"upward ramp","during","T0000145","SD","SD24","MA",0,11,0
+"inverted-u","during","T0000145","SD","SD24","MA",0,11,0
+"short-c","during","T0000145","SD","SD24","MA",3,11,0.272727272727273
+"step up","during","T0000145","SD","SD24","MA",0,11,0
+"multi-step","during","T0000145","SD","SD24","MA",0,11,0
+"short-ur","during","T0000145","SD","SD24","MA",0,11,0
+"complex","b4","T0000159","SD","SD25E4","MA",0,23,0
+"flat","b4","T0000159","SD","SD25E4","MA",11,23,0.478260869565217
+"flat-mz","b4","T0000159","SD","SD25E4","MA",0,23,0
+"flat-z","b4","T0000159","SD","SD25E4","MA",0,23,0
+"short","b4","T0000159","SD","SD25E4","MA",10,23,0.434782608695652
+"upward ramp","b4","T0000159","SD","SD25E4","MA",0,23,0
+"inverted-u","b4","T0000159","SD","SD25E4","MA",0,23,0
+"short-c","b4","T0000159","SD","SD25E4","MA",1,23,0.0434782608695652
+"step up","b4","T0000159","SD","SD25E4","MA",1,23,0.0434782608695652
+"multi-step","b4","T0000159","SD","SD25E4","MA",0,23,0
+"short-ur","b4","T0000159","SD","SD25E4","MA",0,23,0
+"complex","during","T0000159","SD","SD25E4","MA",1,71,0.0140845070422535
+"flat","during","T0000159","SD","SD25E4","MA",38,71,0.535211267605634
+"flat-mz","during","T0000159","SD","SD25E4","MA",0,71,0
+"flat-z","during","T0000159","SD","SD25E4","MA",1,71,0.0140845070422535
+"short","during","T0000159","SD","SD25E4","MA",23,71,0.323943661971831
+"upward ramp","during","T0000159","SD","SD25E4","MA",4,71,0.0563380281690141
+"inverted-u","during","T0000159","SD","SD25E4","MA",0,71,0
+"short-c","during","T0000159","SD","SD25E4","MA",0,71,0
+"step up","during","T0000159","SD","SD25E4","MA",3,71,0.0422535211267606
+"multi-step","during","T0000159","SD","SD25E4","MA",1,71,0.0140845070422535
+"short-ur","during","T0000159","SD","SD25E4","MA",0,71,0
+"complex","b4","T0000161","SD","SD17E3","MA",2,42,0.0476190476190476
+"flat","b4","T0000161","SD","SD17E3","MA",22,42,0.523809523809524
+"flat-mz","b4","T0000161","SD","SD17E3","MA",4,42,0.0952380952380952
+"flat-z","b4","T0000161","SD","SD17E3","MA",7,42,0.166666666666667
+"short","b4","T0000161","SD","SD17E3","MA",6,42,0.142857142857143
+"upward ramp","b4","T0000161","SD","SD17E3","MA",0,42,0
+"inverted-u","b4","T0000161","SD","SD17E3","MA",0,42,0
+"short-c","b4","T0000161","SD","SD17E3","MA",0,42,0
+"step up","b4","T0000161","SD","SD17E3","MA",0,42,0
+"multi-step","b4","T0000161","SD","SD17E3","MA",1,42,0.0238095238095238
+"short-ur","b4","T0000161","SD","SD17E3","MA",0,42,0
+"complex","during","T0000161","SD","SD17E3","MA",4,66,0.0606060606060606
+"flat","during","T0000161","SD","SD17E3","MA",36,66,0.545454545454545
+"flat-mz","during","T0000161","SD","SD17E3","MA",5,66,0.0757575757575758
+"flat-z","during","T0000161","SD","SD17E3","MA",2,66,0.0303030303030303
+"short","during","T0000161","SD","SD17E3","MA",11,66,0.166666666666667
+"upward ramp","during","T0000161","SD","SD17E3","MA",3,66,0.0454545454545455
+"inverted-u","during","T0000161","SD","SD17E3","MA",3,66,0.0454545454545455
+"short-c","during","T0000161","SD","SD17E3","MA",1,66,0.0151515151515152
+"step up","during","T0000161","SD","SD17E3","MA",1,66,0.0151515151515152
+"multi-step","during","T0000161","SD","SD17E3","MA",0,66,0
+"short-ur","during","T0000161","SD","SD17E3","MA",0,66,0
+"complex","b4","T0000199","WK","WK29E2","MA",0,0,0
+"flat","b4","T0000199","WK","WK29E2","MA",0,0,0
+"flat-mz","b4","T0000199","WK","WK29E2","MA",0,0,0
+"flat-z","b4","T0000199","WK","WK29E2","MA",0,0,0
+"short","b4","T0000199","WK","WK29E2","MA",0,0,0
+"upward ramp","b4","T0000199","WK","WK29E2","MA",0,0,0
+"inverted-u","b4","T0000199","WK","WK29E2","MA",0,0,0
+"short-c","b4","T0000199","WK","WK29E2","MA",0,0,0
+"step up","b4","T0000199","WK","WK29E2","MA",0,0,0
+"multi-step","b4","T0000199","WK","WK29E2","MA",0,0,0
+"short-ur","b4","T0000199","WK","WK29E2","MA",0,0,0
+"complex","during","T0000199","WK","WK29E2","MA",1,19,0.0526315789473684
+"flat","during","T0000199","WK","WK29E2","MA",7,19,0.368421052631579
+"flat-mz","during","T0000199","WK","WK29E2","MA",0,19,0
+"flat-z","during","T0000199","WK","WK29E2","MA",1,19,0.0526315789473684
+"short","during","T0000199","WK","WK29E2","MA",8,19,0.421052631578947
+"upward ramp","during","T0000199","WK","WK29E2","MA",0,19,0
+"inverted-u","during","T0000199","WK","WK29E2","MA",0,19,0
+"short-c","during","T0000199","WK","WK29E2","MA",0,19,0
+"step up","during","T0000199","WK","WK29E2","MA",0,19,0
+"multi-step","during","T0000199","WK","WK29E2","MA",0,19,0
+"short-ur","during","T0000199","WK","WK29E2","MA",2,19,0.105263157894737
+"complex","b4","T0000201","SD","SD31E5","MA",0,4,0
+"flat","b4","T0000201","SD","SD31E5","MA",3,4,0.75
+"flat-mz","b4","T0000201","SD","SD31E5","MA",0,4,0
+"flat-z","b4","T0000201","SD","SD31E5","MA",0,4,0
+"short","b4","T0000201","SD","SD31E5","MA",1,4,0.25
+"upward ramp","b4","T0000201","SD","SD31E5","MA",0,4,0
+"inverted-u","b4","T0000201","SD","SD31E5","MA",0,4,0
+"short-c","b4","T0000201","SD","SD31E5","MA",0,4,0
+"step up","b4","T0000201","SD","SD31E5","MA",0,4,0
+"multi-step","b4","T0000201","SD","SD31E5","MA",0,4,0
+"short-ur","b4","T0000201","SD","SD31E5","MA",0,4,0
+"complex","during","T0000201","SD","SD31E5","MA",0,13,0
+"flat","during","T0000201","SD","SD31E5","MA",8,13,0.615384615384615
+"flat-mz","during","T0000201","SD","SD31E5","MA",0,13,0
+"flat-z","during","T0000201","SD","SD31E5","MA",0,13,0
+"short","during","T0000201","SD","SD31E5","MA",4,13,0.307692307692308
+"upward ramp","during","T0000201","SD","SD31E5","MA",0,13,0
+"inverted-u","during","T0000201","SD","SD31E5","MA",1,13,0.0769230769230769
+"short-c","during","T0000201","SD","SD31E5","MA",0,13,0
+"step up","during","T0000201","SD","SD31E5","MA",0,13,0
+"multi-step","during","T0000201","SD","SD31E5","MA",0,13,0
+"short-ur","during","T0000201","SD","SD31E5","MA",0,13,0
+"complex","b4","T0000203","WK","WK34G1","MA",0,0,0
+"flat","b4","T0000203","WK","WK34G1","MA",0,0,0
+"flat-mz","b4","T0000203","WK","WK34G1","MA",0,0,0
+"flat-z","b4","T0000203","WK","WK34G1","MA",0,0,0
+"short","b4","T0000203","WK","WK34G1","MA",0,0,0
+"upward ramp","b4","T0000203","WK","WK34G1","MA",0,0,0
+"inverted-u","b4","T0000203","WK","WK34G1","MA",0,0,0
+"short-c","b4","T0000203","WK","WK34G1","MA",0,0,0
+"step up","b4","T0000203","WK","WK34G1","MA",0,0,0
+"multi-step","b4","T0000203","WK","WK34G1","MA",0,0,0
+"short-ur","b4","T0000203","WK","WK34G1","MA",0,0,0
+"complex","during","T0000203","WK","WK34G1","MA",1,32,0.03125
+"flat","during","T0000203","WK","WK34G1","MA",11,32,0.34375
+"flat-mz","during","T0000203","WK","WK34G1","MA",1,32,0.03125
+"flat-z","during","T0000203","WK","WK34G1","MA",0,32,0
+"short","during","T0000203","WK","WK34G1","MA",8,32,0.25
+"upward ramp","during","T0000203","WK","WK34G1","MA",0,32,0
+"inverted-u","during","T0000203","WK","WK34G1","MA",6,32,0.1875
+"short-c","during","T0000203","WK","WK34G1","MA",5,32,0.15625
+"step up","during","T0000203","WK","WK34G1","MA",0,32,0
+"multi-step","during","T0000203","WK","WK34G1","MA",0,32,0
+"short-ur","during","T0000203","WK","WK34G1","MA",0,32,0
+"complex","b4","T0000233","WK","WK77","MA",0,3,0
+"flat","b4","T0000233","WK","WK77","MA",0,3,0
+"flat-mz","b4","T0000233","WK","WK77","MA",0,3,0
+"flat-z","b4","T0000233","WK","WK77","MA",0,3,0
+"short","b4","T0000233","WK","WK77","MA",1,3,0.333333333333333
+"upward ramp","b4","T0000233","WK","WK77","MA",0,3,0
+"inverted-u","b4","T0000233","WK","WK77","MA",1,3,0.333333333333333
+"short-c","b4","T0000233","WK","WK77","MA",1,3,0.333333333333333
+"step up","b4","T0000233","WK","WK77","MA",0,3,0
+"multi-step","b4","T0000233","WK","WK77","MA",0,3,0
+"short-ur","b4","T0000233","WK","WK77","MA",0,3,0
+"complex","during","T0000233","WK","WK77","MA",1,21,0.0476190476190476
+"flat","during","T0000233","WK","WK77","MA",6,21,0.285714285714286
+"flat-mz","during","T0000233","WK","WK77","MA",0,21,0
+"flat-z","during","T0000233","WK","WK77","MA",1,21,0.0476190476190476
+"short","during","T0000233","WK","WK77","MA",6,21,0.285714285714286
+"upward ramp","during","T0000233","WK","WK77","MA",1,21,0.0476190476190476
+"inverted-u","during","T0000233","WK","WK77","MA",1,21,0.0476190476190476
+"short-c","during","T0000233","WK","WK77","MA",1,21,0.0476190476190476
+"step up","during","T0000233","WK","WK77","MA",0,21,0
+"multi-step","during","T0000233","WK","WK77","MA",0,21,0
+"short-ur","during","T0000233","WK","WK77","MA",4,21,0.19047619047619
+"complex","b4","T0000251","SD","SD76","MA",0,0,0
+"flat","b4","T0000251","SD","SD76","MA",0,0,0
+"flat-mz","b4","T0000251","SD","SD76","MA",0,0,0
+"flat-z","b4","T0000251","SD","SD76","MA",0,0,0
+"short","b4","T0000251","SD","SD76","MA",0,0,0
+"upward ramp","b4","T0000251","SD","SD76","MA",0,0,0
+"inverted-u","b4","T0000251","SD","SD76","MA",0,0,0
+"short-c","b4","T0000251","SD","SD76","MA",0,0,0
+"step up","b4","T0000251","SD","SD76","MA",0,0,0
+"multi-step","b4","T0000251","SD","SD76","MA",0,0,0
+"short-ur","b4","T0000251","SD","SD76","MA",0,0,0
+"complex","during","T0000251","SD","SD76","MA",2,33,0.0606060606060606
+"flat","during","T0000251","SD","SD76","MA",12,33,0.363636363636364
+"flat-mz","during","T0000251","SD","SD76","MA",1,33,0.0303030303030303
+"flat-z","during","T0000251","SD","SD76","MA",2,33,0.0606060606060606
+"short","during","T0000251","SD","SD76","MA",12,33,0.363636363636364
+"upward ramp","during","T0000251","SD","SD76","MA",0,33,0
+"inverted-u","during","T0000251","SD","SD76","MA",1,33,0.0303030303030303
+"short-c","during","T0000251","SD","SD76","MA",1,33,0.0303030303030303
+"step up","during","T0000251","SD","SD76","MA",1,33,0.0303030303030303
+"multi-step","during","T0000251","SD","SD76","MA",0,33,0
+"short-ur","during","T0000251","SD","SD76","MA",1,33,0.0303030303030303
+"complex","b4","T0000260","SD","SD78","MA",0,9,0
+"flat","b4","T0000260","SD","SD78","MA",6,9,0.666666666666667
+"flat-mz","b4","T0000260","SD","SD78","MA",0,9,0
+"flat-z","b4","T0000260","SD","SD78","MA",0,9,0
+"short","b4","T0000260","SD","SD78","MA",1,9,0.111111111111111
+"upward ramp","b4","T0000260","SD","SD78","MA",1,9,0.111111111111111
+"inverted-u","b4","T0000260","SD","SD78","MA",0,9,0
+"short-c","b4","T0000260","SD","SD78","MA",0,9,0
+"step up","b4","T0000260","SD","SD78","MA",0,9,0
+"multi-step","b4","T0000260","SD","SD78","MA",0,9,0
+"short-ur","b4","T0000260","SD","SD78","MA",1,9,0.111111111111111
+"complex","during","T0000260","SD","SD78","MA",0,18,0
+"flat","during","T0000260","SD","SD78","MA",11,18,0.611111111111111
+"flat-mz","during","T0000260","SD","SD78","MA",0,18,0
+"flat-z","during","T0000260","SD","SD78","MA",0,18,0
+"short","during","T0000260","SD","SD78","MA",5,18,0.277777777777778
+"upward ramp","during","T0000260","SD","SD78","MA",2,18,0.111111111111111
+"inverted-u","during","T0000260","SD","SD78","MA",0,18,0
+"short-c","during","T0000260","SD","SD78","MA",0,18,0
+"step up","during","T0000260","SD","SD78","MA",0,18,0
+"multi-step","during","T0000260","SD","SD78","MA",0,18,0
+"short-ur","during","T0000260","SD","SD78","MA",0,18,0
+"complex","b4","T0000308","WK","WK95","MA",0,0,0
+"flat","b4","T0000308","WK","WK95","MA",0,0,0
+"flat-mz","b4","T0000308","WK","WK95","MA",0,0,0
+"flat-z","b4","T0000308","WK","WK95","MA",0,0,0
+"short","b4","T0000308","WK","WK95","MA",0,0,0
+"upward ramp","b4","T0000308","WK","WK95","MA",0,0,0
+"inverted-u","b4","T0000308","WK","WK95","MA",0,0,0
+"short-c","b4","T0000308","WK","WK95","MA",0,0,0
+"step up","b4","T0000308","WK","WK95","MA",0,0,0
+"multi-step","b4","T0000308","WK","WK95","MA",0,0,0
+"short-ur","b4","T0000308","WK","WK95","MA",0,0,0
+"complex","during","T0000308","WK","WK95","MA",3,31,0.0967741935483871
+"flat","during","T0000308","WK","WK95","MA",4,31,0.129032258064516
+"flat-mz","during","T0000308","WK","WK95","MA",0,31,0
+"flat-z","during","T0000308","WK","WK95","MA",0,31,0
+"short","during","T0000308","WK","WK95","MA",12,31,0.387096774193548
+"upward ramp","during","T0000308","WK","WK95","MA",3,31,0.0967741935483871
+"inverted-u","during","T0000308","WK","WK95","MA",2,31,0.0645161290322581
+"short-c","during","T0000308","WK","WK95","MA",5,31,0.161290322580645
+"step up","during","T0000308","WK","WK95","MA",2,31,0.0645161290322581
+"multi-step","during","T0000308","WK","WK95","MA",0,31,0
+"short-ur","during","T0000308","WK","WK95","MA",0,31,0

@@ -5,7 +5,7 @@ plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO", ncol = 2, align = 'w')
 
 #bar graph of major 4 call type counts by strain
 plot1 <- momanesth_counts %>% 
-  filter(categories.allowed == "flat" | categories.allowed == "flat-z" |categories.allowed == "short" | categories.allowed == "short-c" | categories.allowed == "short-ur") %>% 
+  #filter(categories.allowed == "flat" | categories.allowed == "flat-z" |categories.allowed == "short" | categories.allowed == "short-c" | categories.allowed == "short-ur") %>% 
   group_by(strain, categories.allowed) %>% 
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
@@ -39,11 +39,12 @@ plot2 <- ggplot(ma.pie.data, aes(x="", y=per, fill=categories.allowed))+
                                                                           fill = "transparent"),
         strip.text=element_text(size=24))
 
-ma.pie.data <- momanesth_counts %>% group_by(strain, categories.allowed) %>%
+ma.pie.data <- count_frame_2 %>% filter(recording=="MA") %>% 
+  group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
   filter(total.count > 1) %>%
   mutate(per = total.count/sum(total.count) *100,
-         pie.lab = ifelse(per > 2.5, paste0(categories.allowed, " ", round(per), "%"), NA))
+         pie.lab = ifelse(per > 2, paste0(categories.allowed, " ", round(per), "%"), NA))
 colour.key <- left_join(ma.pie.data, label_colours)
 colour.key <- colour.key %>% group_by(categories.allowed) %>%
   summarise(label.colour = unique(colour))
@@ -86,7 +87,9 @@ freq.hist <- ggplot(ma.freq.hist, aes(x = m.freq/1000, fill = strain)) +
   scale_fill_grey() +
   theme_classic() +
   theme(legend.position = "none", axis.title.y = element_blank(), 
-        axis.text.y = element_blank()) +
+        axis.text.y = element_blank(),
+        axis.text.x=element_text(size=20),
+        axis.title.x=element_text(size=14)) +
   coord_flip()
 
 ma.dur.hist <- data_durs %>% filter(recording == "MA" & duration < 0.4)
@@ -98,7 +101,9 @@ dur.hist <- ggplot(ma.dur.hist, aes(x = duration * 1000, fill = strain)) +
   scale_fill_grey() +
   theme_classic()+
   theme(legend.position = "none", axis.title.x = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        axis.text.y=element_text(size=20),
+        axis.title.y=element_text(size=14))
 
 
 
@@ -111,12 +116,8 @@ empty <- ggplot()+geom_point(aes(1,1), colour="white")+
 
 main.plot <- base.plot + annotation_custom(grob = inset.plot, xmin = 100, xmax = 400, ymin = 55, ymax = 95)
 
-plot4.data <- data_freqs %>% filter((recording == "MA") & (label == "flat" | label == "flat-z" | label == "short" | label == "short-c" | label == "short-ur"))
-scatter.colour.key <- colour.key %>% filter(categories.allowed == "flat"|
-                                              categories.allowed == "flat-z"|
-                                              categories.allowed == "short"|
-                                              categories.allowed == "short-c"|
-                                              categories.allowed == "short-ur")
+plot4.data <- data_freqs %>% filter((recording == "MA") & (label %in% label.to.keep.ma))
+scatter.colour.key <- colour.key %>% filter(categories.allowed %in% label.to.keep.ma)
 
 inset.plot <- ggplotGrob(ggplot(plot4.data, aes(x = duration * 1000, y = m.freq/1000)) +
   geom_point(size = 1, aes(colour = label), alpha = 0.5) +
@@ -139,7 +140,10 @@ base.plot <- ggplot(plot4.data, aes(x = duration * 1000, y = m.freq/1000)) +
   ylab("Frequeny (kHz)") +
   theme_classic() +
   scale_colour_grey() +
-  theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  theme(legend.position = "none", panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=20),
+        axis.title=element_text(size=14))
 
 
 #frequency boxplot
@@ -340,10 +344,10 @@ ma.pup.plot$recording <- factor(ma.pup.plot$recording, levels=c("Pup","MA"))
 
 
 ggplot(ma.pup.plot, aes(x = recording, y = m.count, fill=strain)) +
-  geom_bar(stat="identity", colour="black", width=.5,
-           position=position_dodge(.6)) +
-  geom_errorbar(aes(ymin=m.count-sem, ymax=m.count+sem), size=.5, width=.2,
-                position=position_dodge(.6))+
+  geom_errorbar(aes(ymin=m.count-sem, ymax=m.count+sem), size=.5, width=.1,
+                position=position_dodge(.8))+
+  geom_bar(stat="identity", colour="black", width=.7,
+           position=position_dodge(.8)) +
   scale_fill_grey(labels=c("SD","WKY"))+
   theme_classic() +
   theme(legend.justification = c(0,0),

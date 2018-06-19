@@ -9,7 +9,7 @@ plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO", ncol = 2, align = 'w')
 
 #bar graph of major 4 call type counts by strain
 plot1 <- pup_counts %>% 
-  filter(categories.allowed == "flat" | categories.allowed == "flat-z" |categories.allowed == "flat-mz" | categories.allowed == "short") %>% 
+  #filter(categories.allowed == "flat" | categories.allowed == "flat-z" |categories.allowed == "flat-mz" | categories.allowed == "short") %>% 
   group_by(strain, categories.allowed) %>% 
   summarise(mean = mean(total.counts), sem = sd(total.counts)/sqrt(length(total.counts))) %>% 
   ggplot(aes(x = categories.allowed, y = mean, group = strain, fill = strain)) + 
@@ -30,7 +30,8 @@ plot1 <- pup_counts %>%
 #pie chart
 label_colours <- read.csv("data/usv_label_colours.csv", stringsAsFactors = F)
 names(label_colours) <- c("categories.allowed","colour")
-plot2.data <- pup_counts %>% group_by(strain, categories.allowed) %>%
+plot2.data <- count_frame_2 %>% filter(recording=="Fpupiso"|recording=="Mpupiso") %>% 
+  group_by(strain, categories.allowed) %>%
   summarise(total.count = sum(total.counts)) %>%
   filter(total.count > 1) %>%
   mutate(per = round(total.count/sum(total.count) *100, digits = 0),
@@ -77,7 +78,9 @@ plot3 <- ggplot(line.data, aes(x=bin, y=mean, group = strain, colour=strain)) +
   ylab("# USVs / 1min") +
   xlab("Test Duration (min)") +
   theme_classic() +
-  theme(legend.position="none") +
+  theme(legend.position="none",
+        axis.text = element_text(size = 17),
+        axis.title = element_text(size=14)) +
   scale_colour_grey(start = 0, end = .7)
 
 
@@ -100,7 +103,8 @@ freq.hist <- ggplot(pup.freq.hist, aes(x = m.freq/1000, fill = strain)) +
   scale_fill_grey() +
   theme_classic() +
   theme(legend.position = "none", axis.title.y = element_blank(), 
-        axis.text.y = element_blank()) +
+        axis.text.y = element_blank(), axis.text.x=element_text(size=20),
+        axis.title.x=element_text(size=14)) +
   coord_flip()
 
 pup.dur.hist <- data_durs %>% filter((recording == "Mpupiso"|recording=="Fpupiso") & duration < 0.4)
@@ -112,7 +116,8 @@ dur.hist <- ggplot(pup.dur.hist, aes(x = duration * 1000, fill = strain)) +
   scale_fill_grey() +
   theme_classic()+
   theme(legend.position = "none", axis.title.x = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(), axis.text.y=element_text(size=20),
+        axis.title.y=element_text(size=14))
 
 
 main.plot <- base.plot + annotation_custom(grob = inset.plot, xmin = 155, xmax = 340, ymin = 50, ymax = 95)
@@ -198,4 +203,44 @@ data_durs %>%
   ylab("Percent (%)") +
   scale_fill_grey() +
   theme_classic()
+
+
+##horizontal duration bar
+dur.bar <- pup_durs %>% group_by(strain, label, rat.id) %>% 
+  summarise(m.litter.dur = mean(mean.dur)) %>% 
+  group_by(strain, label) %>% 
+  summarise(m.d = mean(m.litter.dur)*1000, sem = 1000*sd(m.litter.dur)/sqrt(length(m.litter.dur))) %>% 
+  ggplot(aes(x=label, y=m.d, fill=strain)) +
+  geom_errorbar(aes(ymin=m.d-sem, ymax=m.d+sem),position=position_dodge(.8),
+                width=.1,size=.5)+
+  geom_bar(stat="identity", position=position_dodge(.8), width=.7, colour="black")+
+  #coord_flip() +
+  theme_classic() +
+  theme(legend.justification = c(0,0),
+        legend.position = c(.8,.6),
+        axis.text=element_text(size=20),
+        axis.title=element_text(size=14)) +
+  scale_fill_grey() +
+  ylab("Duration (ms)")+
+  xlab("USV Category")
+
+
+#frequency bars
+freq.bar <- pup_freqs %>% #group_by(strain, label, rat.id) %>% 
+  #summarise(m.litter.freq = mean(mean.freq)) %>%
+  group_by(strain, label) %>%
+  summarise(m.f = mean(mean.freq)/1000, sem=(sd(mean.freq)/sqrt(length(mean.freq)))/1000) %>%
+  ggplot(aes(x=label, y=m.f, fill=strain)) +
+  geom_errorbar(aes(ymin=m.f-sem, ymax=m.f+sem), position=position_dodge(.8),
+                width=.1, size=.5)+
+  geom_bar(stat="identity",position=position_dodge(.8), width=.7, colour="black")+
+  theme_classic() +
+  theme(legend.position="none",
+        axis.text=element_text(size=20),
+        axis.title=element_text(size=14))+
+  scale_fill_grey() +
+  ylab("Peak Frequency (kHz)")+
+  xlab("USV Category")
+
+
 

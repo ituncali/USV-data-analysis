@@ -48,5 +48,18 @@ pup_durs <- data_durs %>% filter(recording == "Mpupiso" | recording == "Fpupiso"
 pup_durs$rat.id.fix <- ifelse(pup_durs$recording=="Fpupiso",paste(pup_durs$rat.id,"F"),paste(pup_durs$rat.id,"M"))
 
 
+##Bandwidth
+pup_bandw <- pca_data %>% filter(recording=="Mpupiso"|recording=="Fpupiso") 
+pup_bandw$rat.id.fix <- ifelse(pup_bandw$recording=="Fpupiso",paste(pup_bandw$rat.id,"F"),paste(pup_bandw$rat.id,"M"))
 
+pup_bandw_2 <- pup_bandw %>%
+  group_by(strain, label,recording,file.name,rat.id.fix) %>%
+  summarise(mean.bw = mean(bandwidth), SEM = sd(bandwidth)/sqrt(length(bandwidth)),
+            count = length(bandwidth)) %>%
+  filter(label=="flat"|label=="flat-mz"|label=="flat-z"|label=="short")
+
+lme_pup_bandw <- lme(bandwidth ~ strain * recording * label, 
+                    random = ~1|rat.id.fix,
+                    data = pup_freqs)
+anova(lme_pup_freq)
 

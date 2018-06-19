@@ -11,6 +11,21 @@ count_frame_3 <- count_frame_2 %>% filter(!(file.name=="T0000399"|
                                               file.name=="T0000410"|
                                               file.name=="T0000291"))
 
+##only use those calls >2%
+per <- count_frame_2 %>% group_by(strain, categories.allowed, recording) %>%
+  summarise(total.usv = sum(total.counts)) %>%
+  group_by(strain, recording) %>%
+  mutate(total=sum(total.usv)) %>% ungroup() %>%
+  mutate(percent=total.usv/total*100) %>%
+  filter(percent>2)
+label.to.keep.exp2 <- as.vector(unique(per$categories.allowed))
+
+
+exp2_per <- count_frame_2 %>% filter(categories.allowed %in% label.to.keep.exp2) %>%
+  droplevels() %>% group_by(strain, rat.id, recording) %>%
+  mutate(new.per = total.counts/sum(total.counts))
+
+
 library(nlme)
 msx3_lme <- lme(total.counts~strain * categories.allowed * recording,
                 random = ~1|rat.id/categories.allowed,

@@ -27,11 +27,11 @@ count_frame_3 <- count_frame_2 %>% filter(!(file.name=="T0000399"|
 
 ##durations
 data_dur_readin <- read.csv("data/Exp2_Non_Overlap_Durations.csv", stringsAsFactors = F)
-data_durs_2 <- data_dur_readin %>% 
+data_durs <- data_dur_readin %>% 
   mutate(label = ifelse(duration < 0.012 & label !="short", "short",
                         ifelse(duration > 0.012 & label == "short", "flat",label))) %>%
   filter(duration < 0.8 & duration > 0.002)
-data_durs <- data_durs_2 %>% filter(!(file.name=="T0000399"|
+data_durs_2 <- data_durs %>% filter(!(file.name=="T0000399"|
                                        file.name=="T0000410"|
                                        file.name=="T0000291"))
 
@@ -40,11 +40,11 @@ data_durs <- data_durs_2 %>% filter(!(file.name=="T0000399"|
 data_read_in <- read.csv("data/Exp2_Filtered_All_Vars.csv", stringsAsFactors = F)
 m.freq <- apply(data_read_in[,c(1:50)],1,function(y) mean(y))
 data_freqs_readin <- mutate(data_read_in, m.freq = m.freq)
-data_freqs_2 <- data_freqs_readin %>% 
+data_freqs <- data_freqs_readin %>% 
   mutate(label = ifelse(duration < 0.012 & label !="short", "short",
                         ifelse(duration > 0.012 & label == "short", "flat",label))) %>%
   filter(duration < 0.8 & duration > 0.002)
-data_freqs <- data_freqs_2 %>% filter(!(file.name=="T0000399"|
+data_freqs_2 <- data_freqs %>% filter(!(file.name=="T0000399"|
                                           file.name=="T0000410"|
                                           file.name=="T0000291"))
 
@@ -68,7 +68,7 @@ xtra.notlist.fix <- str_replace_all(xtra.notlist,
                                     ))                           
 #first remove the rows that do not contain calls
 xtra.rows <- unlist(mapply(function(q) str_subset(q, categories.allowed.search), xtra.notlist.fix))
-start.rows.almost <- cbind.data.frame(label = xtra.rows,
+start.rows <- cbind.data.frame(label = xtra.rows,
                                rat.id = unlist(mapply(function(q,x) c(rep(q,x)),
                                                       q = start_data$rat.id, x = start_data$no.counts)),
                                strain = unlist(mapply(function(q,x) c(rep(q,x)),
@@ -81,6 +81,6 @@ start.rows.almost <- cbind.data.frame(label = xtra.rows,
                                                          q = start_data$unique.id, x = start_data$no.counts)),
                                recording = unlist(mapply(function(q,x) c(rep(q,x)),
                                                          q = start_data$recording, x = start_data$no.counts)))
-start.rows <- start.rows.almost %>% filter(!(file.name=="T0000399"|
+start.rows.2 <- start.rows %>% filter(!(file.name=="T0000399"|
                                                file.name=="T0000410"|
                                                file.name=="T0000291"))
